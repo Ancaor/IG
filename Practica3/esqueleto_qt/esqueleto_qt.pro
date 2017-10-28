@@ -14,6 +14,7 @@ HEADERS += \
     cono.h \
     tubo.h\
     esfera.h\
+    base.h
 
 SOURCES += \
   main.cc \
@@ -31,7 +32,8 @@ SOURCES += \
     vaso_invertido.cpp \
     cono.cpp \
     tubo.cpp\
-    esfera.cpp
+    esfera.cpp \
+    base.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 

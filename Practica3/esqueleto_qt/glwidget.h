@@ -25,6 +25,8 @@
 #include "cono.h"
 #include "esfera.h"
 
+#include "base.h"
+
 
 namespace _gl_widget_ne {
 
@@ -54,9 +56,12 @@ public:
      O3DR object_revolucion;
      PLY_Object ply;
 
+     Base base;
+
      bool ply_bool=0;
 
      bool revolucion = 0;
+     bool objeto_complejo;
      bool vertex = 1; // 1: pinta vertices; 0:No los pinta
      bool lines = 0; // 1: pinta lineas; 0:No los pinta
      bool fill = 0;  // 1: pinta relleno; 0:No los pinta

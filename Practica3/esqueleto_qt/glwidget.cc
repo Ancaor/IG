@@ -52,12 +52,14 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 
   case Qt::Key_3: ply.read_ply(); revolucion=true; ply_bool=true;break;
 
-  case Qt::Key_4: object_revolucion = Tubo(40); revolucion=true; ply_bool=false;break;
-  case Qt::Key_5: object_revolucion = Cilindro(40); revolucion=true; ply_bool=false; break;
-  case Qt::Key_6: object_revolucion = Vaso(40); revolucion=true; ply_bool=false; break;
-  case Qt::Key_7: object_revolucion = Vaso_Invertido(40); revolucion=true; ply_bool=false; break;
-  case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false; break;
-  case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false; break;
+  case Qt::Key_4: object_revolucion = Tubo(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+  case Qt::Key_5: object_revolucion = Cilindro(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+  case Qt::Key_6: object_revolucion = Vaso(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+  case Qt::Key_7: object_revolucion = Vaso_Invertido(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+  case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+  case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+
+  case Qt::Key_U: base = Base();objeto_complejo= true; break;
 
   }
 
@@ -131,36 +133,48 @@ void _gl_widget::draw_axis()
 
 void _gl_widget::draw_objects()
 {
-    if(!revolucion){
+    if(objeto_complejo){
         if(vertex)
-            object.drawPoints();
+            base.draw(0);
         if(lines)
-            object.drawLines();
+           base.draw(1);
         if(fill)
-            object.drawFill();
+            base.draw(2);
         if(chest)
-            object.drawAjedrez();
-        }
-    else {
-        if(ply_bool){
+            base.draw(3);
+    }
+    else{
+        if(!revolucion){
             if(vertex)
-                ply.drawPoints();
+                object.drawPoints();
             if(lines)
-                ply.drawLines();
+                object.drawLines();
             if(fill)
-                ply.drawFill();
+                object.drawFill();
             if(chest)
-                ply.drawAjedrez();
-        }
-        else{
-            if(vertex)
-                object_revolucion.drawPoints();
-            if(lines)
-                object_revolucion.drawLines();
-            if(fill)
-                object_revolucion.drawFill();
-            if(chest)
-                object_revolucion.drawAjedrez();
+                object.drawAjedrez();
+            }
+        else {
+            if(ply_bool){
+                if(vertex)
+                    ply.drawPoints();
+                if(lines)
+                    ply.drawLines();
+                if(fill)
+                    ply.drawFill();
+                if(chest)
+                    ply.drawAjedrez();
+            }
+            else{
+                if(vertex)
+                    object_revolucion.drawPoints();
+                if(lines)
+                    object_revolucion.drawLines();
+                if(fill)
+                    object_revolucion.drawFill();
+                if(chest)
+                    object_revolucion.drawAjedrez();
+            }
         }
     }
 }
