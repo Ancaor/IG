@@ -5,3 +5,5 @@ los objetos de revolucion dado un angulo inicial y otro final.
 
 Estos angulos se modifican en "glwidget.h" y estan puestos por defecto
 en el rango o-360 (objeto completo).
+
+Contiene el Peón.
