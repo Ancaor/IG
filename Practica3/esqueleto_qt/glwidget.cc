@@ -34,6 +34,17 @@ _gl_widget::_gl_widget(_window *Window1):Window(Window1)
 
 void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
+    QKeySequence secuencia = QKeySequence(Qt::Key_Shift + Qt::Key_C);
+
+    cout << Keyevent->modifiers();
+
+    if(Keyevent->modifiers() == Qt::ShiftModifier)
+        if(Keyevent->key() == Qt::Key_U){
+            base=Base();
+            objeto_complejo=true;
+        }
+
+
   switch(Keyevent->key()){
   case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
   case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
@@ -59,7 +70,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
   case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
 
-  case Qt::Key_U: base = Base();objeto_complejo= true; break;
+  //case Qt::Key_U: base = Base();objeto_complejo= true; break;
 
   }
 
