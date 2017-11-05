@@ -14,7 +14,10 @@ HEADERS += \
     cono.h \
     tubo.h\
     esfera.h\
-    base.h
+    base.h \
+    brazo.h \
+    partesuperior.h \
+    partemedia.h
 
 SOURCES += \
   main.cc \
@@ -33,7 +36,10 @@ SOURCES += \
     cono.cpp \
     tubo.cpp\
     esfera.cpp \
-    base.cpp
+    base.cpp \
+    brazo.cpp \
+    partesuperior.cpp \
+    partemedia.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 

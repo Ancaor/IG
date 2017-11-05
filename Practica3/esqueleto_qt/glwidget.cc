@@ -34,13 +34,9 @@ _gl_widget::_gl_widget(_window *Window1):Window(Window1)
 
 void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
-    QKeySequence secuencia = QKeySequence(Qt::Key_Shift + Qt::Key_C);
-
-    cout << Keyevent->modifiers();
-
     if(Keyevent->modifiers() == Qt::ShiftModifier)
         if(Keyevent->key() == Qt::Key_U){
-            base=Base();
+            psup=ParteSuperior();
             objeto_complejo=true;
         }
 

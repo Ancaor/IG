@@ -26,7 +26,9 @@
 #include "esfera.h"
 
 #include "base.h"
-
+#include "brazo.h"
+#include "partesuperior.h"
+#include "partemedia.h"
 
 namespace _gl_widget_ne {
 
@@ -56,7 +58,10 @@ public:
      O3DR object_revolucion;
      PLY_Object ply;
 
-     Base base;
+     Base base = Base();
+     Brazo brazo;
+     ParteSuperior psup;
+     ParteMedia pmed = ParteMedia();
 
      bool ply_bool=0;
 
