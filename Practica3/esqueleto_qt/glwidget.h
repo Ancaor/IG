@@ -29,6 +29,7 @@
 #include "brazo.h"
 #include "partesuperior.h"
 #include "partemedia.h"
+#include "brazopequenio.h"
 
 namespace _gl_widget_ne {
 
@@ -41,7 +42,7 @@ namespace _gl_widget_ne {
   const float FRONT_PLANE_PERSPECTIVE=(X_MAX-X_MIN)/2;
   const float BACK_PLANE_PERSPECTIVE=1000;
   const float DEFAULT_DISTANCE=10;
-  const float ANGLE_STEP=1;
+  const float ANGLE_STEP=0.5;
 
   // axis
   const int AXIS_SIZE=5000;
@@ -59,9 +60,12 @@ public:
      PLY_Object ply;
 
      Base base = Base();
-     Brazo brazo;
-     ParteSuperior psup;
+     Brazo brazo = Brazo();
+     ParteSuperior psup = ParteSuperior();
      ParteMedia pmed = ParteMedia();
+     BrazoPequenio bpeq = BrazoPequenio();
+     double angle = 0;
+     double angle_z = 45;
 
      bool ply_bool=0;
 

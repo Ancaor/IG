@@ -3,18 +3,17 @@
 
 #include "o3d.h"
 #include "brazo.h"
-#include "cubo.h"
+#include "cubowatt.h"
 
 class ParteSuperior
 {
     private:
 
-        Brazo brazo1 = Brazo();
-        Brazo brazo2 = Brazo();
-        Cubo cubo = Cubo();
+        Brazo brazo = Brazo();
+        CuboWatt cuboWatt = CuboWatt();
     public:
         ParteSuperior();
-        void draw(int tipo);
+        void draw(int tipo, double angle_z);
 };
 
 #endif // PARTESUPERIOR_H

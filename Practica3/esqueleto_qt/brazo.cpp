@@ -9,8 +9,7 @@ void Brazo::draw(int tipo){
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef(0,2.5/2.0,0);
-    glRotatef(45,0,0,1);
+    glTranslatef(0,-3.535534/2,0);
     glScalef(0.2,3.535534,0.2);
 
     switch(tipo){
@@ -22,7 +21,7 @@ void Brazo::draw(int tipo){
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(2.5/2.0,0,0);
+    glTranslatef(0,-3.535534,0);
 
     switch(tipo){
     case 0: esfera.drawPoints(); break;

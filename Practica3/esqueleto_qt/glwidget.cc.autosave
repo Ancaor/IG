@@ -74,7 +74,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_T: angle+=ANGLE_STEP;break;
   case Qt::Key_Z: if(angle_z+ANGLE_STEP < 81.86989)angle_z+=ANGLE_STEP;else angle_z =81.86989; break;
   case Qt::Key_J:
-        if(angle_z+ANGLE_STEP < 81.86989)angle_z+=ANGLE_STEP;else angle_z =81.86989;
+        if(angle_z+ANGLE_STEP < 81.86989)angle_z+=ANGLE_STEP;else{ angle_z =81.86989;   };
          angle+=ANGLE_STEP;
       break;
 

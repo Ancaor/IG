@@ -5,7 +5,8 @@ Base::Base()
    // cilindro = Cilindro(40);
 }
 
-void Base::draw(int tipo){
+void Base::draw(int tipo,double angle_y, double angle_z ){
+
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0.125,0);
@@ -21,7 +22,8 @@ void Base::draw(int tipo){
 
     glPushMatrix();
     glTranslatef(0,2.75,0);
-    glScalef(0.5,5,0.5);
+    glRotatef(angle_y,0,1,0);
+    glScalef(0.4,5,0.4);
 
     switch(tipo){
     case 0: cilindro1.drawPoints(); break;
@@ -32,6 +34,15 @@ void Base::draw(int tipo){
     glPopMatrix();
 
     glPushMatrix();
-    pmed.draw(tipo);
+    glTranslatef(0,5-(((sin((90-angle_z)*(M_PI/180.0)))*3.535534)),0);
+    glRotatef(angle_y,0,1,0);
+    pmed.draw(tipo,angle_z);
     glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0,5,0);
+    glRotatef(angle_y,0,1,0);
+    psup.draw(tipo,angle_z);
+    glPopMatrix();
+
 }

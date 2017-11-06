@@ -4,6 +4,7 @@
 #include "o3dr.h"
 #include"cilindro.h"
 #include "cubo.h"
+#include "partesuperior.h"
 #include "partemedia.h"
 class Base : public O3DR
 {
@@ -15,9 +16,10 @@ private:
     Cubo cubo2 = Cubo();
     Cubo cubo3 = Cubo();
     ParteMedia pmed = ParteMedia();
+    ParteSuperior psup = ParteSuperior();
 public:
     Base();
-    void draw(int tipo);
+    void draw(int tipo,double angle ,double angle_z );
 };
 
 #endif // BASE_H
