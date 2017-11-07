@@ -19,7 +19,8 @@ HEADERS += \
     partesuperior.h \
     partemedia.h \
     cubowatt.h \
-    brazopequenio.h
+    brazopequenio.h \
+    brazogrande.h
 
 SOURCES += \
   main.cc \
@@ -43,7 +44,8 @@ SOURCES += \
     partesuperior.cpp \
     partemedia.cpp \
     cubowatt.cpp \
-    brazopequenio.cpp
+    brazopequenio.cpp \
+    brazogrande.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 

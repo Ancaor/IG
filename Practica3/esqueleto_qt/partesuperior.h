@@ -4,6 +4,7 @@
 #include "o3d.h"
 #include "brazo.h"
 #include "cubowatt.h"
+#include "cubo.h"
 
 class ParteSuperior
 {
@@ -11,6 +12,7 @@ class ParteSuperior
 
         Brazo brazo = Brazo();
         CuboWatt cuboWatt = CuboWatt();
+        Cubo cubo = Cubo();
     public:
         ParteSuperior();
         void draw(int tipo, double angle_z);
