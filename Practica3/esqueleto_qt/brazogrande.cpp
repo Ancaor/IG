@@ -10,7 +10,7 @@ void BrazoGrande::draw(int tipo)
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,-3.535534/2,0);
-    glScalef(0.2,3.535534,0.2);
+    glScalef(0.13,3.535534,0.13);
 
     switch(tipo){
     case 0: cilindro.drawPoints(); break;
@@ -22,6 +22,7 @@ void BrazoGrande::draw(int tipo)
 
     glPushMatrix();
     glTranslatef(0,-3.535534,0);
+    glScalef(0.6,0.6,0.6);
 
     switch(tipo){
     case 0: esfera.drawPoints(); break;

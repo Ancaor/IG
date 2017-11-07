@@ -242,7 +242,7 @@ void _gl_widget::animar()
     // if(velocidad > 100)
       //      velocidad=100;
        //  else velocidad+=ANGLE_STEPS;
-    angle+=velocidad/10;
+    angle+=velocidad/14;
 
      update();
 }

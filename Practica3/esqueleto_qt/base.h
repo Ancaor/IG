@@ -18,7 +18,7 @@ private:
     ParteMedia pmed = ParteMedia();
     ParteSuperior psup = ParteSuperior();
 
-    const double Z_MAX = 81.86989;
+    const double Z_MAX = 85.94519288;
     const double Z_MIN = 38.9388;
     double angle_z;
 public:

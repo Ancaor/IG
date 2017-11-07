@@ -32,7 +32,7 @@ void ParteSuperior::draw(int tipo,double angle_z){
 
     glPushMatrix();
     glTranslatef(-0.35,-1.125,0);
-    glScalef(0.125,2.25,0.125);
+    glScalef(0.08,2.25,0.1);
     switch(tipo){
     case 0: cubo.drawPoints(); break;
     case 1: cubo.drawLines(); break;
