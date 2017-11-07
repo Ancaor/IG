@@ -5,7 +5,9 @@ Base::Base()
    // cilindro = Cilindro(40);
 }
 
-void Base::draw(int tipo,double angle_y, double angle_z ){
+void Base::draw(int tipo,double angle_y, double velocidad ){
+
+    calcular_angulo_z(velocidad);
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -45,4 +47,16 @@ void Base::draw(int tipo,double angle_y, double angle_z ){
     psup.draw(tipo,angle_z);
     glPopMatrix();
 
+}
+
+void Base::calcular_angulo_z(double velocidad)
+{
+    if(velocidad <= 50.0)
+        angle_z=Z_MIN;
+    else{
+        if(velocidad >= 100)
+            angle_z=Z_MAX;
+        else
+        angle_z = Z_MIN+(((Z_MAX-Z_MIN)/50.0)*(velocidad-50));
+    }
 }

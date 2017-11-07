@@ -17,9 +17,14 @@ private:
     Cubo cubo3 = Cubo();
     ParteMedia pmed = ParteMedia();
     ParteSuperior psup = ParteSuperior();
+
+    const double Z_MAX = 81.86989;
+    const double Z_MIN = 38.9388;
+    double angle_z;
 public:
     Base();
-    void draw(int tipo,double angle ,double angle_z );
+    void draw(int tipo,double angle ,double velocidad );
+    void calcular_angulo_z(double velocidad);
 };
 
 #endif // BASE_H

@@ -30,6 +30,7 @@
 #include "partesuperior.h"
 #include "partemedia.h"
 #include "brazopequenio.h"
+#include<QTimer>
 
 namespace _gl_widget_ne {
 
@@ -65,7 +66,7 @@ public:
      ParteMedia pmed = ParteMedia();
      BrazoPequenio bpeq = BrazoPequenio();
      double angle = 0;
-     double angle_z = 45;
+     double angle_z = 0;
 
      bool ply_bool=0;
 
@@ -77,6 +78,12 @@ public:
      bool chest = 0; // 1: pinta ajedrez; 0:No los pinta
      QString pathname_ply = "/home";
 
+     QTimer *timer;
+     bool subiendo = 1;
+     double velocidad=0;
+
+     float ANGLE_STEPS=2;
+
   _gl_widget(_window *Window1);
 
   void clear_window();
@@ -87,6 +94,10 @@ public:
   void draw_objects();
   string buscarPLY();
   QString getPathPLYs(string archivo);
+  void timers();
+
+public slots:
+  void animar();
 
 
 protected:

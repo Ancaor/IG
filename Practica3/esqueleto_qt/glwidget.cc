@@ -26,6 +26,8 @@ _gl_widget::_gl_widget(_window *Window1):Window(Window1)
   setMinimumSize(300, 300);
   setFocusPolicy(Qt::StrongFocus);
   object=Cubo();                           // Cubo por defecto
+  timer = new QTimer(this);
+  connect(timer,SIGNAL(timeout()),this,SLOT(animar()));
 }
 
 //*************************************************************************
@@ -42,6 +44,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
             case Qt::Key_Z: if(angle_z-ANGLE_STEP >38.9388)angle_z-=ANGLE_STEP;
                             else angle_z = 38.9388;
             break;
+        case Qt::Key_J:if((velocidad-1) >=0) velocidad-=1;break;
         }
 
      }else
@@ -71,12 +74,13 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_7: object_revolucion = Vaso_Invertido(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
   case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
   case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-  case Qt::Key_T: angle+=ANGLE_STEP;break;
+  case Qt::Key_T: angle+=2;break;
   case Qt::Key_Z: if(angle_z+ANGLE_STEP < 81.86989)angle_z+=ANGLE_STEP;else angle_z =81.86989; break;
-  case Qt::Key_J:
-        if(angle_z+ANGLE_STEP < 81.86989)angle_z+=ANGLE_STEP;else angle_z =81.86989;
-         angle+=ANGLE_STEP;
+  case Qt::Key_J:if(velocidad+1 <=100)
+               velocidad+=1;
       break;
+
+  case Qt::Key_B: timers(); break;
 
   //case Qt::Key_U: base = Base();objeto_complejo= true; break;
 
@@ -154,13 +158,13 @@ void _gl_widget::draw_objects()
 {
     if(objeto_complejo){
         if(vertex)
-            base.draw(0,angle,angle_z);
+            base.draw(0,angle,velocidad);
         if(lines)
-           base.draw(1,angle,angle_z);
+           base.draw(1,angle,velocidad);
         if(fill)
-            base.draw(2,angle,angle_z);
+            base.draw(2,angle,velocidad);
         if(chest)
-            base.draw(3,angle,angle_z);
+            base.draw(3,angle,velocidad);
     }
     else{
         if(!revolucion){
@@ -196,6 +200,51 @@ void _gl_widget::draw_objects()
             }
         }
     }
+}
+
+void _gl_widget::timers()
+{
+    if(!timer->isActive()){
+
+        timer->start(10);
+    }
+    else timer->stop();
+}
+
+void _gl_widget::animar()
+{
+   // if(subiendo)
+     //   ANGLE_STEPS = abs(ANGLE_STEPS);
+   // else ANGLE_STEPS = -abs(ANGLE_STEPS);
+/*
+    if(angle_z+ANGLE_STEPS < 81.86989 && subiendo)
+        //subiendo = true;
+        angle_z += ANGLE_STEPS;
+    else{
+         if(subiendo){
+             angle_z = 81.86989;
+             subiendo = false;
+         }else{
+             if(angle_z-ANGLE_STEPS >38.9388 && !subiendo)
+                 angle_z-=ANGLE_STEPS;
+             else if(!subiendo){
+                  angle_z = 38.9388;
+                  subiendo = true;
+             }
+         }
+
+
+
+       // angle_z += ANGLE_STEPS;
+
+        }
+        */
+    // if(velocidad > 100)
+      //      velocidad=100;
+       //  else velocidad+=ANGLE_STEPS;
+    angle+=velocidad/10;
+
+     update();
 }
 
 
