@@ -1,11 +1,11 @@
-#include "base.h"
+#include "watt_regulator.h"
 
-Base::Base()
+WattRegulator::WattRegulator()
 {
-   // cilindro = Cilindro(40);
+
 }
 
-void Base::draw(int tipo,double angle_y, double velocidad ){
+void WattRegulator::draw(int tipo,double angle_y, double velocidad ){
 
     calcular_angulo_z(velocidad);
 
@@ -34,13 +34,7 @@ void Base::draw(int tipo,double angle_y, double velocidad ){
     case 3: cilindro1.drawAjedrez();break;
     }
     glPopMatrix();
-/*
-    glPushMatrix();
-    glTranslatef(0,5-(((sin((90-angle_z)*(M_PI/180.0)))*3.535534)),0);
-    glRotatef(angle_y,0,1,0);
-    pmed.draw(tipo,angle_z);
-    glPopMatrix();
-*/
+
     glPushMatrix();
     glTranslatef(0,2.75,0);
     glRotatef(angle_y,0,1,0);
@@ -49,7 +43,7 @@ void Base::draw(int tipo,double angle_y, double velocidad ){
 
 }
 
-void Base::calcular_angulo_z(double velocidad)
+void WattRegulator::calcular_angulo_z(double velocidad)
 {
     if(velocidad <= 50.0)
         angle_z=Z_MIN;

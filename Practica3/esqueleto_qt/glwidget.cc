@@ -38,13 +38,14 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
     if(Keyevent->modifiers() == Qt::ShiftModifier){
         switch(Keyevent->key()){
-            case Qt::Key_U: psup=ParteSuperior();
+            case Qt::Key_U:// watt_regulator = WattRegulator();
                             objeto_complejo=true;
             break;
             case Qt::Key_Z: if(angle_z-ANGLE_STEP >38.9388)angle_z-=ANGLE_STEP;
                             else angle_z = 38.9388;
             break;
-        case Qt::Key_J:if((velocidad-1) >=0) velocidad-=1;break;
+        case Qt::Key_J:if((velocidad-1) >=0) velocidad-=1; if(timer->isActive())angle+=velocidad/10;break;
+        case Qt::Key_Q:angle+=(-1);
         }
 
      }else
@@ -78,7 +79,10 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_Z: if(angle_z+ANGLE_STEP < 81.86989)angle_z+=ANGLE_STEP;else angle_z =81.86989; break;
   case Qt::Key_J:if(velocidad+1 <=100)
                velocidad+=1;
+                if(timer->isActive())
+                angle+=velocidad/10;
       break;
+  case Qt::Key_Q: angle+=1; break;
 
   case Qt::Key_B: timers(); break;
 
@@ -158,13 +162,13 @@ void _gl_widget::draw_objects()
 {
     if(objeto_complejo){
         if(vertex)
-            base.draw(0,angle,velocidad);
+            watt_regulator.draw(0,angle,velocidad);
         if(lines)
-           base.draw(1,angle,velocidad);
+           watt_regulator.draw(1,angle,velocidad);
         if(fill)
-            base.draw(2,angle,velocidad);
+            watt_regulator.draw(2,angle,velocidad);
         if(chest)
-            base.draw(3,angle,velocidad);
+            watt_regulator.draw(3,angle,velocidad);
     }
     else{
         if(!revolucion){

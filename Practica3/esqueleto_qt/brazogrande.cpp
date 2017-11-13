@@ -22,12 +22,7 @@ void BrazoGrande::draw(int tipo)
 
     glPushMatrix();
     glTranslatef(0,-3.535534,0);
-
-    switch(tipo){
-    case 0: esfera.drawPoints(); break;
-    case 1: esfera.drawLines(); break;
-    case 2: esfera.drawFill();break;
-    case 3: esfera.drawAjedrez();break;
-    }
+    es_beeth.draw(tipo);
     glPopMatrix();
+
 }

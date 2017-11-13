@@ -14,13 +14,13 @@ HEADERS += \
     cono.h \
     tubo.h\
     esfera.h\
-    base.h \
     brazo.h \
     partesuperior.h \
-    partemedia.h \
     cubowatt.h \
     brazopequenio.h \
-    brazogrande.h
+    brazogrande.h \
+    watt_regulator.h \
+    esfera_beethoven.h
 
 SOURCES += \
   main.cc \
@@ -39,13 +39,13 @@ SOURCES += \
     cono.cpp \
     tubo.cpp\
     esfera.cpp \
-    base.cpp \
     brazo.cpp \
     partesuperior.cpp \
-    partemedia.cpp \
     cubowatt.cpp \
     brazopequenio.cpp \
-    brazogrande.cpp
+    brazogrande.cpp \
+    watt_regulator.cpp \
+    esfera_beethoven.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 
@@ -54,3 +54,7 @@ LIBS += -L/usr/X11R6/lib64 -lGL \
 
 CONFIG += c++11
 QT += widgets
+
+DISTFILES +=
+
+FORMS +=

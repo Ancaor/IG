@@ -25,11 +25,12 @@
 #include "cono.h"
 #include "esfera.h"
 
-#include "base.h"
+#include "watt_regulator.h"
 #include "brazo.h"
 #include "partesuperior.h"
-#include "partemedia.h"
+//#include "partemedia.h"
 #include "brazopequenio.h"
+#include "brazogrande.h"
 #include<QTimer>
 
 namespace _gl_widget_ne {
@@ -60,11 +61,13 @@ public:
      O3DR object_revolucion;
      PLY_Object ply;
 
-     Base base = Base();
-     Brazo brazo = Brazo();
-     ParteSuperior psup = ParteSuperior();
-     ParteMedia pmed = ParteMedia();
-     BrazoPequenio bpeq = BrazoPequenio();
+     WattRegulator watt_regulator;// = WattRegulator();
+    // Brazo brazo = Brazo();
+   //  ParteSuperior psup = ParteSuperior();
+   //  ParteMedia pmed = ParteMedia();
+   //  BrazoPequenio bpeq = BrazoPequenio();
+    // BrazoGrande bgra = BrazoGrande();
+    // CuboWatt cwatt = CuboWatt();
      double angle = 0;
      double angle_z = 0;
 

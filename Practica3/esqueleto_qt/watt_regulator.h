@@ -1,30 +1,26 @@
-#ifndef BASE_H
-#define BASE_H
+#ifndef WATT_REGULATOR_H
+#define WATT_REGULATOR_H
 
 #include "o3dr.h"
 #include"cilindro.h"
 #include "cubo.h"
 #include "partesuperior.h"
-#include "partemedia.h"
-class Base : public O3DR
+//#include "partemedia.h"
+
+class WattRegulator : public O3DR
 {
 private:
     Cilindro cilindro1 = Cilindro(40);
-    Cilindro cilindro2 = Cilindro(40);
-    Cilindro cilindro3 = Cilindro(40);
     Cubo cubo1 = Cubo();
-    Cubo cubo2 = Cubo();
-    Cubo cubo3 = Cubo();
-    ParteMedia pmed = ParteMedia();
     ParteSuperior psup = ParteSuperior();
 
     const double Z_MAX = 81.86989;
     const double Z_MIN = 38.9388;
     double angle_z;
 public:
-    Base();
+    WattRegulator();
     void draw(int tipo,double angle ,double velocidad );
     void calcular_angulo_z(double velocidad);
 };
 
-#endif // BASE_H
+#endif // WATT_REGULATOR_H
