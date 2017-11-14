@@ -75,7 +75,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       case Qt::Key_N:if(velocidad+1 <=100) velocidad+=1; if(timer->isActive()) angle+=velocidad/10;break;  // Aumenta velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
       case Qt::Key_B: angle+=1; break;     // Gira el regulador de watt en sentido anti-horario.
       case Qt::Key_A: timers(); break;     // Activa / Desactiva la animacion
-      case Qt::Key_W: objeto_complejo=true;  // Activa el Watt Regulattor
+      case Qt::Key_W: watt_regulator=new WattRegulator(); objeto_complejo=true;  // Activa e inicializa el Watt Regulattor
 
       }
 
@@ -151,13 +151,13 @@ void _gl_widget::draw_objects()
 {
     if(objeto_complejo){
         if(vertex)
-            watt_regulator.draw(0,angle,velocidad);
+            watt_regulator->draw(0,angle,velocidad);
         if(lines)
-           watt_regulator.draw(1,angle,velocidad);
+           watt_regulator->draw(1,angle,velocidad);
         if(fill)
-            watt_regulator.draw(2,angle,velocidad);
+            watt_regulator->draw(2,angle,velocidad);
         if(chest)
-            watt_regulator.draw(3,angle,velocidad);
+            watt_regulator->draw(3,angle,velocidad);
     }
     else{
         if(!revolucion){

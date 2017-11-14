@@ -71,7 +71,7 @@ public:
      QString pathname_ply = "/home";
 
 
-     WattRegulator watt_regulator;  // objeto WattRegulator
+     WattRegulator* watt_regulator;  // objeto WattRegulator (es un puntero para que no salte el constructor al iniciarse el programa)
      double angle = 0;              // Angulo de rotacion sobre eje z del WattRegulator
      QTimer *timer;
      double velocidad=0;            // velocidad de giro del Watt Regulator.
