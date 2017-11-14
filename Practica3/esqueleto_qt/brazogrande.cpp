@@ -20,6 +20,13 @@ void BrazoGrande::draw(int tipo)
     }
     glPopMatrix();
 
+    /*
+     * Originalmente se instanciaba una esfera y se trasladaba, pero para
+     * añadir el Beethoven más facilmente creé una clase que pintara una esfera con el
+     * Beethoven bien colocado en ella
+     */
+
+
     glPushMatrix();
     glTranslatef(0,-3.535534,0);
     es_beeth.draw(tipo);

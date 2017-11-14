@@ -26,7 +26,8 @@ _gl_widget::_gl_widget(_window *Window1):Window(Window1)
   setMinimumSize(300, 300);
   setFocusPolicy(Qt::StrongFocus);
   object=Cubo();                           // Cubo por defecto
-  timer = new QTimer(this);
+
+  timer = new QTimer(this);                               // inicializacion del QTimer
   connect(timer,SIGNAL(timeout()),this,SLOT(animar()));
 }
 
@@ -36,59 +37,47 @@ _gl_widget::_gl_widget(_window *Window1):Window(Window1)
 
 void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
-    if(Keyevent->modifiers() == Qt::ShiftModifier){
-        switch(Keyevent->key()){
-            case Qt::Key_U:// watt_regulator = WattRegulator();
-                            objeto_complejo=true;
-            break;
-            case Qt::Key_Z: if(angle_z-ANGLE_STEP >38.9388)angle_z-=ANGLE_STEP;
-                            else angle_z = 38.9388;
-            break;
-        case Qt::Key_J:if((velocidad-1) >=0) velocidad-=1; if(timer->isActive())angle+=velocidad/10;break;
-        case Qt::Key_Q:angle+=(-1);
-        }
+  if(Keyevent->modifiers() == Qt::ShiftModifier){ // Composiciones de teclas SHIFT+TECLA
+      switch(Keyevent->key()){
+      case Qt::Key_N:if((velocidad-1) >=0) velocidad-=1; if(timer->isActive())angle+=velocidad/10;break;  // Disminuye la velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
+      case Qt::Key_B:angle+=(-1); // Gira el regulador de watt en sentido horario
+      }
 
-     }else
+  }else
+      switch(Keyevent->key()){
+      case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
+      case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
+      case Qt::Key_Up:Observer_angle_x-=ANGLE_STEP;break;
+      case Qt::Key_Down:Observer_angle_x+=ANGLE_STEP;break;
+      case Qt::Key_PageUp:Observer_distance*=1.2;break;
+      case Qt::Key_PageDown:Observer_distance/=1.2;break;
+
+      case Qt::Key_P: if(!vertex)vertex = 1; else vertex=0;break; // pinta puntos
+      case Qt::Key_L: if(!lines)lines = 1; else lines=0;break; // pinta aristass
+      case Qt::Key_F: if(!fill)fill = 1;else fill=0;break; // pinta caras
+      case Qt::Key_C: if(!chest)chest = 1;else chest=0;break; // pinta ajedrez
+
+      case Qt::Key_1: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;break;
+      case Qt::Key_2: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
+
+      case Qt::Key_3: ply.read_ply(); revolucion=true; ply_bool=true;break;
+
+      case Qt::Key_4: object_revolucion = Tubo(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+      case Qt::Key_5: object_revolucion = Cilindro(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+      case Qt::Key_6: object_revolucion = Vaso(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+      case Qt::Key_7: object_revolucion = Vaso_Invertido(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+      case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+      case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
 
 
-  switch(Keyevent->key()){
-  case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
-  case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
-  case Qt::Key_Up:Observer_angle_x-=ANGLE_STEP;break;
-  case Qt::Key_Down:Observer_angle_x+=ANGLE_STEP;break;
-  case Qt::Key_PageUp:Observer_distance*=1.2;break;
-  case Qt::Key_PageDown:Observer_distance/=1.2;break;
+          /*Teclas PRACTICA 3*/
 
-  case Qt::Key_P: if(!vertex)vertex = 1; else vertex=0;break; // pinta puntos
-  case Qt::Key_L: if(!lines)lines = 1; else lines=0;break; // pinta aristass
-  case Qt::Key_F: if(!fill)fill = 1;else fill=0;break; // pinta caras
-  case Qt::Key_C: if(!chest)chest = 1;else chest=0;break; // pinta ajedrez
+      case Qt::Key_N:if(velocidad+1 <=100) velocidad+=1; if(timer->isActive()) angle+=velocidad/10;break;  // Aumenta velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
+      case Qt::Key_B: angle+=1; break;     // Gira el regulador de watt en sentido anti-horario.
+      case Qt::Key_A: timers(); break;     // Activa / Desactiva la animacion
+      case Qt::Key_W: objeto_complejo=true;  // Activa el Watt Regulattor
 
-  case Qt::Key_1: object = Tetraedro();revolucion=false;ply_bool=false;break;
-  case Qt::Key_2: object = Cubo();revolucion=false;ply_bool=false;break;
-
-  case Qt::Key_3: ply.read_ply(); revolucion=true; ply_bool=true;break;
-
-  case Qt::Key_4: object_revolucion = Tubo(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-  case Qt::Key_5: object_revolucion = Cilindro(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-  case Qt::Key_6: object_revolucion = Vaso(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-  case Qt::Key_7: object_revolucion = Vaso_Invertido(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-  case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-  case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-  case Qt::Key_T: angle+=2;break;
-  case Qt::Key_Z: if(angle_z+ANGLE_STEP < 81.86989)angle_z+=ANGLE_STEP;else angle_z =81.86989; break;
-  case Qt::Key_J:if(velocidad+1 <=100)
-               velocidad+=1;
-                if(timer->isActive())
-                angle+=velocidad/10;
-      break;
-  case Qt::Key_Q: angle+=1; break;
-
-  case Qt::Key_B: timers(); break;
-
-  //case Qt::Key_U: base = Base();objeto_complejo= true; break;
-
-  }
+      }
 
   update();
 }
@@ -206,6 +195,9 @@ void _gl_widget::draw_objects()
     }
 }
 
+
+// Funcion que activa y desactiva el timer, es decir, activa y desactiva la animacion
+
 void _gl_widget::timers()
 {
     if(!timer->isActive()){
@@ -215,39 +207,12 @@ void _gl_widget::timers()
     else timer->stop();
 }
 
+
+// Funcion que activa la animacion, haciendo que el watt regulator vaya girando acorde a la velocidad seleccionada con las teclas
+
 void _gl_widget::animar()
 {
-   // if(subiendo)
-     //   ANGLE_STEPS = abs(ANGLE_STEPS);
-   // else ANGLE_STEPS = -abs(ANGLE_STEPS);
-/*
-    if(angle_z+ANGLE_STEPS < 81.86989 && subiendo)
-        //subiendo = true;
-        angle_z += ANGLE_STEPS;
-    else{
-         if(subiendo){
-             angle_z = 81.86989;
-             subiendo = false;
-         }else{
-             if(angle_z-ANGLE_STEPS >38.9388 && !subiendo)
-                 angle_z-=ANGLE_STEPS;
-             else if(!subiendo){
-                  angle_z = 38.9388;
-                  subiendo = true;
-             }
-         }
-
-
-
-       // angle_z += ANGLE_STEPS;
-
-        }
-        */
-    // if(velocidad > 100)
-      //      velocidad=100;
-       //  else velocidad+=ANGLE_STEPS;
     angle+=velocidad/10;
-
      update();
 }
 

@@ -28,7 +28,6 @@
 #include "watt_regulator.h"
 #include "brazo.h"
 #include "partesuperior.h"
-//#include "partemedia.h"
 #include "brazopequenio.h"
 #include "brazogrande.h"
 #include<QTimer>
@@ -61,16 +60,6 @@ public:
      O3DR object_revolucion;
      PLY_Object ply;
 
-     WattRegulator watt_regulator;// = WattRegulator();
-    // Brazo brazo = Brazo();
-   //  ParteSuperior psup = ParteSuperior();
-   //  ParteMedia pmed = ParteMedia();
-   //  BrazoPequenio bpeq = BrazoPequenio();
-    // BrazoGrande bgra = BrazoGrande();
-    // CuboWatt cwatt = CuboWatt();
-     double angle = 0;
-     double angle_z = 0;
-
      bool ply_bool=0;
 
      bool revolucion = 0;
@@ -81,11 +70,11 @@ public:
      bool chest = 0; // 1: pinta ajedrez; 0:No los pinta
      QString pathname_ply = "/home";
 
-     QTimer *timer;
-     bool subiendo = 1;
-     double velocidad=0;
 
-     float ANGLE_STEPS=2;
+     WattRegulator watt_regulator;  // objeto WattRegulator
+     double angle = 0;              // Angulo de rotacion sobre eje z del WattRegulator
+     QTimer *timer;
+     double velocidad=0;            // velocidad de giro del Watt Regulator.
 
   _gl_widget(_window *Window1);
 

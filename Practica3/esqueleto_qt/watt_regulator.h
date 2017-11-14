@@ -14,9 +14,14 @@ private:
     Cubo cubo1 = Cubo();
     ParteSuperior psup = ParteSuperior();
 
-    const double Z_MAX = 81.86989;
-    const double Z_MIN = 38.9388;
-    double angle_z;
+
+
+    static const double Z_MAX = 81.86989;    // Máximo angulo alcanzable por brazos para que no choque la caja del medio con la superior.
+    static const double Z_MIN = 38.9388;     // Mínimo angulo alcanzable por brazos para que el tope no atraviese la base.
+
+
+    double angle_z;                   // Angulo que forman los brazos con el mastil
+
 public:
     WattRegulator();
     void draw(int tipo,double angle ,double velocidad );

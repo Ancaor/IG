@@ -10,7 +10,6 @@ void ParteSuperior::draw(int tipo,double angle_z){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0.375,0,0);
-    //glRotatef(-angle_z,0,0,1);
     brazo.draw(tipo,angle_z);
     glPopMatrix();
 
@@ -25,7 +24,7 @@ void ParteSuperior::draw(int tipo,double angle_z){
     cuboWatt.draw(tipo);
     glPopMatrix();
 
-    glTranslatef(0,2.5-(((sin((90-angle_z)*(M_PI/180.0)))*3.535534)),0);
+    glTranslatef(0,2.5-(((sin((90-angle_z)*(M_PI/180.0)))*3.535534)),0);   // Calcula la altura del cubo en funcion del angulo que forman los brazos.
     glPushMatrix();
     cuboWatt.draw(tipo);
     glPopMatrix();
