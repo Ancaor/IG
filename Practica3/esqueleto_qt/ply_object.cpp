@@ -60,3 +60,11 @@ QString PLY_Object::getPathPLYs(string archivo){
 
     return path_ply;
 }
+
+bool PLY_Object::plyCargado()
+{
+    if(vertices.size()!=0)
+        return true;
+    else
+        return false;
+}

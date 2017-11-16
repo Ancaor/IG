@@ -1,6 +1,6 @@
 #include "esfera.h"
 
-Esfera::Esfera(int secciones)
+Esfera::Esfera(int secciones,int angulo)
 {
     SECCIONES = secciones;
 
@@ -8,6 +8,6 @@ Esfera::Esfera(int secciones)
     revolucion_por_barrido_z(M_PI);
     setPuntosPerfil(vertices.size());
     vertices[vertices.size()-1] = _vertex3f(0.0,0.5,0.0);
-    generar_objeto_de_revolucion();
+    generar_objeto_de_revolucion(angulo);
 
 }

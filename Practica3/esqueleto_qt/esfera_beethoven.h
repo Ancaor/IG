@@ -8,7 +8,7 @@ class esfera_beethoven : public O3D
 {
 
 private:
-    Esfera esfera = Esfera(40);
+    Esfera esfera = Esfera(40,360);
     PLY_Object ply_object;
 public:
     esfera_beethoven();

@@ -10,7 +10,7 @@
 class WattRegulator : public O3DR
 {
 private:
-    Cilindro cilindro1 = Cilindro(40);
+    Cilindro cilindro1 = Cilindro(40,360);
     Cubo cubo1 = Cubo();
     ParteSuperior psup = ParteSuperior();
 

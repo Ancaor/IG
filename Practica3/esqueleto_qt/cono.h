@@ -6,7 +6,7 @@
 class Cono : public O3DR
 {
 public:
-    Cono(int secciones);
+    Cono(int secciones,int angulo);
 };
 
 #endif // CONO_H

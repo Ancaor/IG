@@ -6,7 +6,7 @@
 class Vaso : public O3DR
 {
 public:
-    Vaso(int secciones);
+    Vaso(int secciones,int angulo);
 };
 
 #endif // VASO_H

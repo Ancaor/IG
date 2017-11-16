@@ -6,7 +6,7 @@
 class Vaso_Invertido : public O3DR
 {
 public:
-    Vaso_Invertido(int secciones);
+    Vaso_Invertido(int secciones,int angulo);
 };
 
 #endif // VASO_INVERTIDO_H

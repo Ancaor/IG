@@ -6,7 +6,7 @@
 class Esfera : public O3DR
 {
 public:
-    Esfera(int secciones);
+    Esfera(int secciones,int angulo);
 };
 
 #endif // ESFERA_H

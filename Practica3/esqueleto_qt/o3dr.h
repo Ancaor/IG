@@ -24,7 +24,7 @@ public:
     void generar_caras();
     void generar_tapa_superior(int indice_centro);
     void generar_tapa_inferior(int indice_centro);
-    void generar_objeto_de_revolucion();
+    void generar_objeto_de_revolucion(int angulo);
     void encontrar_tapas();
 };
 

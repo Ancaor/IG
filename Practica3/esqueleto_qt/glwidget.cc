@@ -36,6 +36,8 @@ _gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
   this->interfaz = interfaz;
   this->interfaz->show();
   this->interfaz->move(840,80);
+ // this->interfaz->
+
 
   timer_interfaz->start();
 }
@@ -48,8 +50,8 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
   if(Keyevent->modifiers() == Qt::ShiftModifier){ // Composiciones de teclas SHIFT+TECLA
       switch(Keyevent->key()){
-      case Qt::Key_N:if((velocidad-1) >=0) velocidad-=1; if(timer->isActive())angle+=velocidad/10;break;  // Disminuye la velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
-      case Qt::Key_B:angle+=(-1); // Gira el regulador de watt en sentido horario
+     // case Qt::Key_N:if((velocidad-1) >=0) velocidad-=1; if(timer->isActive())angle+=velocidad/10;break;  // Disminuye la velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
+     // case Qt::Key_B:angle+=(-1); // Gira el regulador de watt en sentido horario
       }
 
   }else
@@ -60,17 +62,17 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       case Qt::Key_Down:Observer_angle_x+=ANGLE_STEP;break;
       case Qt::Key_PageUp:Observer_distance*=1.2;break;
       case Qt::Key_PageDown:Observer_distance/=1.2;break;
+      case Qt::Key_0: interfaz->raise();break;
+//      case Qt::Key_P: if(!vertex)vertex = 1; else vertex=0;break; // pinta puntos
+  //    case Qt::Key_L: if(!lines)lines = 1; else lines=0;break; // pinta aristass
+    //  case Qt::Key_F: if(!fill)fill = 1;else fill=0;break; // pinta caras
+    //  case Qt::Key_C: if(!chest)chest = 1;else chest=0;break; // pinta ajedrez
 
-      case Qt::Key_P: if(!vertex)vertex = 1; else vertex=0;break; // pinta puntos
-      case Qt::Key_L: if(!lines)lines = 1; else lines=0;break; // pinta aristass
-      case Qt::Key_F: if(!fill)fill = 1;else fill=0;break; // pinta caras
-      case Qt::Key_C: if(!chest)chest = 1;else chest=0;break; // pinta ajedrez
+      //case Qt::Key_1: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;break;
+      //case Qt::Key_2: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
 
-      case Qt::Key_1: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;break;
-      case Qt::Key_2: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
-
-      case Qt::Key_3: ply.read_ply(); revolucion=true; ply_bool=true;break;
-
+      //case Qt::Key_3: ply.read_ply(); revolucion=true; ply_bool=true;break;
+/*
       case Qt::Key_4: object_revolucion = Tubo(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
       case Qt::Key_5: object_revolucion = Cilindro(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
       case Qt::Key_6: object_revolucion = Vaso(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
@@ -78,13 +80,13 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
       case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
 
-
+*/
           /*Teclas PRACTICA 3*/
 
-      case Qt::Key_N:if(velocidad+1 <=100) velocidad+=1; if(timer->isActive()) angle+=velocidad/10;break;  // Aumenta velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
-      case Qt::Key_B: angle+=1; break;     // Gira el regulador de watt en sentido anti-horario.
-      case Qt::Key_A: timers(); break;     // Activa / Desactiva la animacion
-      case Qt::Key_W: watt_regulator=new WattRegulator(); objeto_complejo=true;  // Activa e inicializa el Watt Regulattor
+      //case Qt::Key_N:if(velocidad+1 <=100) velocidad+=1; if(timer->isActive()) angle+=velocidad/10;break;  // Aumenta velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
+      //case Qt::Key_B: angle+=1; break;     // Gira el regulador de watt en sentido anti-horario.
+      //case Qt::Key_A: timers(); break;     // Activa / Desactiva la animacion
+      //case Qt::Key_W: watt_regulator=new WattRegulator(); objeto_complejo=true;  // Activa e inicializa el Watt Regulattor
 
       }
 
@@ -159,15 +161,15 @@ void _gl_widget::draw_axis()
 void _gl_widget::draw_objects()
 {
     if(objeto_complejo){
-     /*   if(vertex)
-            watt_regulator->draw(0,angle,velocidad);
+        if(vertex)
+            watt_regulator.draw(0,angle,velocidad);
         if(lines)
-           watt_regulator->draw(1,angle,velocidad);
+           watt_regulator.draw(1,angle,velocidad);
         if(fill)
-            watt_regulator->draw(2,angle,velocidad);
+            watt_regulator.draw(2,angle,velocidad);
         if(chest)
-            watt_regulator->draw(3,angle,velocidad);
-    */}
+            watt_regulator.draw(3,angle,velocidad);
+    }
     else{
         if(!revolucion){
             if(vertex)
@@ -221,6 +223,7 @@ void _gl_widget::timers()
 
 void _gl_widget::animar()
 {
+    cout << "activa";
     angle+=velocidad/10;
     update();
 }
@@ -232,13 +235,32 @@ void _gl_widget::updateInterfaz()
     lines = interfaz->getLineas();
     fill = interfaz->getRelleno();
     chest = interfaz->getAjedrez();
-/*
+    int secciones = interfaz->getSecciones();
+    int angulo = interfaz->getAngulo();
+
     switch(figura)
     {
     case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
     case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;break;
+    case 3: object_revolucion = Esfera(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+    case 4: object_revolucion = Cilindro(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+    case 5: object_revolucion = Tubo(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+    case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+    case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+    case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
+    case 9: watt_regulator= WattRegulator(); revolucion=false; ply_bool=false;objeto_complejo=true; break;
+    case 55:ply.read_ply(); revolucion=true; ply_bool=true;objeto_complejo= false;break;
     }
-*/
+
+    velocidad=interfaz->getVelocidad();
+
+
+    if(interfaz->Animacion()){
+         angle+=velocidad/10;
+    }
+    else{
+        angle=interfaz->getAnguloObjetoComplejo();
+    }
     update();
 }
 

@@ -1,6 +1,6 @@
 #include "cilindro.h"
 
-Cilindro::Cilindro(int secciones)
+Cilindro::Cilindro(int secciones,int angulo)
 {
     SECCIONES = secciones;
     vertices.resize(4);
@@ -9,5 +9,5 @@ Cilindro::Cilindro(int secciones)
     vertices[1] = _vertex3f(0.5,-0.5,0);
     vertices[2] = _vertex3f(0.5,0.5,0);
     vertices[3] = _vertex3f(0,0.5,0);
-    generar_objeto_de_revolucion();
+    generar_objeto_de_revolucion(angulo);
 }

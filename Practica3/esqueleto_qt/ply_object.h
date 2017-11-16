@@ -15,6 +15,7 @@ public:
     void read_ply();
     string buscarPLY();
     QString getPathPLYs(string archivo);
+    bool plyCargado();
 };
 
 #endif // PLY_OBJECT_H

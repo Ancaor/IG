@@ -6,7 +6,7 @@
 class Cilindro : public O3DR
 {
 public:
-    Cilindro(int secciones);
+    Cilindro(int secciones,int angulo);
 };
 
 #endif // CILINDRO_H

@@ -9,7 +9,7 @@
 class BrazoGrande
 {
 private:
-    Cilindro cilindro = Cilindro(40);
+    Cilindro cilindro = Cilindro(40,360);
     esfera_beethoven es_beeth;
 public:
     BrazoGrande();

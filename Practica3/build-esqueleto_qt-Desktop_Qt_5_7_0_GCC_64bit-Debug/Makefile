@@ -3986,7 +3986,48 @@ interfaz.o: ../esqueleto_qt/interfaz.cpp ../esqueleto_qt/interfaz.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_interfaz.h
+		ui_interfaz.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QAction \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qaction.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qicon.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qapplication.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qguiapplication.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qinputmethod.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QButtonGroup \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QCheckBox \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGroupBox \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QHeaderView \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvalidator.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qregularexpression.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qstyle.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QRadioButton \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QTabWidget \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o interfaz.o ../esqueleto_qt/interfaz.cpp
 
 moc_glwidget.o: moc_glwidget.cpp 

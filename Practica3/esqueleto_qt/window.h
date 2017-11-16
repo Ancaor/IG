@@ -30,6 +30,9 @@ class _window : public QMainWindow
 public:
     _window();
 
+private slots:
+    void raiseInterfaz();
+
 private:
   _gl_widget *GL_widget;
   Interfaz *interfaz;

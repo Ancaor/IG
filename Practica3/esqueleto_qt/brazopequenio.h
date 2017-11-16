@@ -7,7 +7,7 @@
 class BrazoPequenio
 {
 private:
-    Cilindro cilindro = Cilindro(40);
+    Cilindro cilindro = Cilindro(40,360);
 public:
     BrazoPequenio();
     void draw(int tipo);
