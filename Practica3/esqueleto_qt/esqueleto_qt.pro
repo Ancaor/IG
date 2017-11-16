@@ -20,7 +20,8 @@ HEADERS += \
     brazopequenio.h \
     brazogrande.h \
     watt_regulator.h \
-    esfera_beethoven.h
+    esfera_beethoven.h \
+    interfaz.h
 
 SOURCES += \
   main.cc \
@@ -45,7 +46,8 @@ SOURCES += \
     brazopequenio.cpp \
     brazogrande.cpp \
     watt_regulator.cpp \
-    esfera_beethoven.cpp
+    esfera_beethoven.cpp \
+    interfaz.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 
@@ -57,4 +59,5 @@ QT += widgets
 
 DISTFILES +=
 
-FORMS +=
+FORMS += \
+    interfaz.ui

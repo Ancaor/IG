@@ -31,6 +31,7 @@
 #include "brazopequenio.h"
 #include "brazogrande.h"
 #include<QTimer>
+#include "interfaz.h"
 
 namespace _gl_widget_ne {
 
@@ -73,10 +74,11 @@ public:
 
      WattRegulator* watt_regulator;  // objeto WattRegulator (es un puntero para que no salte el constructor al iniciarse el programa)
      double angle = 0;              // Angulo de rotacion sobre eje z del WattRegulator
-     QTimer *timer;
+
+
      double velocidad=0;            // velocidad de giro del Watt Regulator.
 
-  _gl_widget(_window *Window1);
+  _gl_widget(_window *Window1,Interfaz *interfaz);
 
   void clear_window();
   void change_projection();
@@ -91,6 +93,8 @@ public:
 public slots:
   void animar();
 
+  void updateInterfaz();
+
 
 protected:
   void resizeGL(int Width1, int Height1) Q_DECL_OVERRIDE;
@@ -101,6 +105,10 @@ protected:
 
 private:
   _window *Window;
+  Interfaz *interfaz;
+
+  QTimer *timer;
+  QTimer *timer_interfaz;
 
   float Observer_angle_x;
   float Observer_angle_y;

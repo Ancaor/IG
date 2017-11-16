@@ -31,8 +31,10 @@ _window::_window()
   Framed_widget->setFrameStyle(QFrame::Panel);
   Framed_widget->setLineWidth(3);
 
+  interfaz = new Interfaz(this);
 
-  GL_widget = new _gl_widget(this);
+
+  GL_widget = new _gl_widget(this,interfaz);
   GL_widget->setSizePolicy(Q);
 
   QHBoxLayout *Horizontal_frame = new QHBoxLayout();

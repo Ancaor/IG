@@ -17,6 +17,7 @@
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QGuiApplication>
+#include "interfaz.h"
 
 QT_FORWARD_DECLARE_CLASS(QOpenGLWidget)
 
@@ -31,6 +32,7 @@ public:
 
 private:
   _gl_widget *GL_widget;
+  Interfaz *interfaz;
 };
 
 #endif

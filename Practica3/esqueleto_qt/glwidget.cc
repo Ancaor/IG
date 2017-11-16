@@ -21,7 +21,7 @@
 using namespace std;
 using namespace _gl_widget_ne;
 
-_gl_widget::_gl_widget(_window *Window1):Window(Window1)
+_gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
 {
   setMinimumSize(300, 300);
   setFocusPolicy(Qt::StrongFocus);
@@ -29,6 +29,15 @@ _gl_widget::_gl_widget(_window *Window1):Window(Window1)
 
   timer = new QTimer(this);                               // inicializacion del QTimer
   connect(timer,SIGNAL(timeout()),this,SLOT(animar()));
+
+  timer_interfaz = new QTimer(this);
+  connect(timer_interfaz,SIGNAL(timeout()),this,SLOT(updateInterfaz()));
+
+  this->interfaz = interfaz;
+  this->interfaz->show();
+  this->interfaz->move(840,80);
+
+  timer_interfaz->start();
 }
 
 //*************************************************************************
@@ -150,7 +159,7 @@ void _gl_widget::draw_axis()
 void _gl_widget::draw_objects()
 {
     if(objeto_complejo){
-        if(vertex)
+     /*   if(vertex)
             watt_regulator->draw(0,angle,velocidad);
         if(lines)
            watt_regulator->draw(1,angle,velocidad);
@@ -158,7 +167,7 @@ void _gl_widget::draw_objects()
             watt_regulator->draw(2,angle,velocidad);
         if(chest)
             watt_regulator->draw(3,angle,velocidad);
-    }
+    */}
     else{
         if(!revolucion){
             if(vertex)
@@ -213,7 +222,24 @@ void _gl_widget::timers()
 void _gl_widget::animar()
 {
     angle+=velocidad/10;
-     update();
+    update();
+}
+
+void _gl_widget::updateInterfaz()
+{
+    int figura = interfaz->getFigura();
+    vertex = interfaz->getPuntos();
+    lines = interfaz->getLineas();
+    fill = interfaz->getRelleno();
+    chest = interfaz->getAjedrez();
+/*
+    switch(figura)
+    {
+    case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
+    case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;break;
+    }
+*/
+    update();
 }
 
 
