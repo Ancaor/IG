@@ -1,8 +1,8 @@
 #include "brazo.h"
 
-Brazo::Brazo()
+Brazo::Brazo(string path)
 {
-
+    brazog = BrazoGrande(path);
 }
 /*
  * El angulo llamado angle_z es el angulo que formaran cada brazo con el mastil central. Es el mismo angulo

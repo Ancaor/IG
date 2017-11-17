@@ -5,15 +5,17 @@
  * En el constructor se carga el PLY, para ello aparecerá por pantalla el selector de PLY grafico.
  */
 
-esfera_beethoven::esfera_beethoven()
+esfera_beethoven::esfera_beethoven(string path)
 {
-   // ply_object.read_ply();
+    ply_object.read_ply(path);
 }
 
 void esfera_beethoven::draw(int tipo)
 {
+
+
     glMatrixMode(GL_MODELVIEW);
-    /*glPushMatrix();
+    glPushMatrix();
     glTranslatef(0.8,0,0);
     glRotatef(-90,0,0,1);
     glScalef(0.05,0.05,0.05);
@@ -24,7 +26,7 @@ void esfera_beethoven::draw(int tipo)
     case 3: ply_object.drawAjedrez();break;
     }
     glPopMatrix();
-*/
+
     glPushMatrix();
     switch(tipo){
     case 0: esfera.drawPoints(); break;

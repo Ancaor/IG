@@ -1,8 +1,9 @@
 #include "watt_regulator.h"
 
-WattRegulator::WattRegulator()
+WattRegulator::WattRegulator(string path)
 {
-
+    this->path=path;
+    psup = ParteSuperior(path);
 }
 
 void WattRegulator::draw(int tipo,double angle_y, double velocidad ){

@@ -39,7 +39,7 @@ _gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
  // this->interfaz->
 
 
-  timer_interfaz->start();
+  timer_interfaz->start(0);
 }
 
 //*************************************************************************
@@ -238,6 +238,12 @@ void _gl_widget::updateInterfaz()
     int secciones = interfaz->getSecciones();
     int angulo = interfaz->getAngulo();
 
+    string urlPlyWatt = interfaz->getUrlPly();//"/home/ancaor/IG/PLY/modelos_ply/beethoven.ply";
+    if(urlPlyWatt != url_ply_watt_anterior)
+        figura_anterior=0;
+    url_ply_watt_anterior = urlPlyWatt;
+
+    if(figura != figura_anterior)
     switch(figura)
     {
     case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
@@ -248,9 +254,11 @@ void _gl_widget::updateInterfaz()
     case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
     case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
     case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 9: watt_regulator= WattRegulator(); revolucion=false; ply_bool=false;objeto_complejo=true; break;
-    case 55:ply.read_ply(); revolucion=true; ply_bool=true;objeto_complejo= false;break;
+    case 9: cout << "reoite"<<endl;watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true; break;
+    case 55:ply.read_ply(urlPlyWatt); revolucion=true; ply_bool=true;objeto_complejo= false;break;
     }
+
+    figura_anterior=figura;
 
     velocidad=interfaz->getVelocidad();
 

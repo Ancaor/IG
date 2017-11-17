@@ -2,6 +2,7 @@
 #define INTERFAZ_H
 
 #include <QDialog>
+#include <QFileDialog>
 
 namespace Ui {
 class Interfaz;
@@ -26,6 +27,7 @@ public:
     int getAnguloObjetoComplejo();
     int getVelocidad();
     bool Animacion();
+    std::string getUrlPly();
 
 private slots:
     void on_tabWidget_tabBarClicked(int index);
@@ -68,6 +70,11 @@ private slots:
 
     void on_checkBox_5_clicked();
 
+    void on_pushButton_2_clicked();
+
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
 public slots:
     void raise_dialog();
 
@@ -91,6 +98,8 @@ private:
     int velocidad=0;
     int angulo_objeto_complejo=0;
     bool animacion=0;
+
+    std::string urlPly;
 };
 
 #endif // INTERFAZ_H

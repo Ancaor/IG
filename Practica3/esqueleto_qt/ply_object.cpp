@@ -11,11 +11,11 @@ PLY_Object::PLY_Object()
 //*************************************************************************
 
 
-void PLY_Object::read_ply()
+void PLY_Object::read_ply(string path)
 {
     _file_ply File_ply;
 
-    if (File_ply.open(buscarPLY())){
+    if (File_ply.open(path)){
       File_ply.read(vertices,triangles);
       std::cout << "PLY leido correctamente." << std::endl;
     }

@@ -10,9 +10,9 @@ class BrazoGrande
 {
 private:
     Cilindro cilindro = Cilindro(40,360);
-    esfera_beethoven es_beeth;
+    esfera_beethoven es_beeth = esfera_beethoven("");
 public:
-    BrazoGrande();
+    BrazoGrande(string path);
     void draw(int tipo);
 };
 

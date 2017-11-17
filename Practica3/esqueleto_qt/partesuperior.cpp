@@ -1,8 +1,8 @@
 #include "partesuperior.h"
 
-ParteSuperior::ParteSuperior()
+ParteSuperior::ParteSuperior(string path)
 {
-
+    brazo=Brazo(path);
 }
 
 void ParteSuperior::draw(int tipo,double angle_z){

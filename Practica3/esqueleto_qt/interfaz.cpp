@@ -1,5 +1,6 @@
 #include "interfaz.h"
 #include "ui_interfaz.h"
+#include <string>
 
 Interfaz::Interfaz(QWidget *parent) :
     QDialog(parent),
@@ -73,6 +74,11 @@ int Interfaz::getVelocidad()
 bool Interfaz::Animacion()
 {
     return animacion;
+}
+
+std::__cxx11::string Interfaz::getUrlPly()
+{
+    return urlPly;
 }
 
 void Interfaz::on_tabWidget_tabBarClicked(int index)
@@ -199,4 +205,20 @@ void Interfaz::on_checkBox_5_clicked()
 void Interfaz::raise_dialog()
 {
     this->raise();
+}
+
+void Interfaz::on_pushButton_2_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(0,QString::fromStdString("Abrir PLY"), "/home", QString::fromStdString("Archivos PLY (*.ply)"));
+
+    ui->lineEdit->setText(fileName);
+
+
+
+}
+
+
+void Interfaz::on_lineEdit_textChanged(const QString &arg1)
+{
+    urlPly = arg1.toStdString();
 }
