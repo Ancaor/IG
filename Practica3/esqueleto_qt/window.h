@@ -32,6 +32,7 @@ public:
 
 private slots:
     void raiseInterfaz();
+    void showInterfaz();
 
 private:
   _gl_widget *GL_widget;

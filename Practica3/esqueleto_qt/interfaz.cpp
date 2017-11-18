@@ -81,6 +81,11 @@ std::__cxx11::string Interfaz::getUrlPly()
     return urlPly;
 }
 
+std::__cxx11::string Interfaz::getUrlPly_2()
+{
+    return urlPly_2;
+}
+
 void Interfaz::on_tabWidget_tabBarClicked(int index)
 {
     switch(index)
@@ -118,8 +123,14 @@ void Interfaz::on_checkBox_3_clicked()
 
 void Interfaz::on_checkBox_4_clicked()
 {
-    if(!ajedrez)
+    if(!ajedrez){
         ajedrez=true;
+
+        if(ui->checkBox_3->isChecked()){
+            ui->checkBox_3->setChecked(false);
+            relleno=false;
+        }
+    }
     else
         ajedrez=false;
 }
@@ -217,8 +228,19 @@ void Interfaz::on_pushButton_2_clicked()
 
 }
 
-
 void Interfaz::on_lineEdit_textChanged(const QString &arg1)
 {
     urlPly = arg1.toStdString();
+}
+
+void Interfaz::on_pushButton_3_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(0,QString::fromStdString("Abrir PLY"), "/home", QString::fromStdString("Archivos PLY (*.ply)"));
+
+    ui->lineEdit_2->setText(fileName);
+}
+
+void Interfaz::on_lineEdit_2_textChanged(const QString &arg1)
+{
+    urlPly_2 = arg1.toStdString();
 }

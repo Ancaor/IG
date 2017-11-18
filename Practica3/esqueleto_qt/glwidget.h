@@ -37,10 +37,10 @@ namespace _gl_widget_ne {
 
   const _vertex3f COLORS[]={{0,0,0},{1,0,0},{0,1,0},{0,0,1},{0,1,1},{1,0,1},{1,1,0},{1,1,1}};
 
-  const float X_MIN=-0.5;
-  const float X_MAX=0.5;
-  const float Y_MIN=-0.5;
-  const float Y_MAX=0.5;
+  const float X_MIN=-1;//(16.0/9);
+  const float X_MAX=1;//(16.0/9);
+  const float Y_MIN=-1;
+  const float Y_MAX=1;
   const float FRONT_PLANE_PERSPECTIVE=(X_MAX-X_MIN)/2;
   const float BACK_PLANE_PERSPECTIVE=1000;
   const float DEFAULT_DISTANCE=10;
@@ -82,6 +82,7 @@ public:
 
   void clear_window();
   void change_projection();
+  void change_projection_maximiced();
   void change_observer();
 
   void draw_axis();
@@ -112,6 +113,7 @@ private:
 
   int figura_anterior=0;
   string url_ply_watt_anterior="";
+  string url_ply_anterior="";
 
   float Observer_angle_x;
   float Observer_angle_y;

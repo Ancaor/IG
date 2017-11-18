@@ -35,7 +35,7 @@ _gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
 
   this->interfaz = interfaz;
   this->interfaz->show();
-  this->interfaz->move(840,80);
+  this->interfaz->move(870,120);
  // this->interfaz->
 
 
@@ -89,7 +89,6 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       //case Qt::Key_W: watt_regulator=new WattRegulator(); objeto_complejo=true;  // Activa e inicializa el Watt Regulattor
 
       }
-
   update();
 }
 
@@ -114,7 +113,11 @@ void _gl_widget::change_projection()
 
   // formato(x_minimo,x_maximo, y_minimo, y_maximo,Front_plane, plano_traser)
   //  Front_plane>0  Back_plane>PlanoDelantero)
-  glFrustum(X_MIN,X_MAX,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+  //cout << this->size().width()<<" "<<this->size().height()<<endl;
+  //cout << this->parentWidget()->size().width()<<" "<<this->parentWidget()->parentWidget()->parentWidget()->size().height()<<endl;
+  float relacion_aspecto = this->size().width()*1.0/this->size().height();
+
+  glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
 }
 
 //**************************************************************************
@@ -239,11 +242,18 @@ void _gl_widget::updateInterfaz()
     int angulo = interfaz->getAngulo();
 
     string urlPlyWatt = interfaz->getUrlPly();//"/home/ancaor/IG/PLY/modelos_ply/beethoven.ply";
+
     if(urlPlyWatt != url_ply_watt_anterior)
         figura_anterior=0;
     url_ply_watt_anterior = urlPlyWatt;
 
-    if(figura != figura_anterior)
+    string urlPly = interfaz->getUrlPly_2();//"/home/ancaor/IG/PLY/modelos_ply/beethoven.ply";
+
+    if(urlPly != url_ply_anterior)
+        figura_anterior=0;
+    url_ply_anterior = urlPly;
+
+    if((figura != figura_anterior)|| (figura!=9 && figura !=55))
     switch(figura)
     {
     case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
@@ -254,8 +264,8 @@ void _gl_widget::updateInterfaz()
     case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
     case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
     case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 9: cout << "reoite"<<endl;watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true; break;
-    case 55:ply.read_ply(urlPlyWatt); revolucion=true; ply_bool=true;objeto_complejo= false;break;
+    case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true; break;
+    case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;break;
     }
 
     figura_anterior=figura;
@@ -269,6 +279,7 @@ void _gl_widget::updateInterfaz()
     else{
         angle=interfaz->getAnguloObjetoComplejo();
     }
+
     update();
 }
 

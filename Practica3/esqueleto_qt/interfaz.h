@@ -28,6 +28,7 @@ public:
     int getVelocidad();
     bool Animacion();
     std::string getUrlPly();
+    std::string getUrlPly_2();
 
 private slots:
     void on_tabWidget_tabBarClicked(int index);
@@ -75,6 +76,10 @@ private slots:
 
     void on_lineEdit_textChanged(const QString &arg1);
 
+    void on_pushButton_3_clicked();
+
+    void on_lineEdit_2_textChanged(const QString &arg1);
+
 public slots:
     void raise_dialog();
 
@@ -83,7 +88,7 @@ private:
 
     int practica=1;
 
-    bool puntos = 0;
+    bool puntos = 1;
     bool lineas = 0;
     bool relleno = 0;
     bool ajedrez = 0;
@@ -100,6 +105,7 @@ private:
     bool animacion=0;
 
     std::string urlPly;
+    std::string urlPly_2;
 };
 
 #endif // INTERFAZ_H

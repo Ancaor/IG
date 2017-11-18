@@ -1042,6 +1042,10 @@ moc_interfaz.cpp: ../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QFileDialog \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qfiledialog.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdir.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfileinfo.h \
 		../esqueleto_qt/interfaz.h \
 		../../../Qt5.7.0/5.7/gcc_64/bin/moc
 	/home/ancaor/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/home/ancaor/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I'/home/ancaor/Informatica Grafica/Practica3/esqueleto_qt' -I/casa/dmartin/codigo/funciontecas/glew/include -I/home/ancaor/Qt5.7.0/5.7/gcc_64/include -I/home/ancaor/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/ancaor/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/ancaor/Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../esqueleto_qt/interfaz.h -o moc_interfaz.cpp
@@ -3986,6 +3990,10 @@ interfaz.o: ../esqueleto_qt/interfaz.cpp ../esqueleto_qt/interfaz.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QFileDialog \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qfiledialog.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdir.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfileinfo.h \
 		ui_interfaz.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QAction \
@@ -4007,6 +4015,11 @@ interfaz.o: ../esqueleto_qt/interfaz.cpp ../esqueleto_qt/interfaz.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QGroupBox \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgroupbox.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlayout.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QHeaderView \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qheaderview.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qabstractitemview.h \
@@ -4024,9 +4037,23 @@ interfaz.o: ../esqueleto_qt/interfaz.cpp ../esqueleto_qt/interfaz.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabbar.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QLabel \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QLineEdit \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextcursor.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextformat.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpen.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QPushButton \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QRadioButton \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QSlider \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QSpinBox \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qspinbox.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QTabWidget \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QVBoxLayout \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o interfaz.o ../esqueleto_qt/interfaz.cpp
 

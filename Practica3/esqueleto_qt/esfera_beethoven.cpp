@@ -7,6 +7,7 @@
 
 esfera_beethoven::esfera_beethoven(string path)
 {
+    if(!path.empty())
     ply_object.read_ply(path);
 }
 

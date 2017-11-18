@@ -61,10 +61,16 @@ _window::_window()
   RaiseInterfaz->setToolTip(tr("Raise the interface"));
   connect(RaiseInterfaz, SIGNAL(triggered()), this, SLOT(raiseInterfaz()));
 
+  QAction *ShowInterfaz = new QAction(QIcon("./icons/exit.png"), tr("&Show Interfaz..."),this);
+  ShowInterfaz->setShortcut(tr("Ctrl+S"));
+  ShowInterfaz->setToolTip(tr("Show the interface if it's closed"));
+  connect(ShowInterfaz, SIGNAL(triggered()), this, SLOT(showInterfaz()));
+
   // menus
   QMenu *File_menu=menuBar()->addMenu(tr("&File"));
   File_menu->addAction(Exit);
   File_menu->addAction(RaiseInterfaz);
+  File_menu->addAction(ShowInterfaz);
   File_menu->setAttribute(Qt::WA_AlwaysShowToolTips);
 
   setWindowTitle(tr("esqueleto_qt (Domingo Martín)"));
@@ -76,6 +82,11 @@ _window::_window()
 void _window::raiseInterfaz()
 {
     interfaz->raise();
+}
+
+void _window::showInterfaz()
+{
+    interfaz->show();
 }
 
 
