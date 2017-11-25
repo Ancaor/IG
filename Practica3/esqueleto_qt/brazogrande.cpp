@@ -1,12 +1,14 @@
 #include "brazogrande.h"
 
-BrazoGrande::BrazoGrande()
+BrazoGrande::BrazoGrande(string path)
 {
-
+    es_beeth=esfera_beethoven(path);
 }
 
 void BrazoGrande::draw(int tipo)
 {
+
+
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,-3.535534/2,0);

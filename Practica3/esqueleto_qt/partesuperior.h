@@ -10,11 +10,11 @@ class ParteSuperior
 {
     private:
 
-        Brazo brazo = Brazo();
+        Brazo brazo = Brazo("");
         CuboWatt cuboWatt = CuboWatt();
         Cubo cubo = Cubo();
     public:
-        ParteSuperior();
+        ParteSuperior(string path);
         void draw(int tipo, double angle_z);
 };
 

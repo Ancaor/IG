@@ -10,11 +10,11 @@ class Brazo : public O3D
 {
 private:
     BrazoPequenio bpeq = BrazoPequenio();
-    BrazoGrande brazog = BrazoGrande();
+    BrazoGrande brazog = BrazoGrande("");
 
 public:
-    Brazo();
-    void draw(int tipo,double angle_z);
+    Brazo(string path);
+    void draw(int tipo, double angle_z);
 
 };
 

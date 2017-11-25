@@ -6,7 +6,7 @@
 class Tubo : public O3DR
 {
 public:
-    Tubo(int secciones);
+    Tubo(int secciones,int angulo);
 };
 
 #endif // TUBO_H

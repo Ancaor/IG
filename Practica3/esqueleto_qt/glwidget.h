@@ -31,15 +31,16 @@
 #include "brazopequenio.h"
 #include "brazogrande.h"
 #include<QTimer>
+#include "interfaz.h"
 
 namespace _gl_widget_ne {
 
   const _vertex3f COLORS[]={{0,0,0},{1,0,0},{0,1,0},{0,0,1},{0,1,1},{1,0,1},{1,1,0},{1,1,1}};
 
-  const float X_MIN=-0.5;
-  const float X_MAX=0.5;
-  const float Y_MIN=-0.5;
-  const float Y_MAX=0.5;
+  const float X_MIN=-1;//(16.0/9);
+  const float X_MAX=1;//(16.0/9);
+  const float Y_MIN=-1;
+  const float Y_MAX=1;
   const float FRONT_PLANE_PERSPECTIVE=(X_MAX-X_MIN)/2;
   const float BACK_PLANE_PERSPECTIVE=1000;
   const float DEFAULT_DISTANCE=10;
@@ -71,15 +72,17 @@ public:
      QString pathname_ply = "/home";
 
 
-     WattRegulator* watt_regulator;  // objeto WattRegulator (es un puntero para que no salte el constructor al iniciarse el programa)
+     WattRegulator watt_regulator = WattRegulator("");  // objeto WattRegulator (es un puntero para que no salte el constructor al iniciarse el programa)
      double angle = 0;              // Angulo de rotacion sobre eje z del WattRegulator
-     QTimer *timer;
+
+
      double velocidad=0;            // velocidad de giro del Watt Regulator.
 
-  _gl_widget(_window *Window1);
+  _gl_widget(_window *Window1,Interfaz *interfaz);
 
   void clear_window();
   void change_projection();
+  void change_projection_maximiced();
   void change_observer();
 
   void draw_axis();
@@ -91,6 +94,8 @@ public:
 public slots:
   void animar();
 
+  void updateInterfaz();
+
 
 protected:
   void resizeGL(int Width1, int Height1) Q_DECL_OVERRIDE;
@@ -101,6 +106,14 @@ protected:
 
 private:
   _window *Window;
+  Interfaz *interfaz;
+
+  QTimer *timer;
+  QTimer *timer_interfaz;
+
+  int figura_anterior=0;
+  string url_ply_watt_anterior="";
+  string url_ply_anterior="";
 
   float Observer_angle_x;
   float Observer_angle_y;

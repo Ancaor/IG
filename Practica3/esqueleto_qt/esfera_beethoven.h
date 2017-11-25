@@ -8,10 +8,10 @@ class esfera_beethoven : public O3D
 {
 
 private:
-    Esfera esfera = Esfera(40);
+    Esfera esfera = Esfera(40,360);
     PLY_Object ply_object;
 public:
-    esfera_beethoven();
+    esfera_beethoven(string path);
     void draw(int tipo);
 };
 

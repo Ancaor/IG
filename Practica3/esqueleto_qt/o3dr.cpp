@@ -138,10 +138,15 @@ Funcion que genera el objeto por revolucion:
     4- en funcion del numero de tapas qe tuviera las genera.
 *********************************************************************************/
 
-void O3DR::generar_objeto_de_revolucion()
+void O3DR::generar_objeto_de_revolucion(int angulo)
 {
+    SECCIONES--;
+
     encontrar_tapas();
-    revolucion_por_barrido_y(2.0*M_PI);
+
+    float angulo_radianes = angulo*(M_PI/180.0);
+
+    revolucion_por_barrido_y(angulo_radianes);
 
     if(PUNTOS_PERFIL>1)
         generar_caras();

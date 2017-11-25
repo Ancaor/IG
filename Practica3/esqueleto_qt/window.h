@@ -17,6 +17,7 @@
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QGuiApplication>
+#include "interfaz.h"
 
 QT_FORWARD_DECLARE_CLASS(QOpenGLWidget)
 
@@ -29,8 +30,13 @@ class _window : public QMainWindow
 public:
     _window();
 
+private slots:
+    void raiseInterfaz();
+    void showInterfaz();
+
 private:
   _gl_widget *GL_widget;
+  Interfaz *interfaz;
 };
 
 #endif

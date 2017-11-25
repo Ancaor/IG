@@ -10,9 +10,9 @@
 class WattRegulator : public O3DR
 {
 private:
-    Cilindro cilindro1 = Cilindro(40);
+    Cilindro cilindro1 = Cilindro(40,360);
     Cubo cubo1 = Cubo();
-    ParteSuperior psup = ParteSuperior();
+    ParteSuperior psup = ParteSuperior("");
 
 
 
@@ -21,10 +21,11 @@ private:
 
 
     double angle_z;                   // Angulo que forman los brazos con el mastil
+    string path;
 
 public:
-    WattRegulator();
-    void draw(int tipo,double angle ,double velocidad );
+    WattRegulator(string path);
+    void draw(int tipo, double angle , double velocidad);
     void calcular_angulo_z(double velocidad);
 };
 
