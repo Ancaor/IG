@@ -214,7 +214,7 @@ glShadeModel(GL_FLAT);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_NORMALIZE);
 */
-    GLfloat mat[4];
+   /* GLfloat mat[4];
     mat[0] = 0.24725;
       mat[1] = 0.1995;
       mat[2] = 0.0745;
@@ -229,7 +229,7 @@ glShadeModel(GL_FLAT);
       mat[2] = 0.366065;
       glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
       glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
-    GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
+   */ GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
     GLfloat light0_position[] = {0.3,0.3,1.0,0.0};
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     glColor3f(0,0.5,1.0);
@@ -257,9 +257,9 @@ glShadeModel(GL_FLAT);
     glEnd();
 }
 
-void O3D::drawFillIluminadoSuave(double alfa)
+void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Material material){// GLfloat mat_ambient[], GLfloat mat_diffuse[], GLfloat mat_specular[], float shininess)
 {
-    GLfloat mat[4];
+   // GLfloat mat[4];
    /*
     * ORO
     *
@@ -279,22 +279,23 @@ void O3D::drawFillIluminadoSuave(double alfa)
      glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
     */
 
-    mat[0] = 0.0215;
-          mat[1] = 0.1745	;
-          mat[2] = 0.0215;
-          mat[3] = 1.0;
-          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-          mat[0] = 0.07568;
-          mat[1] = 0.61424;
-          mat[2] = 0.07568;
-          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-          mat[0] = 0.633;
-          mat[1] = 0.727811;
-          mat[2] = 0.633;
-          glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-         glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6 * 128.0);
-    GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
-    GLfloat light0_position[] = {0.0,0.0,1.0,0.0};
+  //  mat[0] = 0.0215;
+    //      mat[1] = 0.1745	;
+     //     mat[2] = 0.0215;
+     //     mat[3] = 1.0;
+          //glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
+       //   mat[0] = 0.07568;
+      //    mat[1] = 0.61424;
+      //    mat[2] = 0.07568;
+         // glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
+      //    mat[0] = 0.633;
+      //    mat[1] = 0.727811;
+      //    mat[2] = 0.633;
+        //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+        material.enable();
+        // glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+ //   GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
+    GLfloat light0_position[] = {0.0,0.0,0.0,1.0};
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
   //  glColor3f(0,0.5,1.0);
 
@@ -302,11 +303,13 @@ void O3D::drawFillIluminadoSuave(double alfa)
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glRotatef(alfa,0,1,0);
+    glRotatef(beta,1,0,0);
+    glTranslatef(0,0,distancia);
     glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 
     glPopMatrix();
 
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
+  //  glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
    // glColorMaterial(GL_FRONT,GL_DIFFUSE);
@@ -323,7 +326,11 @@ void O3D::drawFillIluminadoSuave(double alfa)
         glVertex3f(vertices[triangles[i]._2].x,vertices[triangles[i]._2].y,vertices[triangles[i]._2].z);
     }
     glEnd();
-}
+
+    //glDisable(GL_SHADER);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+}}
 
 void O3D::drawNormalesVertices()
 {

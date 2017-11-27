@@ -32,6 +32,7 @@
 #include "brazogrande.h"
 #include<QTimer>
 #include "interfaz.h"
+#include "material.h"
 
 namespace _gl_widget_ne {
 
@@ -78,8 +79,19 @@ public:
      WattRegulator watt_regulator = WattRegulator("");  // objeto WattRegulator (es un puntero para que no salte el constructor al iniciarse el programa)
      double angle = 0;              // Angulo de rotacion sobre eje z del WattRegulator
 
-     int angulo_camara=0;
+     int angulo_luz=0;
+     int angulo_luz_x=0;
+     double distancia_luz=1;
      double velocidad=0;            // velocidad de giro del Watt Regulator.
+     int material=0;
+     GLfloat mat_ambient[4];
+     GLfloat mat_diffuse[4];
+     GLfloat mat_especular[4];
+
+     //Material mater = Material();
+    Material mater ;
+
+     float shininess;
 
   _gl_widget(_window *Window1,Interfaz *interfaz);
 

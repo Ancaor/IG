@@ -174,7 +174,9 @@ void _gl_widget::draw_objects()
         if(chest)
             watt_regulator.draw(3,angle,velocidad);
     }
+
     else{
+
         if(!revolucion){
             if(vertex)
                 object.drawPoints();
@@ -187,8 +189,8 @@ void _gl_widget::draw_objects()
             if(fill_flat_ilu)
                 object.drawFillIluminado();
             if(fill_smooth_ilu)
-                object.drawFillIluminadoSuave(angulo_camara);
-            }
+               object.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater);//mat_ambient,mat_diffuse,mat_especular,shininess);
+        }
         else {
             if(ply_bool){
                 if(vertex)
@@ -212,7 +214,7 @@ void _gl_widget::draw_objects()
                 if(fill_flat_ilu)
                     object_revolucion.drawFillIluminado();
                 if(fill_smooth_ilu)
-                    object_revolucion.drawFillIluminadoSuave(angulo_camara);
+                    object_revolucion.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater);//mat_ambient,mat_diffuse,mat_especular,shininess);
             }
         }
     }
@@ -250,7 +252,58 @@ void _gl_widget::updateInterfaz()
     fill_flat_ilu = interfaz->getRellenoIluminacionPlana();
     fill_smooth_ilu = interfaz->getRellenoIluminacionSuave();
 
-    angulo_camara=interfaz->getAnguloCamara();
+    angulo_luz=interfaz->getAnguloLuz();
+    angulo_luz_x = interfaz->getAnguloLuzX();
+    distancia_luz = interfaz->getDistanciaLuz();
+
+    material=interfaz->getMaterial();
+
+    cout << figura << endl;
+
+    switch(material)
+    {
+    case 0: mat_ambient[0] = 0.24725;
+        mat_ambient[1] = 0.1995;
+        mat_ambient[2] = 0.0745;
+        mat_ambient[3] = 1.0;
+      //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+        mat_diffuse[0] = 0.75164;
+        mat_diffuse[1] = 0.60648;
+        mat_diffuse[2] = 0.22648;
+        mat_diffuse[3] = 1.0;
+        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+        mat_especular[0] = 0.628281;
+        mat_especular[1] = 0.555802;
+        mat_especular[2] = 0.366065;
+        mat_especular[3] = 1.0;
+      //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+     //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
+        shininess = 0.4 * 128.0;
+        break;
+    case 1:
+      // glEnable(GL_COLOR_MATERIAL);
+        mat_ambient[0] = 0.0215;
+        mat_ambient[1] = 0.1745	;
+        mat_ambient[2] = 0.0215;
+        mat_ambient[3] = 1.0;
+        //glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+        mat_diffuse[0] = 0.07568;
+        mat_diffuse[1] = 0.61424;
+        mat_diffuse[2] = 0.07568;
+        mat_diffuse[3] = 1.0;
+        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+        mat_especular[0] = 0.633;
+        mat_especular[1] = 0.727811;
+        mat_especular[2] = 0.633;
+        mat_especular[3] = 1.0;
+        //glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+        shininess = 0.6 * 128.0;
+        // glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6 * 128.0);
+        break;
+    }
+
+    mater = Material(mat_ambient,mat_diffuse,mat_especular,shininess);
+
 
     if(fill_flat_ilu == false){
         //cout << "entra";

@@ -21,7 +21,8 @@ HEADERS += \
     brazogrande.h \
     watt_regulator.h \
     esfera_beethoven.h \
-    interfaz.h
+    interfaz.h \
+    material.h
 
 SOURCES += \
   main.cc \
@@ -47,7 +48,8 @@ SOURCES += \
     brazogrande.cpp \
     watt_regulator.cpp \
     esfera_beethoven.cpp \
-    interfaz.cpp
+    interfaz.cpp \
+    material.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 

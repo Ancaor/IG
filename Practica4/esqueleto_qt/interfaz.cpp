@@ -96,9 +96,24 @@ bool Interfaz::getRellenoIluminacionSuave()
     return relleno_iluminacion_suave;
 }
 
-int Interfaz::getAnguloCamara()
+int Interfaz::getAnguloLuzX()
 {
-    return angulo_camara;
+    return angulo_luz_x;
+}
+
+double Interfaz::getDistanciaLuz()
+{
+    return distancia_luz;
+}
+
+int Interfaz::getMaterial()
+{
+    return material;
+}
+
+int Interfaz::getAnguloLuz()
+{
+    return angulo_luz;
 }
 
 void Interfaz::on_tabWidget_tabBarClicked(int index)
@@ -297,5 +312,25 @@ void Interfaz::on_checkBox_7_clicked()
 
 void Interfaz::on_horizontalSlider_4_valueChanged(int value)
 {
-    angulo_camara=value;
+    angulo_luz=value;
+}
+
+void Interfaz::on_doubleSpinBox_valueChanged(double arg1)
+{
+    distancia_luz = arg1;
+}
+
+void Interfaz::on_horizontalSlider_5_valueChanged(int value)
+{
+    angulo_luz_x = value;
+}
+
+void Interfaz::on_radioButton_10_clicked()
+{
+    material=0;
+}
+
+void Interfaz::on_radioButton_11_clicked()
+{
+    material=1;
 }
