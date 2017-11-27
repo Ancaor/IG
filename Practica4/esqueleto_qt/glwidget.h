@@ -78,7 +78,7 @@ public:
      WattRegulator watt_regulator = WattRegulator("");  // objeto WattRegulator (es un puntero para que no salte el constructor al iniciarse el programa)
      double angle = 0;              // Angulo de rotacion sobre eje z del WattRegulator
 
-
+     int angulo_camara=0;
      double velocidad=0;            // velocidad de giro del Watt Regulator.
 
   _gl_widget(_window *Window1,Interfaz *interfaz);

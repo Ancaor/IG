@@ -96,6 +96,11 @@ bool Interfaz::getRellenoIluminacionSuave()
     return relleno_iluminacion_suave;
 }
 
+int Interfaz::getAnguloCamara()
+{
+    return angulo_camara;
+}
+
 void Interfaz::on_tabWidget_tabBarClicked(int index)
 {
     switch(index)
@@ -288,4 +293,9 @@ void Interfaz::on_checkBox_7_clicked()
        relleno_iluminacion_plana=0;
     }
     else relleno_iluminacion_suave=false;
+}
+
+void Interfaz::on_horizontalSlider_4_valueChanged(int value)
+{
+    angulo_camara=value;
 }

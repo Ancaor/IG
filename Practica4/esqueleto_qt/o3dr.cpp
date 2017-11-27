@@ -24,7 +24,7 @@ void O3DR::revolucion_por_barrido_y(float angulo)
     float alpha;
     int tamanio = vertices.size();
 
-    for(i=1;i <= SECCIONES ; i++){
+    for(i=1;i < SECCIONES ; i++){
         alpha = (i*angulo)/SECCIONES; // 2.0*M_PI
         for(j=0;j<tamanio;j++){
             float x_rotado= ((vertices[j].x) * cos(alpha) + (vertices[j].z) * sin(alpha));
@@ -85,9 +85,10 @@ void O3DR::generar_tapa_superior(int indice_centro)
 {
     int j;
     int PUNTOS = vertices.size()-1;
-    for(j = 0; j<SECCIONES;j++){
+    for(j = 0; j<SECCIONES-1;j++){
         triangles.push_back(_vertex3i( indice_centro,((j*PUNTOS_PERFIL)+(PUNTOS_PERFIL-1))%PUNTOS , (((j+1)*PUNTOS_PERFIL)+(PUNTOS_PERFIL-1) )%PUNTOS) );
     }
+    triangles.push_back(_vertex3i(indice_centro,(((j*PUNTOS_PERFIL)+(PUNTOS_PERFIL-1))%PUNTOS),PUNTOS_PERFIL-1));
 
 }
 

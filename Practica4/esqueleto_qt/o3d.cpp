@@ -85,7 +85,7 @@ void O3D::drawNormalesCaras()
 
     glBegin(GL_POINTS);
     for(i=0;i<normalCaras.size();i++){
-        cout << normalCaras[i].z;
+      //  cout << normalCaras[i].z;
         glVertex3fv((GLfloat *) &normalCaras[i]);
     }
     glEnd();
@@ -97,9 +97,6 @@ void O3D::calcularNormalesVertices()
         calcularNormalesCaras();
 
     normalVertices.resize(vertices.size());
-    std::vector<int> carasVertice;
-    carasVertice.resize(vertices.size());
-
 
     for(unsigned int i=0; i<triangles.size(); i++){
         int v1 = triangles[i]._0;
@@ -107,15 +104,13 @@ void O3D::calcularNormalesVertices()
         int v3 = triangles[i]._2;
 
         normalVertices[v1] += normalCaras[i];
-        carasVertice[v1]++;
         normalVertices[v2] += normalCaras[i];
-        carasVertice[v2]++;
         normalVertices[v3] += normalCaras[i];
-        carasVertice[v3]++;
     }
     for(unsigned int i=0;i<vertices.size();i++){
-        normalVertices[i] = (normalVertices[i]/carasVertice[i]).normalize();
+        normalVertices[i] = (normalVertices[i]).normalize();///carasVertice[i]).normalize();
     }
+
 
 }
 
@@ -240,12 +235,16 @@ glShadeModel(GL_FLAT);
     glColor3f(0,0.5,1.0);
 
     glShadeModel(GL_FLAT);
+
+
     glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+    glPopMatrix();
     glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glColorMaterial(GL_FRONT,GL_DIFFUSE);
     //glEnable(GL_COLOR_MATERIAL);
+
 
 
     glBegin(GL_TRIANGLES);
@@ -258,10 +257,13 @@ glShadeModel(GL_FLAT);
     glEnd();
 }
 
-void O3D::drawFillIluminadoSuave()
+void O3D::drawFillIluminadoSuave(double alfa)
 {
     GLfloat mat[4];
-    mat[0] = 0.24725;
+   /*
+    * ORO
+    *
+    * mat[0] = 0.24725;
       mat[1] = 0.1995;
       mat[2] = 0.0745;
       mat[3] = 1.0;
@@ -274,18 +276,40 @@ void O3D::drawFillIluminadoSuave()
       mat[1] = 0.555802;
       mat[2] = 0.366065;
       glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-      glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
+     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
+    */
+
+    mat[0] = 0.0215;
+          mat[1] = 0.1745	;
+          mat[2] = 0.0215;
+          mat[3] = 1.0;
+          glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+          mat[0] = 0.07568;
+          mat[1] = 0.61424;
+          mat[2] = 0.07568;
+          glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+          mat[0] = 0.633;
+          mat[1] = 0.727811;
+          mat[2] = 0.633;
+          glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+         glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6 * 128.0);
     GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
-    GLfloat light0_position[] = {0.0,1.0,0.0,0.0};
+    GLfloat light0_position[] = {0.0,0.0,1.0,0.0};
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    glColor3f(0,0.5,1.0);
+  //  glColor3f(0,0.5,1.0);
 
     glShadeModel(GL_SMOOTH);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glRotatef(alfa,0,1,0);
     glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+
+    glPopMatrix();
+
     glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glColorMaterial(GL_FRONT,GL_DIFFUSE);
+   // glColorMaterial(GL_FRONT,GL_DIFFUSE);
     //glEnable(GL_COLOR_MATERIAL);
 
 

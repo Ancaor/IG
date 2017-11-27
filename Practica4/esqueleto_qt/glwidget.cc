@@ -63,6 +63,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       case Qt::Key_PageUp:Observer_distance*=1.2;break;
       case Qt::Key_PageDown:Observer_distance/=1.2;break;
       case Qt::Key_0: interfaz->raise();break;
+     // case Qt::Key_F:
 //      case Qt::Key_P: if(!vertex)vertex = 1; else vertex=0;break; // pinta puntos
   //    case Qt::Key_L: if(!lines)lines = 1; else lines=0;break; // pinta aristass
     //  case Qt::Key_F: if(!fill)fill = 1;else fill=0;break; // pinta caras
@@ -186,7 +187,7 @@ void _gl_widget::draw_objects()
             if(fill_flat_ilu)
                 object.drawFillIluminado();
             if(fill_smooth_ilu)
-                object.drawFillIluminadoSuave();
+                object.drawFillIluminadoSuave(angulo_camara);
             }
         else {
             if(ply_bool){
@@ -211,7 +212,7 @@ void _gl_widget::draw_objects()
                 if(fill_flat_ilu)
                     object_revolucion.drawFillIluminado();
                 if(fill_smooth_ilu)
-                    object_revolucion.drawFillIluminadoSuave();
+                    object_revolucion.drawFillIluminadoSuave(angulo_camara);
             }
         }
     }
@@ -249,8 +250,10 @@ void _gl_widget::updateInterfaz()
     fill_flat_ilu = interfaz->getRellenoIluminacionPlana();
     fill_smooth_ilu = interfaz->getRellenoIluminacionSuave();
 
+    angulo_camara=interfaz->getAnguloCamara();
+
     if(fill_flat_ilu == false){
-        cout << "entra";
+        //cout << "entra";
         glDisable(GL_LIGHTING);
         glDisable(GL_LIGHT0);
     }

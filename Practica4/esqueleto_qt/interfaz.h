@@ -31,6 +31,7 @@ public:
     std::string getUrlPly_2();
     bool getRellenoIluminacionPlana();
     bool getRellenoIluminacionSuave();
+    int getAnguloCamara();
 
 private slots:
     void on_tabWidget_tabBarClicked(int index);
@@ -86,6 +87,8 @@ private slots:
 
     void on_checkBox_7_clicked();
 
+    void on_horizontalSlider_4_valueChanged(int value);
+
 public slots:
     void raise_dialog();
 
@@ -111,6 +114,8 @@ private:
     int velocidad=0;
     int angulo_objeto_complejo=0;
     bool animacion=0;
+
+    int angulo_camara=0;
 
     std::string urlPly;
     std::string urlPly_2;

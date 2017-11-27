@@ -18,7 +18,7 @@ public:
     void drawNormalesCaras();
     void calcularNormalesVertices();
     void drawFillIluminado();
-    void drawFillIluminadoSuave();
+    void drawFillIluminadoSuave(double alfa);
     void drawNormalesVertices();
 };
 
