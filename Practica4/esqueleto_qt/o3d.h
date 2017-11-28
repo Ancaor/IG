@@ -2,6 +2,7 @@
 #define O3D_H
 
 #include "material.h"
+#include "luz.h"
 #include "o3ds.h"
 
 class O3D : public O3DS
@@ -19,7 +20,7 @@ public:
     void drawNormalesCaras();
     void calcularNormalesVertices();
     void drawFillIluminado();
-    void drawFillIluminadoSuave(double alfa, double beta, double distancia, Material material);
+    void drawFillIluminadoSuave(double alfa, double beta, double distancia, Material material, bool lighting,Luz light);
     void drawNormalesVertices();
 };
 

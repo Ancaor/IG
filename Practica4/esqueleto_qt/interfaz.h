@@ -35,6 +35,9 @@ public:
     int getAnguloLuzX();
     double getDistanciaLuz();
     int getMaterial();
+    bool getLightning();
+    int getLuz();
+
 private slots:
     void on_tabWidget_tabBarClicked(int index);
 
@@ -99,6 +102,15 @@ private slots:
 
     void on_radioButton_11_clicked();
 
+
+    void on_checkBox_8_clicked();
+
+    void on_checkBox_7_clicked(bool checked);
+
+    void on_radioButton_12_clicked();
+
+    void on_radioButton_13_clicked();
+
 public slots:
     void raise_dialog();
 
@@ -129,6 +141,9 @@ private:
     int angulo_luz_x=0;
     double distancia_luz = 1;
     int material=0;
+    int luz=-1;
+
+    bool lightning = 0;
 
     std::string urlPly;
     std::string urlPly_2;

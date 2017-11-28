@@ -111,6 +111,16 @@ int Interfaz::getMaterial()
     return material;
 }
 
+bool Interfaz::getLightning()
+{
+    return lightning;
+}
+
+int Interfaz::getLuz()
+{
+    return luz;
+}
+
 int Interfaz::getAnguloLuz()
 {
     return angulo_luz;
@@ -129,24 +139,39 @@ void Interfaz::on_tabWidget_tabBarClicked(int index)
 
 void Interfaz::on_checkBox_clicked()
 {
-    if(!puntos)
+    if(!puntos){
         puntos=true;
+        ui->checkBox_7->setChecked(false);
+        relleno_iluminacion_plana=false;
+        ui->checkBox_6->setChecked(false);
+        relleno_iluminacion_suave=false;
+    }
     else
         puntos=false;
 }
 
 void Interfaz::on_checkBox_2_clicked()
 {
-    if(!lineas)
+    if(!lineas){
         lineas=true;
+        ui->checkBox_7->setChecked(false);
+        relleno_iluminacion_plana=false;
+        ui->checkBox_6->setChecked(false);
+        relleno_iluminacion_suave=false;
+    }
     else
         lineas=false;
 }
 
 void Interfaz::on_checkBox_3_clicked()
 {
-    if(!relleno)
+    if(!relleno){
         relleno=true;
+        ui->checkBox_7->setChecked(false);
+        relleno_iluminacion_plana=false;
+        ui->checkBox_6->setChecked(false);
+        relleno_iluminacion_suave=false;
+    }
     else
         relleno=false;
 }
@@ -155,6 +180,10 @@ void Interfaz::on_checkBox_4_clicked()
 {
     if(!ajedrez){
         ajedrez=true;
+        ui->checkBox_7->setChecked(false);
+        relleno_iluminacion_plana=false;
+        ui->checkBox_6->setChecked(false);
+        relleno_iluminacion_suave=false;
 
         if(ui->checkBox_3->isChecked()){
             ui->checkBox_3->setChecked(false);
@@ -306,6 +335,18 @@ void Interfaz::on_checkBox_7_clicked()
        puntos=0;
        ajedrez=0;
        relleno_iluminacion_plana=0;
+
+       // activar iluminacion y luz infinito por defecto
+
+       lightning=true;
+       ui->checkBox_8->setChecked(true);
+
+       if(luz==-1){
+           luz=0;
+           ui->radioButton_13->setChecked(true);
+       }
+
+
     }
     else relleno_iluminacion_suave=false;
 }
@@ -333,4 +374,22 @@ void Interfaz::on_radioButton_10_clicked()
 void Interfaz::on_radioButton_11_clicked()
 {
     material=1;
+}
+
+void Interfaz::on_checkBox_8_clicked()
+{
+    if(!lightning)
+        lightning=true;
+    else lightning=false;
+}
+
+void Interfaz::on_radioButton_12_clicked()
+{
+    luz = 1;
+
+}
+
+void Interfaz::on_radioButton_13_clicked()
+{
+    luz=0;
 }

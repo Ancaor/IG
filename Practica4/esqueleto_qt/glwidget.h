@@ -33,6 +33,7 @@
 #include<QTimer>
 #include "interfaz.h"
 #include "material.h"
+#include "luz.h"
 
 namespace _gl_widget_ne {
 
@@ -87,6 +88,8 @@ public:
      GLfloat mat_ambient[4];
      GLfloat mat_diffuse[4];
      GLfloat mat_especular[4];
+     bool lighting=0;
+     Luz luz;
 
      //Material mater = Material();
     Material mater ;

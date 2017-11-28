@@ -189,7 +189,7 @@ void _gl_widget::draw_objects()
             if(fill_flat_ilu)
                 object.drawFillIluminado();
             if(fill_smooth_ilu)
-               object.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater);//mat_ambient,mat_diffuse,mat_especular,shininess);
+               object.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
         }
         else {
             if(ply_bool){
@@ -201,6 +201,8 @@ void _gl_widget::draw_objects()
                     ply.drawFill();
                 if(chest)
                     ply.drawAjedrez();
+                if(fill_smooth_ilu)
+                    ply.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);
             }
             else{
                 if(vertex)
@@ -214,7 +216,7 @@ void _gl_widget::draw_objects()
                 if(fill_flat_ilu)
                     object_revolucion.drawFillIluminado();
                 if(fill_smooth_ilu)
-                    object_revolucion.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                    object_revolucion.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
             }
         }
     }
@@ -256,9 +258,19 @@ void _gl_widget::updateInterfaz()
     angulo_luz_x = interfaz->getAnguloLuzX();
     distancia_luz = interfaz->getDistanciaLuz();
 
+    lighting = interfaz->getLightning();
+
+    luz = Luz(interfaz->getLuz());
+    luz.transformar(angulo_luz,angulo_luz_x,distancia_luz);
+
+    //if(lighting)
+      //  glEnable(GL_LIGHTING);
+   // else
+     //   glDisable(GL_LIGHTING);
+
     material=interfaz->getMaterial();
 
-    cout << figura << endl;
+   // cout << lighting << endl;
 
     switch(material)
     {
@@ -266,6 +278,7 @@ void _gl_widget::updateInterfaz()
         mat_ambient[1] = 0.1995;
         mat_ambient[2] = 0.0745;
         mat_ambient[3] = 1.0;
+        //mat_ambient  (0.24725,0.1995,0.0745,1.0;
       //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
         mat_diffuse[0] = 0.75164;
         mat_diffuse[1] = 0.60648;

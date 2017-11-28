@@ -22,7 +22,8 @@ HEADERS += \
     watt_regulator.h \
     esfera_beethoven.h \
     interfaz.h \
-    material.h
+    material.h \
+    luz.h
 
 SOURCES += \
   main.cc \
@@ -49,7 +50,8 @@ SOURCES += \
     watt_regulator.cpp \
     esfera_beethoven.cpp \
     interfaz.cpp \
-    material.cpp
+    material.cpp \
+    luz.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 

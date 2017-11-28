@@ -18,6 +18,7 @@ void PLY_Object::read_ply(string path)
     if (File_ply.open(path)){
       File_ply.read(vertices,triangles);
       std::cout << "PLY leido correctamente." << std::endl;
+      calcularNormalesVertices();
     }
     else std::cout << "No se pudo leer el archivo PLY, se mostrara el PLY cargado anteriormente, si existe." << std::endl;
 }

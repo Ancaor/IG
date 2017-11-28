@@ -257,7 +257,7 @@ glShadeModel(GL_FLAT);
     glEnd();
 }
 
-void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Material material){// GLfloat mat_ambient[], GLfloat mat_diffuse[], GLfloat mat_specular[], float shininess)
+void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Material material, bool lighting, Luz light ){// GLfloat mat_ambient[], GLfloat mat_diffuse[], GLfloat mat_specular[], float shininess)
 {
    // GLfloat mat[4];
    /*
@@ -300,18 +300,14 @@ void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Mat
   //  glColor3f(0,0.5,1.0);
 
     glShadeModel(GL_SMOOTH);
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glRotatef(alfa,0,1,0);
-    glRotatef(beta,1,0,0);
-    glTranslatef(0,0,distancia);
-    glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 
-    glPopMatrix();
+
 
   //  glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
+    if(lighting)
     glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+    light.enable();
+  //  glEnable(GL_LIGHT0);
    // glColorMaterial(GL_FRONT,GL_DIFFUSE);
     //glEnable(GL_COLOR_MATERIAL);
 
@@ -329,7 +325,8 @@ void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Mat
 
     //glDisable(GL_SHADER);
     glDisable(GL_LIGHTING);
-    glDisable(GL_LIGHT0);
+    light.disable();
+    // glDisable(GL_LIGHT0);
 }}
 
 void O3D::drawNormalesVertices()
