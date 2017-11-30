@@ -34,6 +34,7 @@
 #include "interfaz.h"
 #include "material.h"
 #include "luz.h"
+#include "marco.h"
 
 namespace _gl_widget_ne {
 
@@ -73,6 +74,7 @@ public:
      bool chest = 0; // 1: pinta ajedrez; 0:No los pinta
      bool fill_flat_ilu=0;
      bool fill_smooth_ilu=0;
+     bool textura=0;
 
      QString pathname_ply = "/home";
 
@@ -90,6 +92,12 @@ public:
      GLfloat mat_especular[4];
      bool lighting=0;
      Luz luz;
+
+     marco marcoTextura;
+     int divisiones=4;
+     vector<float> porcion_textura = {0.0,0.0,0.5,0.5};
+     vector<int> porcion_marco ={0,0,4,4};
+
 
      //Material mater = Material();
     Material mater ;

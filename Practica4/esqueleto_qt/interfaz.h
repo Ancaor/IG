@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QFileDialog>
+#include <iostream>
 
 namespace Ui {
 class Interfaz;
@@ -37,6 +38,7 @@ public:
     int getMaterial();
     bool getLightning();
     int getLuz();
+    int getDivisiones();
 
 private slots:
     void on_tabWidget_tabBarClicked(int index);
@@ -105,11 +107,15 @@ private slots:
 
     void on_checkBox_8_clicked();
 
-    void on_checkBox_7_clicked(bool checked);
+  //  void on_checkBox_7_clicked(bool checked);
 
     void on_radioButton_12_clicked();
 
     void on_radioButton_13_clicked();
+
+    void on_radioButton_14_clicked();
+
+    void on_spinBox_2_valueChanged(int arg1);
 
 public slots:
     void raise_dialog();
@@ -147,6 +153,10 @@ private:
 
     std::string urlPly;
     std::string urlPly_2;
+
+
+    int marco = 10;
+    int divisiones=4;
 };
 
 #endif // INTERFAZ_H

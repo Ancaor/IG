@@ -164,59 +164,73 @@ void _gl_widget::draw_axis()
 
 void _gl_widget::draw_objects()
 {
-    if(objeto_complejo){
+    if(textura){
         if(vertex)
-            watt_regulator.draw(0,angle,velocidad);
+            marcoTextura.drawPoints();
         if(lines)
-           watt_regulator.draw(1,angle,velocidad);
+            marcoTextura.drawLines();
         if(fill)
-            watt_regulator.draw(2,angle,velocidad);
+            marcoTextura.drawFill();
         if(chest)
-            watt_regulator.draw(3,angle,velocidad);
+            marcoTextura.drawAjedrez();
+            marcoTextura.drawTextura(porcion_textura,porcion_marco);
     }
 
     else{
-
-        if(!revolucion){
+        if(objeto_complejo){
             if(vertex)
-                object.drawPoints();
+                watt_regulator.draw(0,angle,velocidad);
             if(lines)
-                object.drawLines();
+               watt_regulator.draw(1,angle,velocidad);
             if(fill)
-                object.drawFill();
+                watt_regulator.draw(2,angle,velocidad);
             if(chest)
-                object.drawAjedrez();
-            if(fill_flat_ilu)
-                object.drawFillIluminado();
-            if(fill_smooth_ilu)
-               object.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                watt_regulator.draw(3,angle,velocidad);
         }
-        else {
-            if(ply_bool){
+
+        else{
+
+            if(!revolucion){
                 if(vertex)
-                    ply.drawPoints();
+                    object.drawPoints();
                 if(lines)
-                    ply.drawLines();
+                    object.drawLines();
                 if(fill)
-                    ply.drawFill();
+                    object.drawFill();
                 if(chest)
-                    ply.drawAjedrez();
-                if(fill_smooth_ilu)
-                    ply.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);
-            }
-            else{
-                if(vertex)
-                    object_revolucion.drawPoints();
-                if(lines)
-                    object_revolucion.drawLines();
-                if(fill)
-                    object_revolucion.drawFill();
-                if(chest)
-                    object_revolucion.drawAjedrez();
+                    object.drawAjedrez();
                 if(fill_flat_ilu)
-                    object_revolucion.drawFillIluminado();
+                    object.drawFillIluminado();
                 if(fill_smooth_ilu)
-                    object_revolucion.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                   object.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
+            }
+            else {
+                if(ply_bool){
+                    if(vertex)
+                        ply.drawPoints();
+                    if(lines)
+                        ply.drawLines();
+                    if(fill)
+                        ply.drawFill();
+                    if(chest)
+                        ply.drawAjedrez();
+                    if(fill_smooth_ilu)
+                        ply.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);
+                }
+                else{
+                    if(vertex)
+                        object_revolucion.drawPoints();
+                    if(lines)
+                        object_revolucion.drawLines();
+                    if(fill)
+                        object_revolucion.drawFill();
+                    if(chest)
+                        object_revolucion.drawAjedrez();
+                    if(fill_flat_ilu)
+                        object_revolucion.drawFillIluminado();
+                    if(fill_smooth_ilu)
+                        object_revolucion.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                }
             }
         }
     }
@@ -262,6 +276,10 @@ void _gl_widget::updateInterfaz()
 
     luz = Luz(interfaz->getLuz());
     luz.transformar(angulo_luz,angulo_luz_x,distancia_luz);
+
+
+    divisiones=interfaz->getDivisiones();
+  //  cout << divisiones<< endl;
 
     //if(lighting)
       //  glEnable(GL_LIGHTING);
@@ -318,12 +336,12 @@ void _gl_widget::updateInterfaz()
     mater = Material(mat_ambient,mat_diffuse,mat_especular,shininess);
 
 
-    if(fill_flat_ilu == false){
+  /*  if(fill_flat_ilu == false){
         //cout << "entra";
         glDisable(GL_LIGHTING);
         glDisable(GL_LIGHT0);
     }
-
+*/
     int secciones = interfaz->getSecciones();
     int angulo = interfaz->getAngulo();
 
@@ -338,20 +356,21 @@ void _gl_widget::updateInterfaz()
     if(urlPly != url_ply_anterior)
         figura_anterior=0;
     url_ply_anterior = urlPly;
-
+  //  cout << figura;
     if((figura != figura_anterior)|| (figura!=9 && figura !=55))
     switch(figura)
     {
-    case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
-    case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;break;
-    case 3: object_revolucion = Esfera(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 4: object_revolucion = Cilindro(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 5: object_revolucion = Tubo(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-    case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true; break;
-    case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;break;
+    case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;break;
+    case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;break;
+    case 3: object_revolucion = Esfera(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; break;
+    case 4: object_revolucion = Cilindro(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; break;
+    case 5: object_revolucion = Tubo(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; break;
+    case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
+    case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
+    case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
+    case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true;textura=false; break;
+    case 10: marcoTextura = marco(divisiones);marcoTextura.cargarImagen("imagen.png");textura=true;break;
+    case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;textura=false;break;
     }
 
     figura_anterior=figura;

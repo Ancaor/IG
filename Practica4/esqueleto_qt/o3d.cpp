@@ -8,10 +8,11 @@ O3D::O3D()
 void O3D::drawLines()
 {
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-    glColor3f(1,0,0);
+
     unsigned int i;
 
     glBegin(GL_TRIANGLES);
+     glColor3f(1,0,0);
     for(i=0;i<triangles.size();i++){
         glVertex3f(vertices[triangles[i]._0].x,vertices[triangles[i]._0].y,vertices[triangles[i]._0].z);
         glVertex3f(vertices[triangles[i]._1].x,vertices[triangles[i]._1].y,vertices[triangles[i]._1].z);
@@ -23,10 +24,11 @@ void O3D::drawLines()
 void O3D::drawFill()
 {
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    glColor3f(0,0,1);
+
     unsigned int i;
 
     glBegin(GL_TRIANGLES);
+    glColor3f(0,0,1);
     for(i=0;i<triangles.size();i++){
         glVertex3f(vertices[triangles[i]._0].x,vertices[triangles[i]._0].y,vertices[triangles[i]._0].z);
         glVertex3f(vertices[triangles[i]._1].x,vertices[triangles[i]._1].y,vertices[triangles[i]._1].z);
@@ -80,10 +82,11 @@ void O3D::calcularNormalesCaras()
 void O3D::drawNormalesCaras()
 {
     glPolygonMode(GL_BACK,GL_POINT);
-    glColor3f(1,0,0);
+
     unsigned int i;
 
     glBegin(GL_POINTS);
+    glColor3f(1,0,0);
     for(i=0;i<normalCaras.size();i++){
       //  cout << normalCaras[i].z;
         glVertex3fv((GLfloat *) &normalCaras[i]);
@@ -232,7 +235,7 @@ glShadeModel(GL_FLAT);
    */ GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
     GLfloat light0_position[] = {0.3,0.3,1.0,0.0};
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-    glColor3f(0,0.5,1.0);
+    //glColor3f(0,0.5,1.0);
 
     glShadeModel(GL_FLAT);
 
@@ -242,7 +245,7 @@ glShadeModel(GL_FLAT);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glColorMaterial(GL_FRONT,GL_DIFFUSE);
+   // glColorMaterial(GL_FRONT,GL_DIFFUSE);
     //glEnable(GL_COLOR_MATERIAL);
 
 
@@ -255,6 +258,10 @@ glShadeModel(GL_FLAT);
         glVertex3f(vertices[triangles[i]._2].x,vertices[triangles[i]._2].y,vertices[triangles[i]._2].z);
     }
     glEnd();
+
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+
 }
 
 void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Material material, bool lighting, Luz light ){// GLfloat mat_ambient[], GLfloat mat_diffuse[], GLfloat mat_specular[], float shininess)
@@ -295,7 +302,7 @@ void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Mat
         material.enable();
         // glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
  //   GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
-    GLfloat light0_position[] = {0.0,0.0,0.0,1.0};
+  //  GLfloat light0_position[] = {0.0,0.0,0.0,1.0};
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
   //  glColor3f(0,0.5,1.0);
 
@@ -332,10 +339,11 @@ void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Mat
 void O3D::drawNormalesVertices()
 {
     glPolygonMode(GL_BACK,GL_LINE);
-    glColor3f(1,0,0);
+
     unsigned int i;
 
     glBegin(GL_LINES);
+    glColor3f(1,0,0);
     for(i=0;i<normalVertices.size();i++){
         //cout << normalVertices[i].z;
         glVertex3fv((GLfloat*) &vertices[i]);

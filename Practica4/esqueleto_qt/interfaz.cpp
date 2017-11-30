@@ -26,7 +26,9 @@ int Interfaz::getFigura()
     case 1: return fig_pract1; break;
     case 2: return fig_pract2;break;
     case 3: return fig_pract3;break;
+    case 4: return marco; break;
     case 10: int aux = cargar_ply; cargar_ply=0;return aux;break;
+
     }
     return 0;
 }
@@ -121,6 +123,11 @@ int Interfaz::getLuz()
     return luz;
 }
 
+int Interfaz::getDivisiones()
+{
+    return divisiones;
+}
+
 int Interfaz::getAnguloLuz()
 {
     return angulo_luz;
@@ -134,6 +141,7 @@ void Interfaz::on_tabWidget_tabBarClicked(int index)
     case 1: practica=2; break;
     case 2: practica=10; break;
     case 3: practica=3; break;
+    case 5: practica=4; break;
     }
 }
 
@@ -392,4 +400,18 @@ void Interfaz::on_radioButton_12_clicked()
 void Interfaz::on_radioButton_13_clicked()
 {
     luz=0;
+}
+
+void Interfaz::on_radioButton_14_clicked()
+{
+    if(marco != 10)
+        marco=10;
+    else
+        marco=-1;
+}
+
+void Interfaz::on_spinBox_2_valueChanged(int arg1)
+{
+    divisiones=arg1;
+   // std::cout << divisiones;
 }

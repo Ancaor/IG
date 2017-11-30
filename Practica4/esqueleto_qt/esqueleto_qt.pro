@@ -23,7 +23,8 @@ HEADERS += \
     esfera_beethoven.h \
     interfaz.h \
     material.h \
-    luz.h
+    luz.h \
+    marco.h
 
 SOURCES += \
   main.cc \
@@ -51,7 +52,8 @@ SOURCES += \
     esfera_beethoven.cpp \
     interfaz.cpp \
     material.cpp \
-    luz.cpp
+    luz.cpp \
+    marco.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 
