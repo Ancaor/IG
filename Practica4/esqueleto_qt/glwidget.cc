@@ -167,6 +167,22 @@ void _gl_widget::draw_axis()
 
 void _gl_widget::draw_objects()
 {
+     luz_posicional.transformar(angulo_luz_y_posicional,angulo_luz_x_posicional,distancia_luz_posicional);
+     luz_infinito.transformar(angulo_luz_y_infinito,angulo_luz_x_infinito,distancia_luz_posicional);
+    const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
+
+    if(interfaz->getLightning())
+        glEnable(GL_LIGHTING);
+
+    if(interfaz->getEstadoLuzInfinito())
+        luz_infinito.enable();
+    else luz_infinito.disable();
+
+    if(interfaz->getEstadoLuzPosicional())
+        luz_posicional.enable();
+    else luz_posicional.disable();
+
     if(textura){
         if(vertex)
             marcoTextura.drawPoints();
@@ -203,9 +219,14 @@ void _gl_widget::draw_objects()
                 if(chest)
                     object.drawAjedrez();
                 if(fill_flat_ilu)
-                    object.drawFillIluminado();
-                if(fill_smooth_ilu)
-                   object.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                    object.drawFillIluminado(mater);
+                if(fill_smooth_ilu){
+
+
+
+                    object.drawFillIluminadoSuave(mater);//mat_ambient,mat_diffuse,mat_especular,shininess);
+
+                }
             }
             else {
                 if(ply_bool){
@@ -218,7 +239,9 @@ void _gl_widget::draw_objects()
                     if(chest)
                         ply.drawAjedrez();
                     if(fill_smooth_ilu)
-                        ply.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);
+                        ply.drawFillIluminadoSuave(mater);//,luz_infinito,luz_posicional);
+                    if(fill_flat_ilu)
+                        ply.drawFillIluminado(mater);
                 }
                 else{
                     if(vertex)
@@ -230,13 +253,14 @@ void _gl_widget::draw_objects()
                     if(chest)
                         object_revolucion.drawAjedrez();
                     if(fill_flat_ilu)
-                        object_revolucion.drawFillIluminado();
+                        object_revolucion.drawFillIluminado(mater);
                     if(fill_smooth_ilu)
-                        object_revolucion.drawFillIluminadoSuave(angulo_luz,angulo_luz_x,distancia_luz,mater,lighting,luz);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                        object_revolucion.drawFillIluminadoSuave(mater);//,luz_infinito,luz_posicional);//mat_ambient,mat_diffuse,mat_especular,shininess);
                 }
             }
         }
     }
+    glDisable(GL_LIGHTING);
 }
 
 
@@ -271,14 +295,20 @@ void _gl_widget::updateInterfaz()
     fill_flat_ilu = interfaz->getRellenoIluminacionPlana();
     fill_smooth_ilu = interfaz->getRellenoIluminacionSuave();
 
-    angulo_luz=interfaz->getAnguloLuz();
-    angulo_luz_x = interfaz->getAnguloLuzX();
-    distancia_luz = interfaz->getDistanciaLuz();
+    angulo_luz_y_infinito=interfaz->getAnguloLuzInfinito();
+    angulo_luz_x_infinito = interfaz->getAnguloLuzXInfinito();
 
     lighting = interfaz->getLightning();
 
-    luz = Luz(interfaz->getLuz());
-    luz.transformar(angulo_luz,angulo_luz_x,distancia_luz);
+   // luz_infinito = Luz(interfaz->getLuz(),interfaz->getEstadoLuzInfinito());
+  //  luz_infinito.transformar(angulo_luz,angulo_luz_x,distancia_luz);
+
+    angulo_luz_y_posicional=interfaz->getAnguloLuzPosicional();
+    angulo_luz_x_posicional = interfaz->getAnguloLuzXPosicional();
+    distancia_luz_posicional = interfaz->getDistanciaLuzPosicional();
+
+    //luz_posicional = Luz(interfaz->getLuz(),interfaz->getEstadoLuzPosicional());
+   // luz_posicional.transformar(angulo_luz,angulo_luz_x,distancia_luz);
 
 
     divisiones=interfaz->getDivisiones();
@@ -335,6 +365,25 @@ void _gl_widget::updateInterfaz()
         //glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
         shininess = 0.6 * 128.0;
         // glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6 * 128.0);
+        break;
+    case 2:mat_ambient[0] = 1.0;
+        mat_ambient[1] = 1.0;
+        mat_ambient[2] = 1.0;
+        mat_ambient[3] = 1.0;
+        //mat_ambient  (0.24725,0.1995,0.0745,1.0;
+      //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+        mat_diffuse[0] = 1.0;
+        mat_diffuse[1] = 1.0;
+        mat_diffuse[2] = 1.0;
+        mat_diffuse[3] = 1.0;
+        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+        mat_especular[0] = 1.0;
+        mat_especular[1] = 1.0;
+        mat_especular[2] = 1.0;
+        mat_especular[3] = 1.0;
+      //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+     //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
+        shininess = 0.4 * 128.0;
         break;
     }
 

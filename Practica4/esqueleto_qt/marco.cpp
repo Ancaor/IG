@@ -50,9 +50,9 @@ marco::marco(int n)
 
         for(int j=0;j<n;j++){
 
-            triangles.push_back(_vertex3i( ((j*(n+1))+(i+1))%vertices.size() ,((j*(n+1))+i)%vertices.size() , (((j+1)*(n+1))+i )%vertices.size()) );
+            triangles.push_back(_vertex3i(  ((j*(n+1))+i)%vertices.size() , ((j*(n+1))+(i+1))%vertices.size(),(((j+1)*(n+1))+i )%vertices.size()) );
             //Triangulo Impar
-            triangles.push_back(_vertex3i( (((j+1)*(n+1))+i)%vertices.size() ,(((j+1)*(n+1))+(i+1))%vertices.size() , ((j*(n+1))+(i+1))%vertices.size() ) );
+            triangles.push_back(_vertex3i(  (((j+1)*(n+1))+(i+1))%vertices.size() , (((j+1)*(n+1))+i)%vertices.size() , ((j*(n+1))+(i+1))%vertices.size() ) );
         }
     }
 
@@ -141,9 +141,9 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
     glEnable(GL_TEXTURE_2D);
     glColor3f(1,1,1);
     glBegin(GL_TRIANGLES);
-    cout << "RECIEN ENTRADO\n";
+   // cout << "RECIEN ENTRADO\n";
 
-    for(int i=0;i<vertices.size();i++)
+ //   for(int i=0;i<vertices.size();i++)
   //      cout << vertices[i].x << " " << vertices[i].y << endl;
 
     for(int i=0; i<numero_quads;i++){

@@ -10,12 +10,14 @@ private:
     float alfa;
     float beta;
     float distancia;
+    int tipo;
 public:
     Luz();
-    Luz(int w);
+    Luz(float x, float y, float z, float w);
     void transformar(float alfa, float beta, float distancia);
     void enable();
     void disable();
+    bool estado;
 };
 
 #endif // LUZ_H

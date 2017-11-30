@@ -32,15 +32,21 @@ public:
     std::string getUrlPly_2();
     bool getRellenoIluminacionPlana();
     bool getRellenoIluminacionSuave();
-    int getAnguloLuz();
-    int getAnguloLuzX();
-    double getDistanciaLuz();
+    int getAnguloLuzInfinito();
+    int getAnguloLuzXInfinito();
+    double getDistanciaLuzPosicional();
+
+    int getAnguloLuzPosicional();
+    int getAnguloLuzXPosicional();
+
     int getMaterial();
     bool getLightning();
     int getLuz();
     int getDivisiones();
     std::vector<float> getPuntosTextura();
 
+    bool getEstadoLuzPosicional();
+    bool getEstadoLuzInfinito();
 private slots:
     void on_tabWidget_tabBarClicked(int index);
 
@@ -97,8 +103,6 @@ private slots:
 
     void on_horizontalSlider_4_valueChanged(int value);
 
-    void on_doubleSpinBox_valueChanged(double arg1);
-
     void on_horizontalSlider_5_valueChanged(int value);
 
     void on_radioButton_10_clicked();
@@ -126,6 +130,16 @@ private slots:
 
     void on_doubleSpinBox_5_valueChanged(double arg1);
 
+    void on_horizontalSlider_6_valueChanged(int value);
+
+    void on_checkBox_12_clicked();
+
+    void on_checkBox_13_clicked();
+
+    void on_horizontalSlider_7_valueChanged(int value);
+
+    void on_doubleSpinBox_6_valueChanged(double arg1);
+
 public slots:
     void raise_dialog();
 
@@ -152,9 +166,17 @@ private:
     int angulo_objeto_complejo=0;
     bool animacion=0;
 
-    int angulo_luz=0;
-    int angulo_luz_x=0;
-    double distancia_luz = 1;
+    int angulo_luz_infinito=0;
+    int angulo_luz_x_infinito=0;
+    //double distancia_luz_ = 1;
+
+    int angulo_luz_posicional=0;
+    int angulo_luz_x_posicional=0;
+    double distancia_luz_posicional = 2;
+
+    bool estado_luz_posicional=0;
+    bool estado_luz_infinito=0;
+
     int material=0;
     int luz=-1;
 

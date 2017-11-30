@@ -82,16 +82,26 @@ public:
      WattRegulator watt_regulator = WattRegulator("");  // objeto WattRegulator (es un puntero para que no salte el constructor al iniciarse el programa)
      double angle = 0;              // Angulo de rotacion sobre eje z del WattRegulator
 
-     int angulo_luz=0;
-     int angulo_luz_x=0;
-     double distancia_luz=1;
+     int angulo_luz_y_infinito=0;
+     int angulo_luz_x_infinito=0;
+     //double distancia_luz_infinito=1;
+
+     int angulo_luz_x_posicional=0;
+     int angulo_luz_y_posicional=0;
+     double distancia_luz_posicional = 2;
+
+     //INT ANGULO_LUZ
+
+
      double velocidad=0;            // velocidad de giro del Watt Regulator.
      int material=0;
      GLfloat mat_ambient[4];
      GLfloat mat_diffuse[4];
      GLfloat mat_especular[4];
      bool lighting=0;
-     Luz luz;
+     Luz luz_infinito = {0.0,0.0,1.0,0.0};
+     Luz luz_posicional = {0.0,0.0,0.0,1.0};
+
 
      marco marcoTextura;
      int divisiones=4;

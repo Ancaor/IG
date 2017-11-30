@@ -98,14 +98,24 @@ bool Interfaz::getRellenoIluminacionSuave()
     return relleno_iluminacion_suave;
 }
 
-int Interfaz::getAnguloLuzX()
+int Interfaz::getAnguloLuzXInfinito()
 {
-    return angulo_luz_x;
+    return angulo_luz_x_infinito;
 }
 
-double Interfaz::getDistanciaLuz()
+double Interfaz::getDistanciaLuzPosicional()
 {
-    return distancia_luz;
+    return distancia_luz_posicional;
+}
+
+int Interfaz::getAnguloLuzPosicional()
+{
+    return angulo_luz_posicional;
+}
+
+int Interfaz::getAnguloLuzXPosicional()
+{
+    return angulo_luz_x_posicional;
 }
 
 int Interfaz::getMaterial()
@@ -133,9 +143,19 @@ std::vector<float> Interfaz::getPuntosTextura()
     return puntos_textura;
 }
 
-int Interfaz::getAnguloLuz()
+bool Interfaz::getEstadoLuzPosicional()
 {
-    return angulo_luz;
+    return estado_luz_posicional;
+}
+
+bool Interfaz::getEstadoLuzInfinito()
+{
+    return estado_luz_infinito;
+}
+
+int Interfaz::getAnguloLuzInfinito()
+{
+    return angulo_luz_infinito;
 }
 
 void Interfaz::on_tabWidget_tabBarClicked(int index)
@@ -154,10 +174,10 @@ void Interfaz::on_checkBox_clicked()
 {
     if(!puntos){
         puntos=true;
-        ui->checkBox_7->setChecked(false);
-        relleno_iluminacion_plana=false;
-        ui->checkBox_6->setChecked(false);
-        relleno_iluminacion_suave=false;
+      //  ui->checkBox_7->setChecked(false);
+      //  relleno_iluminacion_plana=false;
+      //  ui->checkBox_6->setChecked(false);
+      //  relleno_iluminacion_suave=false;
     }
     else
         puntos=false;
@@ -167,10 +187,10 @@ void Interfaz::on_checkBox_2_clicked()
 {
     if(!lineas){
         lineas=true;
-        ui->checkBox_7->setChecked(false);
-        relleno_iluminacion_plana=false;
-        ui->checkBox_6->setChecked(false);
-        relleno_iluminacion_suave=false;
+    //    ui->checkBox_7->setChecked(false);
+    //    relleno_iluminacion_plana=false;
+    //    ui->checkBox_6->setChecked(false);
+    //    relleno_iluminacion_suave=false;
     }
     else
         lineas=false;
@@ -180,10 +200,11 @@ void Interfaz::on_checkBox_3_clicked()
 {
     if(!relleno){
         relleno=true;
-        ui->checkBox_7->setChecked(false);
+    /*    ui->checkBox_7->setChecked(false);
         relleno_iluminacion_plana=false;
         ui->checkBox_6->setChecked(false);
         relleno_iluminacion_suave=false;
+    */
     }
     else
         relleno=false;
@@ -193,15 +214,13 @@ void Interfaz::on_checkBox_4_clicked()
 {
     if(!ajedrez){
         ajedrez=true;
-        ui->checkBox_7->setChecked(false);
-        relleno_iluminacion_plana=false;
-        ui->checkBox_6->setChecked(false);
-        relleno_iluminacion_suave=false;
+      //  ui->checkBox_7->setChecked(false);
+      //  relleno_iluminacion_plana=false;
+      //  ui->checkBox_6->setChecked(false);
+      //  relleno_iluminacion_suave=false;
+          ui->checkBox_3->setChecked(false);
+          relleno=false;
 
-        if(ui->checkBox_3->isChecked()){
-            ui->checkBox_3->setChecked(false);
-            relleno=false;
-        }
     }
     else
         ajedrez=false;
@@ -321,14 +340,15 @@ void Interfaz::on_checkBox_6_clicked()
 {
     if(!relleno_iluminacion_plana){
        relleno_iluminacion_plana=true;
-       ui->checkBox->setChecked(false);
-       ui->checkBox_2->setChecked(false);
-       ui->checkBox_3->setChecked(false);
-       ui->checkBox_4->setChecked(false);
-       relleno=0;
-       lineas=0;
-       puntos=0;
-       ajedrez=0;
+     //  ui->checkBox->setChecked(false);
+     //  ui->checkBox_2->setChecked(false);
+     //  ui->checkBox_3->setChecked(false);
+       ui->checkBox_7->setChecked(false);
+       relleno_iluminacion_suave=false;
+
+       lightning=true;
+       ui->checkBox_8->setChecked(true);
+
     }
     else relleno_iluminacion_plana=false;
 }
@@ -336,28 +356,30 @@ void Interfaz::on_checkBox_6_clicked()
 
 void Interfaz::on_checkBox_7_clicked()
 {
-    if(!relleno_iluminacion_plana){
+    if(!relleno_iluminacion_suave){
        relleno_iluminacion_suave=true;
-       ui->checkBox->setChecked(false);
-       ui->checkBox_2->setChecked(false);
-       ui->checkBox_3->setChecked(false);
-       ui->checkBox_4->setChecked(false);
+       //ui->checkBox->setChecked(false);
+       //ui->checkBox_2->setChecked(false);
+       //ui->checkBox_3->setChecked(false);
+       //ui->checkBox_4->setChecked(false);
+       //ui->checkBox_6->setChecked(false);
+       //relleno=0;
+       //lineas=0;
+       //puntos=0;
+       //ajedrez=0;
+       //relleno_iluminacion_plana=0;
+       relleno_iluminacion_plana=false;
        ui->checkBox_6->setChecked(false);
-       relleno=0;
-       lineas=0;
-       puntos=0;
-       ajedrez=0;
-       relleno_iluminacion_plana=0;
 
        // activar iluminacion y luz infinito por defecto
 
        lightning=true;
        ui->checkBox_8->setChecked(true);
 
-       if(luz==-1){
-           luz=0;
-           ui->radioButton_13->setChecked(true);
-       }
+   //    if(luz==-1){
+     //      luz=0;
+     //      ui->radioButton_13->setChecked(true);
+     //  }
 
 
     }
@@ -366,17 +388,12 @@ void Interfaz::on_checkBox_7_clicked()
 
 void Interfaz::on_horizontalSlider_4_valueChanged(int value)
 {
-    angulo_luz=value;
-}
-
-void Interfaz::on_doubleSpinBox_valueChanged(double arg1)
-{
-    distancia_luz = arg1;
+    angulo_luz_infinito=value;
 }
 
 void Interfaz::on_horizontalSlider_5_valueChanged(int value)
 {
-    angulo_luz_x = value;
+    angulo_luz_x_infinito = value;
 }
 
 void Interfaz::on_radioButton_10_clicked()
@@ -398,7 +415,7 @@ void Interfaz::on_checkBox_8_clicked()
 
 void Interfaz::on_radioButton_12_clicked()
 {
-    luz = 1;
+    material=2;
 
 }
 
@@ -439,4 +456,39 @@ void Interfaz::on_doubleSpinBox_3_valueChanged(double arg1)
 void Interfaz::on_doubleSpinBox_5_valueChanged(double arg1)
 {
     puntos_textura[2]=arg1;
+}
+
+void Interfaz::on_checkBox_12_clicked()
+{
+    if(!estado_luz_posicional)
+        estado_luz_posicional=true;
+    else
+        estado_luz_posicional=false;
+
+    luz=1;
+}
+
+void Interfaz::on_checkBox_13_clicked()
+{
+    if(!estado_luz_infinito)
+        estado_luz_infinito=true;
+    else
+        estado_luz_infinito=false;
+
+    luz=0;
+}
+
+void Interfaz::on_horizontalSlider_6_valueChanged(int value)
+{
+    angulo_luz_posicional=value;
+}
+
+void Interfaz::on_horizontalSlider_7_valueChanged(int value)
+{
+    angulo_luz_x_posicional=value;
+}
+
+void Interfaz::on_doubleSpinBox_6_valueChanged(double arg1)
+{
+    distancia_luz_posicional = arg1;
 }

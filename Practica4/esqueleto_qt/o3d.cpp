@@ -117,7 +117,7 @@ void O3D::calcularNormalesVertices()
 
 }
 
-void O3D::drawFillIluminado()
+void O3D::drawFillIluminado(Material material)
 {
  /*   glShadeModel(GL_FLAT);
     glEnable(GL_NORMALIZE);
@@ -232,22 +232,31 @@ glShadeModel(GL_FLAT);
       mat[2] = 0.366065;
       glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
       glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
-   */ GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
-    GLfloat light0_position[] = {0.3,0.3,1.0,0.0};
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+   */ //GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
+   // GLfloat light0_position[] = {0.3,0.3,1.0,0.0};
+  //  glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     //glColor3f(0,0.5,1.0);
 
-    glShadeModel(GL_FLAT);
+   // glShadeModel(GL_FLAT);
 
 
-    glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
-    glPopMatrix();
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+//    glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+//    glPopMatrix();
+ //   glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
+   // glEnable(GL_LIGHTING);
+  //  glEnable(GL_LIGHT0);
    // glColorMaterial(GL_FRONT,GL_DIFFUSE);
     //glEnable(GL_COLOR_MATERIAL);
 
+
+    material.enable();
+    // glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+//   GLfloat light_diffuse[] = {1.0,1.0,1.0,1.0};
+//  GLfloat light0_position[] = {0.0,0.0,0.0,1.0};
+glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+//  glColor3f(0,0.5,1.0);
+
+glShadeModel(GL_FLAT);
 
 
     glBegin(GL_TRIANGLES);
@@ -259,12 +268,12 @@ glShadeModel(GL_FLAT);
     }
     glEnd();
 
-    glDisable(GL_LIGHTING);
-    glDisable(GL_LIGHT0);
+    //glDisable(GL_LIGHTING);
+    //glDisable(GL_LIGHT0);
 
 }
 
-void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Material material, bool lighting, Luz light ){// GLfloat mat_ambient[], GLfloat mat_diffuse[], GLfloat mat_specular[], float shininess)
+void O3D::drawFillIluminadoSuave(Material material){// GLfloat mat_ambient[], GLfloat mat_diffuse[], GLfloat mat_specular[], float shininess)
 {
    // GLfloat mat[4];
    /*
@@ -311,9 +320,25 @@ void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Mat
 
 
   //  glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
-    if(lighting)
-    glEnable(GL_LIGHTING);
-    light.enable();
+   // if(lighting)
+   // glEnable(GL_LIGHTING);
+/*
+    //Creamos una luz roja un poco a la derecha de la esfera
+    const GLfloat light_ambient[]  = { 0.0f, 0.0f, 0.0f, 1.0f };
+    const GLfloat light_diffuse[]  = { 1.0f, 0.0f, 0.0f, 1.0f };
+    const GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    const GLfloat light_position[] = { 5.0f, 0.0f, 5.0f, 0.0f };
+    //Asignamos estos valores a la luz
+    glLightfv(GL_LIGHT1, GL_AMBIENT,  light_ambient);
+        glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
+        glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+        glLightfv(GL_LIGHT1, GL_POSITION, light_position);
+    //Activamos la luz 0
+    glEnable(GL_LIGHT1);
+*/
+//    luz_infinito.enable();
+  //  cout << luz_infinito.estado;
+  //  luz_posicional.enable();
   //  glEnable(GL_LIGHT0);
    // glColorMaterial(GL_FRONT,GL_DIFFUSE);
     //glEnable(GL_COLOR_MATERIAL);
@@ -331,8 +356,9 @@ void O3D::drawFillIluminadoSuave(double alfa, double beta, double distancia, Mat
     glEnd();
 
     //glDisable(GL_SHADER);
-    glDisable(GL_LIGHTING);
-    light.disable();
+    //glDisable(GL_LIGHTING);
+   // luz_infinito.disable();
+   // luz_posicional.disable();
     // glDisable(GL_LIGHT0);
 }}
 
