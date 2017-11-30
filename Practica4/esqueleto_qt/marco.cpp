@@ -117,6 +117,8 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
 
     int numero_quads = fila_marco_final - fila_marco_inicial;
     float distancia = fila_imagen_final-fila_imagen_inicial;
+    float distancia_columna = columna_imagen_final - columna_imagen_inicial;
+    float salto_columna = distancia_columna / numero_quads;
     float salto = distancia / numero_quads;
 
     vector<vector<float>> puntos_textura;
@@ -124,8 +126,8 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
 
     for(int i=0; i<=numero_quads;i++){
         for(int j=0; j<=numero_quads;j++){
-            float x = fila_imagen_inicial + (i*salto);
-            float y = columna_imagen_inicial + (j*salto);
+            float y = fila_imagen_inicial + (j*salto);
+            float x = columna_imagen_inicial + (i*salto_columna);
             vector<float> aux = {x,y};
             puntos_textura.push_back(aux);
 
@@ -142,7 +144,7 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
     cout << "RECIEN ENTRADO\n";
 
     for(int i=0;i<vertices.size();i++)
-        cout << vertices[i].x << " " << vertices[i].y << endl;
+  //      cout << vertices[i].x << " " << vertices[i].y << endl;
 
     for(int i=0; i<numero_quads;i++){
         for(int j=0; j<numero_quads;j++){
@@ -153,8 +155,8 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
                glTexCoord2f(aux_tex[0],aux_tex[1]);
                glVertex3f(vertices[aux_marco].x,vertices[aux_marco].y,0);
 
-               cout << "tex coor 1  "<< i<< " " << j << " : " << aux_tex[0] << " , " << aux_tex[1] << endl;
-               cout << "vertex coor 1  "<< i<< " " << j << " : " <<"aux_marco=" <<aux_marco <<" "<< vertices[aux_marco].x << " , " << vertices[aux_marco].y << endl;
+  //             cout << "tex coor 1  "<< i<< " " << j << " : " << aux_tex[0] << " , " << aux_tex[1] << endl;
+  //             cout << "vertex coor 1  "<< i<< " " << j << " : " <<"aux_marco=" <<aux_marco <<" "<< vertices[aux_marco].x << " , " << vertices[aux_marco].y << endl;
 
 
               // aux_tex = puntos_textura[((j+1)*(numero_quads+1))+i];
@@ -164,8 +166,8 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
                glTexCoord2f(aux_tex[0],aux_tex[1]);
                glVertex3f(vertices[aux_marco].x,vertices[aux_marco].y,0);
 
-               cout << "tex coor 2  "<< i<< " " << j << " : " << aux_tex[0] << " , " << aux_tex[1] << endl;
-               cout << "vertex coor 2  "<< i<< " " << j << " : "<<"aux_marco=" <<aux_marco <<" " << vertices[aux_marco].x << " , " << vertices[aux_marco].y << endl;
+  //             cout << "tex coor 2  "<< i<< " " << j << " : " << aux_tex[0] << " , " << aux_tex[1] << endl;
+  //             cout << "vertex coor 2  "<< i<< " " << j << " : "<<"aux_marco=" <<aux_marco <<" " << vertices[aux_marco].x << " , " << vertices[aux_marco].y << endl;
 
                //aux_tex = puntos_textura[(i+1)+(j*(numero_quads+1))];
                aux_tex = puntos_textura[1+j+((numero_quads+1)*i)];
@@ -175,8 +177,8 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
                glTexCoord2f(aux_tex[0],aux_tex[1]);
                glVertex3f(vertices[aux_marco].x,vertices[aux_marco].y,0);
 
-               cout << "tex coor 3  "<< i<< " " << j << " : " << aux_tex[0] << " , " << aux_tex[1] << endl;
-                cout << "vertex coor 3  "<< i<< " " << j << " : " <<"aux_marco=" <<aux_marco <<" "<< vertices[aux_marco].x << " , " << vertices[aux_marco].y << endl;
+  //             cout << "tex coor 3  "<< i<< " " << j << " : " << aux_tex[0] << " , " << aux_tex[1] << endl;
+  //              cout << "vertex coor 3  "<< i<< " " << j << " : " <<"aux_marco=" <<aux_marco <<" "<< vertices[aux_marco].x << " , " << vertices[aux_marco].y << endl;
 
 
                 // IMPARES

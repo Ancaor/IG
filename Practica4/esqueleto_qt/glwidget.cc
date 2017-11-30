@@ -39,6 +39,9 @@ _gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
  // this->interfaz->
 
 
+  for(float a : porcion_textura)
+      cout << a;
+
   timer_interfaz->start(0);
 }
 
@@ -279,6 +282,8 @@ void _gl_widget::updateInterfaz()
 
 
     divisiones=interfaz->getDivisiones();
+    porcion_textura = interfaz->getPuntosTextura();
+
   //  cout << divisiones<< endl;
 
     //if(lighting)

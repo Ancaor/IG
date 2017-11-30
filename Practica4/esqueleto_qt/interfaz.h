@@ -39,6 +39,7 @@ public:
     bool getLightning();
     int getLuz();
     int getDivisiones();
+    std::vector<float> getPuntosTextura();
 
 private slots:
     void on_tabWidget_tabBarClicked(int index);
@@ -117,6 +118,14 @@ private slots:
 
     void on_spinBox_2_valueChanged(int arg1);
 
+    void on_doubleSpinBox_2_valueChanged(double arg1);
+
+    void on_doubleSpinBox_4_valueChanged(double arg1);
+
+    void on_doubleSpinBox_3_valueChanged(double arg1);
+
+    void on_doubleSpinBox_5_valueChanged(double arg1);
+
 public slots:
     void raise_dialog();
 
@@ -157,6 +166,14 @@ private:
 
     int marco = 10;
     int divisiones=4;
+
+    std::vector<float> puntos_textura = {0,0,0,0};
+    /*
+    float x_min_text = 0.0;
+    float y_min_text = 0.0;
+    float x_max_text = 0.0;
+    float x_max_text = 0.0;
+    */
 };
 
 #endif // INTERFAZ_H

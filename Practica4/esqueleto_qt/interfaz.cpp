@@ -128,6 +128,11 @@ int Interfaz::getDivisiones()
     return divisiones;
 }
 
+std::vector<float> Interfaz::getPuntosTextura()
+{
+    return puntos_textura;
+}
+
 int Interfaz::getAnguloLuz()
 {
     return angulo_luz;
@@ -414,4 +419,24 @@ void Interfaz::on_spinBox_2_valueChanged(int arg1)
 {
     divisiones=arg1;
    // std::cout << divisiones;
+}
+
+void Interfaz::on_doubleSpinBox_2_valueChanged(double arg1)
+{
+    puntos_textura[1]=arg1;
+}
+
+void Interfaz::on_doubleSpinBox_4_valueChanged(double arg1)
+{
+    puntos_textura[0]=arg1;
+}
+
+void Interfaz::on_doubleSpinBox_3_valueChanged(double arg1)
+{
+    puntos_textura[3]=arg1;
+}
+
+void Interfaz::on_doubleSpinBox_5_valueChanged(double arg1)
+{
+    puntos_textura[2]=arg1;
 }
