@@ -313,6 +313,7 @@ void _gl_widget::updateInterfaz()
 
     divisiones=interfaz->getDivisiones();
     porcion_textura = interfaz->getPuntosTextura();
+    porcion_marco=interfaz->getPuntosMarco();
 
   //  cout << divisiones<< endl;
 

@@ -143,6 +143,11 @@ std::vector<float> Interfaz::getPuntosTextura()
     return puntos_textura;
 }
 
+std::vector<int> Interfaz::getPuntosMarco()
+{
+    return puntos_marco;
+}
+
 bool Interfaz::getEstadoLuzPosicional()
 {
     return estado_luz_posicional;
@@ -491,4 +496,24 @@ void Interfaz::on_horizontalSlider_7_valueChanged(int value)
 void Interfaz::on_doubleSpinBox_6_valueChanged(double arg1)
 {
     distancia_luz_posicional = arg1;
+}
+
+void Interfaz::on_spinBox_5_valueChanged(int arg1)
+{
+    puntos_marco[0]=arg1;
+}
+
+void Interfaz::on_spinBox_3_valueChanged(int arg1)
+{
+    puntos_marco[1]=arg1;
+}
+
+void Interfaz::on_spinBox_4_valueChanged(int arg1)
+{
+    puntos_marco[2]=arg1;
+}
+
+void Interfaz::on_spinBox_6_valueChanged(int arg1)
+{
+    puntos_marco[3]=arg1;
 }

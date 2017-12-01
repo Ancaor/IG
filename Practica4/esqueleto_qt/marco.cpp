@@ -82,6 +82,108 @@ void marco::cargarImagen(string path)
 void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco)
 {
 
+    int pos_x_marco_min = porcion_marco[1];
+    int pos_x_marco_max = porcion_marco[3];
+    int pos_y_marco_min = porcion_marco[0];
+    int pos_y_marco_max = porcion_marco[2];
+
+    float pos_x_tex_min = porcion_textura[1];
+    float pos_x_tex_max = porcion_textura[3];
+    float pos_y_tex_min = porcion_textura[0];
+    float pos_y_tex_max = porcion_textura[2];
+
+    float x_textura = pos_x_tex_min;
+    float y_textura = pos_y_tex_min;
+    float salto_y = (pos_y_tex_max - pos_y_tex_min) / (pos_y_marco_max - pos_y_marco_min);
+    float salto_x = (pos_x_tex_max - pos_x_tex_min) / (pos_x_marco_max - pos_x_marco_min);
+
+    int v1,v2,v3;
+
+
+    /*
+
+    int saltos_marco_x = porcion_marco[3] - porcion_marco[1];
+    int saltos_marco_y = porcion_marco[2] - porcion_marco[0];
+
+    int posicion_inicial_marco = (porcion_marco[0]*(n))+porcion_marco[1];
+
+    float distancia_x_textura = porcion_textura[3] - porcion_textura[1];
+    float distancia_y_textura = porcion_textura[2] - porcion_textura[0];
+
+    float salto_x_textura = distancia_x_textura / saltos_marco_x;
+    float salto_y_textura = distancia_y_textura / saltos_marco_y;
+
+    cout << salto_x_textura<<endl;
+    cout << salto_y_textura << endl;
+*/
+    glEnable(GL_TEXTURE_2D);
+    glColor3f(1,1,1);
+    glBegin(GL_TRIANGLES);
+
+
+    for(int i=pos_y_marco_min; i < pos_y_marco_max; i++){
+        x_textura = pos_x_marco_min;
+        for(int j=pos_x_marco_min; j < pos_x_marco_max; j++){
+
+            v1 = i * (n+1) +j;
+            v2 = v1+1;
+            v3 = v1 +(n+1);
+
+            glTexCoord2f(x_textura,y_textura);
+            glVertex3f(vertices[v1].x,vertices[v1].y,vertices[v1].z);
+
+            glTexCoord2f(x_textura + salto_x,y_textura);
+            glVertex3f(vertices[v2].x,vertices[v2].y,vertices[v2].z);
+
+            glTexCoord2f(x_textura,y_textura + salto_y);
+            glVertex3f(vertices[v3].x,vertices[v3].y,vertices[v3].z);
+
+
+/*
+            int indice_marco = posicion_inicial_marco + x + (y * n)+y;
+            float pos_textura_x = porcion_textura[1] + (x * salto_x_textura);
+            float pos_textura_y = porcion_textura[0] + (y * salto_y_textura);
+            glTexCoord2f(pos_textura_y,pos_textura_x);
+            glVertex3f(vertices[indice_marco].x,vertices[indice_marco].y,vertices[indice_marco].z);
+
+            pos_textura_x = pos_textura_x + salto_x_textura;
+            indice_marco = indice_marco+1;
+            glTexCoord2f(pos_textura_x,pos_textura_y);
+            glVertex3f(vertices[indice_marco].x,vertices[indice_marco].y,vertices[indice_marco].z);
+
+            pos_textura_y = pos_textura_y + salto_y_textura;
+            indice_marco = (indice_marco)+n;
+            glTexCoord2f(pos_textura_x,pos_textura_y);
+            glVertex3f(vertices[indice_marco].x,vertices[indice_marco].y,vertices[indice_marco].z);
+
+
+            glTexCoord2f(pos_textura_x,pos_textura_y);
+            glVertex3f(vertices[indice_marco].x,vertices[indice_marco].y,vertices[indice_marco].z);
+
+            pos_textura_x = pos_textura_x + salto_x_textura;
+            pos_textura_y = pos_textura_y - salto_y_textura;
+            indice_marco = indice_marco-n;
+            glTexCoord2f(pos_textura_x,pos_textura_y);
+            glVertex3f(vertices[indice_marco].x,vertices[indice_marco].y,vertices[indice_marco].z);
+
+            pos_textura_y = pos_textura_y + salto_y_textura;
+            indice_marco = indice_marco+n+1;
+            glTexCoord2f(pos_textura_x,pos_textura_y);
+            glVertex3f(vertices[indice_marco].x,vertices[indice_marco].y,vertices[indice_marco].z);
+
+            */
+            x_textura += salto_x;
+        }
+
+        y_textura += salto_y;
+
+    }
+
+
+
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
 
 /*
     glBegin(GL_TRIANGLES);
@@ -103,6 +205,7 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
 
     */
 
+    /*
 
 
     float fila_imagen_inicial = porcion_textura[0];
@@ -143,7 +246,7 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
     glBegin(GL_TRIANGLES);
    // cout << "RECIEN ENTRADO\n";
 
- //   for(int i=0;i<vertices.size();i++)
+    //for(int i=0;i<vertices.size();i++)
   //      cout << vertices[i].x << " " << vertices[i].y << endl;
 
     for(int i=0; i<numero_quads;i++){
@@ -203,7 +306,11 @@ void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco
                 glVertex3f(vertices[aux_marco].x,vertices[aux_marco].y,0);
 
         }
+
     }
     glEnd();
     glDisable(GL_TEXTURE_2D);
+
+
+    */
 }

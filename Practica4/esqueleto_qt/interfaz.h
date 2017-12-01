@@ -44,6 +44,7 @@ public:
     int getLuz();
     int getDivisiones();
     std::vector<float> getPuntosTextura();
+    std::vector<int> getPuntosMarco();
 
     bool getEstadoLuzPosicional();
     bool getEstadoLuzInfinito();
@@ -140,6 +141,14 @@ private slots:
 
     void on_doubleSpinBox_6_valueChanged(double arg1);
 
+    void on_spinBox_5_valueChanged(int arg1);
+
+    void on_spinBox_3_valueChanged(int arg1);
+
+    void on_spinBox_4_valueChanged(int arg1);
+
+    void on_spinBox_6_valueChanged(int arg1);
+
 public slots:
     void raise_dialog();
 
@@ -190,6 +199,7 @@ private:
     int divisiones=4;
 
     std::vector<float> puntos_textura = {0,0,0,0};
+    std::vector<int> puntos_marco = {0,0,0,0};
     /*
     float x_min_text = 0.0;
     float y_min_text = 0.0;
