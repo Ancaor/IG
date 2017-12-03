@@ -172,8 +172,8 @@ void _gl_widget::draw_objects()
     const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
     glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
 
-    if(interfaz->getLightning())
-        glEnable(GL_LIGHTING);
+   // if(interfaz->getLightning())
+    //    glEnable(GL_LIGHTING);
 
     if(interfaz->getEstadoLuzInfinito())
         luz_infinito.enable();
@@ -192,7 +192,12 @@ void _gl_widget::draw_objects()
             marcoTextura.drawFill();
         if(chest)
             marcoTextura.drawAjedrez();
-            marcoTextura.drawTextura(porcion_textura,porcion_marco);
+        if(fill_flat_ilu)
+            marcoTextura.drawFillIluminado(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+        if(fill_smooth_ilu)
+            marcoTextura.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+        if(!textura_con_iluminacion)
+            marcoTextura.drawTextura(porcion_textura,porcion_marco);   // nunca se activa   revisar variables
     }
 
     else{
@@ -219,14 +224,10 @@ void _gl_widget::draw_objects()
                 if(chest)
                     object.drawAjedrez();
                 if(fill_flat_ilu)
-                    object.drawFillIluminado(mater);
-                if(fill_smooth_ilu){
-
-
-
-                    object.drawFillIluminadoSuave(mater);//mat_ambient,mat_diffuse,mat_especular,shininess);
-
-                }
+                    object.drawFillIluminado(mater,interfaz->getLightning());
+                if(fill_smooth_ilu)
+                    object.drawFillIluminadoSuave(mater,interfaz->getLightning());//mat_ambient,mat_diffuse,mat_especular,shininess);
+                
             }
             else {
                 if(ply_bool){
@@ -239,9 +240,9 @@ void _gl_widget::draw_objects()
                     if(chest)
                         ply.drawAjedrez();
                     if(fill_smooth_ilu)
-                        ply.drawFillIluminadoSuave(mater);//,luz_infinito,luz_posicional);
+                        ply.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);
                     if(fill_flat_ilu)
-                        ply.drawFillIluminado(mater);
+                        ply.drawFillIluminado(mater,interfaz->getLightning());
                 }
                 else{
                     if(vertex)
@@ -253,14 +254,14 @@ void _gl_widget::draw_objects()
                     if(chest)
                         object_revolucion.drawAjedrez();
                     if(fill_flat_ilu)
-                        object_revolucion.drawFillIluminado(mater);
+                        object_revolucion.drawFillIluminado(mater,interfaz->getLightning());
                     if(fill_smooth_ilu)
-                        object_revolucion.drawFillIluminadoSuave(mater);//,luz_infinito,luz_posicional);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                        object_revolucion.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);//mat_ambient,mat_diffuse,mat_especular,shininess);
                 }
             }
         }
     }
-    glDisable(GL_LIGHTING);
+    //glDisable(GL_LIGHTING);
 }
 
 
@@ -314,6 +315,11 @@ void _gl_widget::updateInterfaz()
     divisiones=interfaz->getDivisiones();
     porcion_textura = interfaz->getPuntosTextura();
     porcion_marco=interfaz->getPuntosMarco();
+
+    textura_con_iluminacion = interfaz->getTexturaConIlu();
+
+    ancho_marco = interfaz->getAnchoMarco();
+    alto_marco = interfaz->getAltoMarco();
 
   //  cout << divisiones<< endl;
 
@@ -424,7 +430,7 @@ void _gl_widget::updateInterfaz()
     case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
     case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
     case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true;textura=false; break;
-    case 10: marcoTextura = marco(divisiones);marcoTextura.cargarImagen("imagen.png");textura=true;break;
+    case 10: marcoTextura = marco(divisiones,ancho_marco,alto_marco);marcoTextura.cargarImagen("imagen.png");textura=true;break;
     case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;textura=false;break;
     }
 

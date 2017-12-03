@@ -46,8 +46,15 @@ public:
     std::vector<float> getPuntosTextura();
     std::vector<int> getPuntosMarco();
 
+    bool getTexturaConIlu();
+
     bool getEstadoLuzPosicional();
     bool getEstadoLuzInfinito();
+
+    float getAnchoMarco();
+    float getAltoMarco();
+
+
 private slots:
     void on_tabWidget_tabBarClicked(int index);
 
@@ -149,6 +156,16 @@ private slots:
 
     void on_spinBox_6_valueChanged(int arg1);
 
+    void on_checkBox_9_clicked();
+
+    void on_checkBox_10_clicked();
+
+    void on_checkBox_11_clicked();
+
+    void on_doubleSpinBox_valueChanged(double arg1);
+
+    void on_doubleSpinBox_7_valueChanged(double arg1);
+
 public slots:
     void raise_dialog();
 
@@ -196,11 +213,19 @@ private:
 
 
     int marco = 10;
-    int divisiones=4;
+    int divisiones=1;
+
+    bool textura_con_iluminacion=0;
 
     std::vector<float> puntos_textura = {0,0,0,0};
     std::vector<int> puntos_marco = {0,0,0,0};
+
+    float ancho_marco = 1.0;
+    float alto_marco = 1.0;
+
     /*
+     *
+
     float x_min_text = 0.0;
     float y_min_text = 0.0;
     float x_max_text = 0.0;

@@ -75,6 +75,7 @@ public:
      bool fill_flat_ilu=0;
      bool fill_smooth_ilu=0;
      bool textura=0;
+     bool textura_con_iluminacion=0;
 
      QString pathname_ply = "/home";
 
@@ -107,6 +108,9 @@ public:
      int divisiones=4;
      vector<float> porcion_textura = {0.0,0.0,0.5,0.5};
      vector<int> porcion_marco ={0,0,4,4};
+
+     float ancho_marco = 1;
+     float alto_marco = 1;
 
 
      //Material mater = Material();

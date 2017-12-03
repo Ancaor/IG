@@ -10,9 +10,11 @@ private:
     int n;
 public:
     marco();
-    marco(int n);
+    marco(int n, float ancho , float alto);
     void cargarImagen(string path);
     void drawTextura(vector<float> porcion_textura , vector<int> porcion_marco);
+    void drawFillIluminado(vector<float> porcion_textura, vector<int> porcion_marco, Material material , bool iluminacion);
+    void drawFillIluminadoSuave(vector<float> porcion_textura, vector<int> porcion_marco,Material material , bool iluminacion);
 };
 
 #endif // MARCO_H

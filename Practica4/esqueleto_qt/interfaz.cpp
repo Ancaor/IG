@@ -148,6 +148,11 @@ std::vector<int> Interfaz::getPuntosMarco()
     return puntos_marco;
 }
 
+bool Interfaz::getTexturaConIlu()
+{
+    return textura_con_iluminacion;
+}
+
 bool Interfaz::getEstadoLuzPosicional()
 {
     return estado_luz_posicional;
@@ -156,6 +161,16 @@ bool Interfaz::getEstadoLuzPosicional()
 bool Interfaz::getEstadoLuzInfinito()
 {
     return estado_luz_infinito;
+}
+
+float Interfaz::getAnchoMarco()
+{
+    return ancho_marco;
+}
+
+float Interfaz::getAltoMarco()
+{
+    return alto_marco;
 }
 
 int Interfaz::getAnguloLuzInfinito()
@@ -413,8 +428,11 @@ void Interfaz::on_radioButton_11_clicked()
 
 void Interfaz::on_checkBox_8_clicked()
 {
-    if(!lightning)
+    if(!lightning){
         lightning=true;
+        textura_con_iluminacion=true;
+        ui->checkBox_11->setChecked(true);
+    }
     else lightning=false;
 }
 
@@ -440,7 +458,12 @@ void Interfaz::on_radioButton_14_clicked()
 void Interfaz::on_spinBox_2_valueChanged(int arg1)
 {
     divisiones=arg1;
-   // std::cout << divisiones;
+    ui->spinBox_3->setMaximum(arg1);
+    ui->spinBox_4->setMaximum(arg1);
+    ui->spinBox_5->setMaximum(arg1);
+    ui->spinBox_6->setMaximum(arg1);
+
+    // std::cout << divisiones;
 }
 
 void Interfaz::on_doubleSpinBox_2_valueChanged(double arg1)
@@ -516,4 +539,51 @@ void Interfaz::on_spinBox_4_valueChanged(int arg1)
 void Interfaz::on_spinBox_6_valueChanged(int arg1)
 {
     puntos_marco[3]=arg1;
+}
+
+void Interfaz::on_checkBox_9_clicked()
+{
+    if(!relleno_iluminacion_plana){
+       relleno_iluminacion_plana=true;
+     //  ui->checkBox->setChecked(false);
+     //  ui->checkBox_2->setChecked(false);
+     //  ui->checkBox_3->setChecked(false);
+       //ui->checkBox_7->setChecked(false);
+      // relleno_iluminacion_suave=false;
+
+      // lightning=true;
+     //  ui->checkBox_8->setChecked(true);
+
+    }
+    else relleno_iluminacion_plana=false;
+}
+
+void Interfaz::on_checkBox_10_clicked()
+{
+    if(!relleno_iluminacion_suave){
+        relleno_iluminacion_suave=true;
+    }
+    else{
+        relleno_iluminacion_suave=false;
+    }
+}
+
+void Interfaz::on_checkBox_11_clicked()
+{
+    if(!textura_con_iluminacion){
+        textura_con_iluminacion=true;
+        lightning=true;
+        ui->checkBox_8->setChecked(true);
+    }else
+        textura_con_iluminacion=false;
+}
+
+void Interfaz::on_doubleSpinBox_valueChanged(double arg1)
+{
+    ancho_marco = arg1;
+}
+
+void Interfaz::on_doubleSpinBox_7_valueChanged(double arg1)
+{
+    alto_marco = arg1;
 }
