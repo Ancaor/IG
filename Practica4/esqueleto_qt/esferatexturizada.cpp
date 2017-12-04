@@ -14,10 +14,13 @@ EsferaTexturizada::EsferaTexturizada(int secciones,int angulo, float radio)
     vertices[vertices.size()-1] = _vertex3f(0.0,(radio/2.0),0.0);
     generar_objeto_de_revolucion(angulo);
 
-   // calcularNormalesCaras();
-   // calcularNormalesVertices();
+    calcularNormalesCaras();
+    calcularNormalesVertices();
 }
 
+/*
+    Metodo sobrecargado de O3DR que permite puntos repetidos para poder palicar textura correctamente.
+  */
 void EsferaTexturizada::generar_objeto_de_revolucion(int angulo){
     SECCIONES--;
 
@@ -28,15 +31,21 @@ void EsferaTexturizada::generar_objeto_de_revolucion(int angulo){
 
 }
 
+/*
+ *  Carga la imagen como textura
+ *
+*/
+
 void EsferaTexturizada::cargarImagen(string path)
 {
 
     QString aux = QString::fromStdString(path);
 
     if (Imagen.load(aux)==false) cout << "Image not loaded" << endl;
+
     // reflejo vertical
     Imagen=Imagen.mirrored(false,true);
-    //
+
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -47,10 +56,16 @@ void EsferaTexturizada::cargarImagen(string path)
     glTexImage2D(GL_TEXTURE_2D,0,4,Imagen.width(),Imagen.height(),0,GL_BGRA,GL_UNSIGNED_BYTE,Imagen.bits());
 }
 
-void EsferaTexturizada::drawTextura(std::string path_textura,bool cargar_textura)
+/*
+ * Dibuja textura sin ilumimnación
+ *
+*/
+
+
+void EsferaTexturizada::drawTextura()
 {
 
-
+    // Se utiliza la textura completa
 
     float pos_x_tex_min = 0.0;
     float pos_x_tex_max = 1.0;
@@ -59,26 +74,28 @@ void EsferaTexturizada::drawTextura(std::string path_textura,bool cargar_textura
 
     float x_textura = pos_x_tex_min;
     float y_textura = pos_y_tex_min;
-    float salto_y = (pos_y_tex_max - pos_y_tex_min) / PUNTOS_PERFIL;//(pos_y_marco_max - pos_y_marco_min);
-    float salto_x = (pos_x_tex_max - pos_x_tex_min) /SECCIONES;//(pos_x_marco_max - pos_x_marco_min);
+
+    float salto_y = (pos_y_tex_max - pos_y_tex_min) / PUNTOS_PERFIL;
+    float salto_x = (pos_x_tex_max - pos_x_tex_min) /SECCIONES;
 
     int v1,v2,v3;
 
-    //if(cargar_textura)
-     //   cargarImagen(path_textura);
 
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-
     glEnable(GL_TEXTURE_2D);
     glColor3f(1,1,1);
-    glBegin(GL_TRIANGLES);
 
+    glBegin(GL_TRIANGLES);
 
     int i,j;
     int PUNTOS = vertices.size();
+
+
     for(i = 0; i < PUNTOS_PERFIL-1 ; i++){
         x_textura = pos_x_tex_min;
         for(j=0; j < SECCIONES ; j++){
+
+            // Triangulos Pares
 
             v1 = ((j*PUNTOS_PERFIL)+(i+1))%PUNTOS;
             v2 = ((j*PUNTOS_PERFIL)+i)%PUNTOS;
@@ -90,8 +107,11 @@ void EsferaTexturizada::drawTextura(std::string path_textura,bool cargar_textura
 
             glTexCoord2f(x_textura,y_textura);
             glVertex3f(vertices[v2].x,vertices[v2].y,vertices[v2].z);
-glTexCoord2f(x_textura + salto_x,y_textura);
+
+            glTexCoord2f(x_textura + salto_x,y_textura);
             glVertex3f(vertices[v3].x,vertices[v3].y,vertices[v3].z);
+
+            // Triangulos Impares
 
             v1 = (((j+1)*PUNTOS_PERFIL)+i)%PUNTOS;
             v2 = (((j+1)*PUNTOS_PERFIL)+(i+1))%PUNTOS;
@@ -106,61 +126,52 @@ glTexCoord2f(x_textura + salto_x,y_textura);
             glTexCoord2f(x_textura,y_textura + salto_y);
             glVertex3f(vertices[v3].x,vertices[v3].y,vertices[v3].z);
 
-            x_textura =  pos_x_tex_min + salto_x*(j - 0 +1);
+            x_textura =  pos_x_tex_min + salto_x * (j +1 );
         }
 
-        y_textura = pos_y_tex_min + salto_y*(i - 0 + 1);
+        y_textura = pos_y_tex_min + salto_y * (i + 1 );
 
     }
-
-
 
     glEnd();
     glDisable(GL_TEXTURE_2D);
 
-
 }
 
-void EsferaTexturizada::drawFillIluminado(std::string path_textura,bool cargar_textura,Material material, bool iluminacion)
+
+/*
+ * Dibula la esfera texturizada con sombreado FLAT
+*/
+
+
+void EsferaTexturizada::drawFillIluminado(Material material, bool iluminacion)
 {
-
-    if(normalCaras.empty())
-        calcularNormalesCaras();
-
- //   for(int i=0;i<10;i++)
-  //      cout << normalCaras[i]._0 << "  "<< normalCaras[i]._1 << "  " << normalCaras[i]._2 << endl;
-
 
     float pos_x_tex_min = 0.0;
     float pos_x_tex_max = 1.0;
     float pos_y_tex_min = 0.0;
     float pos_y_tex_max = 1.0;
 
+
     float x_textura = pos_x_tex_min;
     float y_textura = pos_y_tex_min;
-    float salto_y = (pos_y_tex_max - pos_y_tex_min) / PUNTOS_PERFIL;//(pos_y_marco_max - pos_y_marco_min);
-    float salto_x = (pos_x_tex_max - pos_x_tex_min) /SECCIONES;//(pos_x_marco_max - pos_x_marco_min);
+    float salto_y = (pos_y_tex_max - pos_y_tex_min) / PUNTOS_PERFIL;
+    float salto_x = (pos_x_tex_max - pos_x_tex_min) /SECCIONES;
 
     int v1,v2,v3;
-    int index=0;
 
-    //if(cargar_textura)
-     //   cargarImagen(path_textura);
+    // Indice de las Normales
+    int index=0;
 
     if(iluminacion)
         glEnable(GL_LIGHTING);
 
-
-
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-
     glShadeModel(GL_FLAT);
-
     glEnable(GL_TEXTURE_2D);
-    //material.enable();
+    material.enable();
     glColor3f(1,1,1);
     glBegin(GL_TRIANGLES);
-
 
     int i,j;
     int PUNTOS = vertices.size();
@@ -172,7 +183,7 @@ void EsferaTexturizada::drawFillIluminado(std::string path_textura,bool cargar_t
             v2 = ((j*PUNTOS_PERFIL)+i)%PUNTOS;
             v3 = (((j+1)*PUNTOS_PERFIL)+i )%PUNTOS;
 
-            //glNormal3fv((GLfloat*) &normalCaras[index]);
+
             glNormal3f(normalCaras[index].x,normalCaras[index].y,normalCaras[index].z);
             glTexCoord2f(x_textura,y_textura + salto_y);
             glVertex3f(vertices[v1].x,vertices[v1].y,vertices[v1].z);
@@ -186,7 +197,6 @@ void EsferaTexturizada::drawFillIluminado(std::string path_textura,bool cargar_t
             v2 = (((j+1)*PUNTOS_PERFIL)+(i+1))%PUNTOS;
             v3 = ((j*PUNTOS_PERFIL)+(i+1))%PUNTOS;
 
-            //glNormal3fv((GLfloat*) &normalCaras[index+1]);
             glNormal3f(normalCaras[index+1].x,normalCaras[index+1].y,normalCaras[index+1].z);
             glTexCoord2f(x_textura + salto_x,y_textura);
             glVertex3f(vertices[v1].x,vertices[v1].y,vertices[v1].z);
@@ -197,15 +207,13 @@ void EsferaTexturizada::drawFillIluminado(std::string path_textura,bool cargar_t
             glTexCoord2f(x_textura,y_textura + salto_y);
             glVertex3f(vertices[v3].x,vertices[v3].y,vertices[v3].z);
 
-            x_textura =  pos_x_tex_min + salto_x*(j - 0 +1);
+            x_textura =  pos_x_tex_min + salto_x*(j +1);
             index+=2;
         }
 
-        y_textura = pos_y_tex_min + salto_y*(i - 0 + 1);
+        y_textura = pos_y_tex_min + salto_y*(i + 1);
 
     }
-  //  material.enable();
-
 
     glEnd();
     glDisable(GL_TEXTURE_2D);
@@ -215,19 +223,18 @@ void EsferaTexturizada::drawFillIluminado(std::string path_textura,bool cargar_t
 }
 
 
-void EsferaTexturizada::drawFillIluminadoSuave(std::string path_textura,bool cargar_textura,Material material , bool iluminacion)
+/*
+ *  Dibula la esfera texturizada con sombreado SMOOTH
+ *
+*/
+
+
+void EsferaTexturizada::drawFillIluminadoSuave(Material material , bool iluminacion)
 {
-    if(normalVertices.empty())
-        calcularNormalesVertices();
 
     if(iluminacion)
         glEnable(GL_LIGHTING);
 
-    /*int pos_x_marco_min = porcion_marco[1];
-    int pos_x_marco_max = porcion_marco[3];
-    int pos_y_marco_min = porcion_marco[0];
-    int pos_y_marco_max = porcion_marco[2];
-*/
     float pos_x_tex_min = 0.0;
     float pos_x_tex_max = 1.0;
     float pos_y_tex_min = 0.0;
@@ -243,14 +250,10 @@ void EsferaTexturizada::drawFillIluminadoSuave(std::string path_textura,bool car
 
     int index=0;
 
-  //  if(cargar_textura)
-    //    cargarImagen(path_textura);
-
     material.enable();
+
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     glShadeModel(GL_SMOOTH);
-
-
     glEnable(GL_TEXTURE_2D);
     glColor3f(1,1,1);
     glBegin(GL_TRIANGLES);
@@ -301,9 +304,6 @@ void EsferaTexturizada::drawFillIluminadoSuave(std::string path_textura,bool car
         y_textura = pos_y_tex_min + salto_y*(i - 0 + 1);
 
     }
-
-
-
     glEnd();
     glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);

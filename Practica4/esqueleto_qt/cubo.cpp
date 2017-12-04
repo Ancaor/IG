@@ -26,10 +26,6 @@ Cubo::Cubo()
     triangles[10] = _vertex3i(5,6,7);
     triangles[11] = _vertex3i(5,4,6);
 
-  //  triangles.resize(2);
-   // triangles[0] = _vertex3i(0,1,3);
-   // triangles[1] = _vertex3i(3,2,0);
-
     calcularNormalesCaras();
-   calcularNormalesVertices();
+    calcularNormalesVertices();
 }

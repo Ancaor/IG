@@ -94,7 +94,6 @@ public:
 
      //INT ANGULO_LUZ
 
-
      double velocidad=0;            // velocidad de giro del Watt Regulator.
      int material=0;
      GLfloat mat_ambient[4];
@@ -118,8 +117,6 @@ public:
      EsferaTexturizada tierra;
      EsferaTexturizada estrellas;
 
-     std::string path_textura_anterior = "sss";
-
      bool redibujar_textura = 0;
 
      bool pintar_tierra=0;
@@ -127,40 +124,20 @@ public:
      bool planeta_tierra = 0;
 
      bool tierra_cargada=0;
-     bool estrellas_cargadas=0;
 
      std::string path_tierra;
      std::string path_estrellas;
+
      bool cargar_tierra=0;
      bool cargar_estrellas=0;
-     //Material mater = Material();
+
     Material mater ;
 
     bool cargar_textura=true;
 
-    /*basura*/
-    /*mat_ambient[0] = 1.0;
-            mat_ambient[1] = 1.0;
-            mat_ambient[2] = 1.0;
-            mat_ambient[3] = 1.0;
-            //mat_ambient  (0.24725,0.1995,0.0745,1.0;
-          //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-            mat_diffuse[0] = 1.0;
-            mat_diffuse[1] = 1.0;
-            mat_diffuse[2] = 1.0;
-            mat_diffuse[3] = 1.0;
-            //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-            mat_especular[0] = 1.0;
-            mat_especular[1] = 1.0;
-            mat_especular[2] = 1.0;
-            mat_especular[3] = 1.0;
+  Material vacio;
 
-*/
-
-
-    Material vacio;
-
-     float shininess;
+  float shininess;
 
   _gl_widget(_window *Window1,Interfaz *interfaz);
 

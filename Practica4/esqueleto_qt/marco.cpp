@@ -7,31 +7,10 @@ marco::marco()
 
 marco::marco(int n , float ancho , float alto)
 {
-    /*
-    float x=0;
-    float y=0;
-
-
-    vertices.push_back(_vertex3f(x,y,0.0));
-
-
- for(float i=1.0;i<=n;i++){
-     y=i/n;
-     for(int j=1.0;j<=n;j++){
-        x=j/n;
-        vertices.push_back(_vertex3f(x,y,0.0));
-     }
-
- }
-
-// cout << n<<endl;
-*/
     this->n = n;
     float tama = 1.0;
     float x_min=-(ancho*0.5);
-  //  float x_max=(tama*0.5);
     float y_min=-(alto*0.5);
-  //  float y_max=(tama*0.5);
 
     float x,y;
 
@@ -49,14 +28,12 @@ marco::marco(int n , float ancho , float alto)
     for(int i=0;i<=n-1;i++){
 
         for(int j=0;j<n;j++){
-
+            //Triangulo par
             triangles.push_back(_vertex3i(  ((j*(n+1))+i)%vertices.size() , ((j*(n+1))+(i+1))%vertices.size(),(((j+1)*(n+1))+i )%vertices.size()) );
             //Triangulo Impar
             triangles.push_back(_vertex3i(  (((j+1)*(n+1))+(i+1))%vertices.size() , (((j+1)*(n+1))+i)%vertices.size() , ((j*(n+1))+(i+1))%vertices.size() ) );
         }
     }
-
-
 
 }
 
@@ -68,7 +45,7 @@ void marco::cargarImagen(string path)
     if (Imagen.load(aux)==false) cout << "Image not loaded" << endl;
     // reflejo vertical
     Imagen=Imagen.mirrored(false,true);
-    //
+
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -78,6 +55,12 @@ void marco::cargarImagen(string path)
     // asignacion de la textura
     glTexImage2D(GL_TEXTURE_2D,0,4,Imagen.width(),Imagen.height(),0,GL_BGRA,GL_UNSIGNED_BYTE,Imagen.bits());
 }
+
+/*
+ * Dada porcion de textura y porcion del marco de N x N aplica la textura.
+ *
+*/
+
 
 void marco::drawTextura(vector<float> porcion_textura, vector<int> porcion_marco)
 {

@@ -18,6 +18,13 @@
 
 #include "window.h"
 
+
+// COMPONENTES DE LUCES BLANCAS
+GLfloat light_ambient[]  = { 0.1f, 0.1f, 0.1f, 1.0f };  // 10%
+GLfloat light_diffuse[]  = { 0.7f, 0.7f, 0.7f, 1.0f };  // 70%
+GLfloat light_specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };  // 20%
+
+
 using namespace std;
 using namespace _gl_widget_ne;
 
@@ -36,36 +43,27 @@ _gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
   this->interfaz = interfaz;
   this->interfaz->show();
   this->interfaz->move(870,120);
- // this->interfaz->
 
-
-
+// Inicializacion de Material Vacio
 
   mat_ambient[0] = 1.0;
-          mat_ambient[1] = 1.0;
-          mat_ambient[2] = 1.0;
-          mat_ambient[3] = 1.0;
-          //mat_ambient  (0.24725,0.1995,0.0745,1.0;
-        //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-          mat_diffuse[0] = 1.0;
-          mat_diffuse[1] = 1.0;
-          mat_diffuse[2] = 1.0;
-          mat_diffuse[3] = 1.0;
-          //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-          mat_especular[0] = 1.0;
-          mat_especular[1] = 1.0;
-          mat_especular[2] = 1.0;
-          mat_especular[3] = 1.0;
-        //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-       //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
-          shininess = 0.6 * 128.0;
+  mat_ambient[1] = 1.0;
+  mat_ambient[2] = 1.0;
+  mat_ambient[3] = 1.0;
 
-          vacio = Material(mat_ambient,mat_diffuse,mat_especular,shininess);
+  mat_diffuse[0] = 1.0;
+  mat_diffuse[1] = 1.0;
+  mat_diffuse[2] = 1.0;
+  mat_diffuse[3] = 1.0;
 
+  mat_especular[0] = 1.0;
+  mat_especular[1] = 1.0;
+  mat_especular[2] = 1.0;
+  mat_especular[3] = 1.0;
 
+  shininess = 0.6 * 128.0;
 
-
-
+  vacio = Material(mat_ambient,mat_diffuse,mat_especular,shininess);
 
   timer_interfaz->start(0);
 }
@@ -76,14 +74,8 @@ _gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
 
 void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
-  if(Keyevent->modifiers() == Qt::ShiftModifier){ // Composiciones de teclas SHIFT+TECLA
-      switch(Keyevent->key()){
-     // case Qt::Key_N:if((velocidad-1) >=0) velocidad-=1; if(timer->isActive())angle+=velocidad/10;break;  // Disminuye la velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
-     // case Qt::Key_B:angle+=(-1); // Gira el regulador de watt en sentido horario
-      }
 
-  }else
-      switch(Keyevent->key()){
+    switch(Keyevent->key()){
       case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
       case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
       case Qt::Key_Up:Observer_angle_x-=ANGLE_STEP;break;
@@ -91,34 +83,8 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       case Qt::Key_PageUp:Observer_distance*=1.2;break;
       case Qt::Key_PageDown:Observer_distance/=1.2;break;
       case Qt::Key_0: interfaz->raise();break;
-     // case Qt::Key_F:
-//      case Qt::Key_P: if(!vertex)vertex = 1; else vertex=0;break; // pinta puntos
-  //    case Qt::Key_L: if(!lines)lines = 1; else lines=0;break; // pinta aristass
-    //  case Qt::Key_F: if(!fill)fill = 1;else fill=0;break; // pinta caras
-    //  case Qt::Key_C: if(!chest)chest = 1;else chest=0;break; // pinta ajedrez
-
-      //case Qt::Key_1: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;break;
-      //case Qt::Key_2: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;break;
-
-      //case Qt::Key_3: ply.read_ply(); revolucion=true; ply_bool=true;break;
-/*
-      case Qt::Key_4: object_revolucion = Tubo(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-      case Qt::Key_5: object_revolucion = Cilindro(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-      case Qt::Key_6: object_revolucion = Vaso(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-      case Qt::Key_7: object_revolucion = Vaso_Invertido(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-      case Qt::Key_8: object_revolucion = Cono(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-      case Qt::Key_9: object_revolucion = Esfera(40); revolucion=true; ply_bool=false;objeto_complejo= false; break;
-
-*/
-          /*Teclas PRACTICA 3*/
-
-      //case Qt::Key_N:if(velocidad+1 <=100) velocidad+=1; if(timer->isActive()) angle+=velocidad/10;break;  // Aumenta velocidad de giro ( TIENE UN TOPE DE VELOCIDAD )
-      //case Qt::Key_B: angle+=1; break;     // Gira el regulador de watt en sentido anti-horario.
-      //case Qt::Key_A: timers(); break;     // Activa / Desactiva la animacion
-      //case Qt::Key_W: watt_regulator=new WattRegulator(); objeto_complejo=true;  // Activa e inicializa el Watt Regulattor
-
-      }
-  update();
+    }
+    update();
 }
 
 //**************************************************************************
@@ -140,12 +106,7 @@ void _gl_widget::change_projection()
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  // formato(x_minimo,x_maximo, y_minimo, y_maximo,Front_plane, plano_traser)
-  //  Front_plane>0  Back_plane>PlanoDelantero)
-  //cout << this->size().width()<<" "<<this->size().height()<<endl;
-  //cout << this->parentWidget()->size().width()<<" "<<this->parentWidget()->parentWidget()->parentWidget()->size().height()<<endl;
   float relacion_aspecto = (this->size().width()*1.0)/(this->size().height()*1.0);
-  //float r = (this->size().height()*(X_MAX-X_MIN)*1.0)/(this->size().width()*1.0);
 
   glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
 }
@@ -195,13 +156,8 @@ void _gl_widget::draw_objects()
 {
      luz_posicional.transformar(angulo_luz_y_posicional,angulo_luz_x_posicional,distancia_luz_posicional);
      luz_infinito.transformar(angulo_luz_y_infinito,angulo_luz_x_infinito,distancia_luz_posicional);
-  //  const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
-  //  glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
-     //INICIALIZACION DE LUCES
 
-      GLfloat light_ambient[]  = { 0.1f, 0.1f, 0.1f, 1.0f };  // 10%
-      GLfloat light_diffuse[]  = { 0.7f, 0.7f, 0.7f, 1.0f };  // 70%
-      GLfloat light_specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };  // 20%
+     //INICIALIZACION DE LUCES
 
      glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
      glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
@@ -210,50 +166,44 @@ void _gl_widget::draw_objects()
      glLightfv(GL_LIGHT1, GL_AMBIENT,  light_ambient);
      glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
      glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
-   // if(interfaz->getLightning())
-    //    glEnable(GL_LIGHTING);
+
+    // Activador de luz en infinito
 
     if(interfaz->getEstadoLuzInfinito())
         luz_infinito.enable();
     else luz_infinito.disable();
 
+    // Activador de luz en punto
+
     if(interfaz->getEstadoLuzPosicional())
         luz_posicional.enable();
     else luz_posicional.disable();
 
+
     if(planeta_tierra){
+
         if(tierra_cargada){
             if(vertex){
                 tierra.drawPoints();
-                //estrellas.drawPoints();
             }
             if(lines){
-                //estrellas.drawLines();
                 tierra.drawLines();
             }
             if(fill){
-                //estrellas.drawFill();
                 tierra.drawFill();
             }
             if(chest){
-                //estrellas.drawAjedrez();
                 tierra.drawAjedrez();
             }
 
             if(fill_flat_ilu)
-                tierra.drawFillIluminado(path_tierra,cargar_tierra,vacio,interfaz->getLightning());
+                tierra.drawFillIluminado(vacio,interfaz->getLightning());
             if(fill_smooth_ilu)
-                tierra.drawFillIluminadoSuave(path_tierra,cargar_tierra,vacio,interfaz->getLightning());
-               // tierra.drawNormalesCaras();
-                // if(fill_smooth_ilu)
-             //   tierra.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+                tierra.drawFillIluminadoSuave(vacio,interfaz->getLightning());
             if(!textura_con_iluminacion){
-
-               // glMatrixMode(GL_MODELVIEW);
-                tierra.drawTextura(path_tierra,cargar_tierra);
+                tierra.drawTextura();
             }
         }
-
     }
     else{
         if(textura){
@@ -270,7 +220,7 @@ void _gl_widget::draw_objects()
             if(fill_smooth_ilu)
                 marcoTextura.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
             if(!textura_con_iluminacion)
-                marcoTextura.drawTextura(porcion_textura,porcion_marco);   // nunca se activa   revisar variables
+                marcoTextura.drawTextura(porcion_textura,porcion_marco);
         }
 
         else{
@@ -284,7 +234,6 @@ void _gl_widget::draw_objects()
                 if(chest)
                     watt_regulator.draw(3,angle,velocidad);
             }
-
             else{
 
                 if(!revolucion){
@@ -299,7 +248,7 @@ void _gl_widget::draw_objects()
                     if(fill_flat_ilu)
                         object.drawFillIluminado(mater,interfaz->getLightning());
                     if(fill_smooth_ilu)
-                        object.drawFillIluminadoSuave(mater,interfaz->getLightning());//mat_ambient,mat_diffuse,mat_especular,shininess);
+                        object.drawFillIluminadoSuave(mater,interfaz->getLightning());
 
                 }
                 else {
@@ -313,7 +262,7 @@ void _gl_widget::draw_objects()
                         if(chest)
                             ply.drawAjedrez();
                         if(fill_smooth_ilu)
-                            ply.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);
+                            ply.drawFillIluminadoSuave(mater,interfaz->getLightning());
                         if(fill_flat_ilu)
                             ply.drawFillIluminado(mater,interfaz->getLightning());
                     }
@@ -329,13 +278,12 @@ void _gl_widget::draw_objects()
                         if(fill_flat_ilu)
                             object_revolucion.drawFillIluminado(mater,interfaz->getLightning());
                         if(fill_smooth_ilu)
-                            object_revolucion.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                            object_revolucion.drawFillIluminadoSuave(mater,interfaz->getLightning());
                     }
                 }
             }
         }
     }
-    //glDisable(GL_LIGHTING);
 }
 
 
@@ -360,9 +308,19 @@ void _gl_widget::animar()
     update();
 }
 
+/*********************************
+ * Funcion que actualiza interfaz
+ * *******************************/
+
+
 void _gl_widget::updateInterfaz()
 {
+
+    // Figura que va a pintarse
     int figura = interfaz->getFigura();
+
+    // Variables de modo de dibujado
+
     vertex = interfaz->getPuntos();
     lines = interfaz->getLineas();
     fill = interfaz->getRelleno();
@@ -370,158 +328,144 @@ void _gl_widget::updateInterfaz()
     fill_flat_ilu = interfaz->getRellenoIluminacionPlana();
     fill_smooth_ilu = interfaz->getRellenoIluminacionSuave();
 
+    // Variable de estado de iluminacion
+    lighting = interfaz->getLightning();
+
+    // Posicion luz infinito
     angulo_luz_y_infinito=interfaz->getAnguloLuzInfinito();
     angulo_luz_x_infinito = interfaz->getAnguloLuzXInfinito();
 
-    lighting = interfaz->getLightning();
-
-   // luz_infinito = Luz(interfaz->getLuz(),interfaz->getEstadoLuzInfinito());
-  //  luz_infinito.transformar(angulo_luz,angulo_luz_x,distancia_luz);
-
+    // Posicion luz en un punto
     angulo_luz_y_posicional=interfaz->getAnguloLuzPosicional();
     angulo_luz_x_posicional = interfaz->getAnguloLuzXPosicional();
     distancia_luz_posicional = interfaz->getDistanciaLuzPosicional();
 
-    //luz_posicional = Luz(interfaz->getLuz(),interfaz->getEstadoLuzPosicional());
-   // luz_posicional.transformar(angulo_luz,angulo_luz_x,distancia_luz);
-
-    cargar_estrellas = interfaz->getCargarEstrellas();
-
+    // Path de la textura para la tierra.
     path_tierra = interfaz->getPathTierra();
-    path_estrellas = interfaz->getPathEstrellas();
 
+
+    // Indica si hay que construir el objeto tierra
     cargar_tierra = interfaz->getCargarTierra();
-    pintar_tierra = interfaz->getPintarTierra();
 
+    // Divisiones del marco
     divisiones=interfaz->getDivisiones();
+
+    // Porcion de textura y marco.
     porcion_textura = interfaz->getPuntosTextura();
     porcion_marco=interfaz->getPuntosMarco();
 
+    // Indica si se va a pintar la textura junto a iluminación
     textura_con_iluminacion = interfaz->getTexturaConIlu();
 
+    // tamaño de marco
     ancho_marco = interfaz->getAnchoMarco();
     alto_marco = interfaz->getAltoMarco();
 
+    // path textura de marco
     path_textura = interfaz->getPathTextura();
 
+    // indica si hay que cargar la textura de nuevo
     cargar_textura = interfaz->getCargarTextura();
-    cout << cargar_textura << endl;
-  //  cout << divisiones<< endl;
 
-    //if(lighting)
-      //  glEnable(GL_LIGHTING);
-   // else
-     //   glDisable(GL_LIGHTING);
-
+    // indica el material a usar.
     material=interfaz->getMaterial();
 
-   // cout << lighting << endl;
+    // Eleccion del material
 
     switch(material)
     {
-    case 0: mat_ambient[0] = 0.24725;
-        mat_ambient[1] = 0.1995;
-        mat_ambient[2] = 0.0745;
-        mat_ambient[3] = 1.0;
-        //mat_ambient  (0.24725,0.1995,0.0745,1.0;
-      //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-        mat_diffuse[0] = 0.75164;
-        mat_diffuse[1] = 0.60648;
-        mat_diffuse[2] = 0.22648;
-        mat_diffuse[3] = 1.0;
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-        mat_especular[0] = 0.628281;
-        mat_especular[1] = 0.555802;
-        mat_especular[2] = 0.366065;
-        mat_especular[3] = 1.0;
-      //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-     //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
-        shininess = 0.4 * 128.0;
-        break;
-    case 1:
-      // glEnable(GL_COLOR_MATERIAL);
-        mat_ambient[0] = 0.0215;
-        mat_ambient[1] = 0.1745	;
-        mat_ambient[2] = 0.0215;
-        mat_ambient[3] = 1.0;
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-        mat_diffuse[0] = 0.07568;
-        mat_diffuse[1] = 0.61424;
-        mat_diffuse[2] = 0.07568;
-        mat_diffuse[3] = 1.0;
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-        mat_especular[0] = 0.633;
-        mat_especular[1] = 0.727811;
-        mat_especular[2] = 0.633;
-        mat_especular[3] = 1.0;
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-        shininess = 0.9 * 128.0;
-        // glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6 * 128.0);
-        break;
-    case 2:mat_ambient[0] = 1.0;
-        mat_ambient[1] = 1.0;
-        mat_ambient[2] = 1.0;
-        mat_ambient[3] = 1.0;
-        //mat_ambient  (0.24725,0.1995,0.0745,1.0;
-      //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-        mat_diffuse[0] = 1.0;
-        mat_diffuse[1] = 1.0;
-        mat_diffuse[2] = 1.0;
-        mat_diffuse[3] = 1.0;
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-        mat_especular[0] = 1.0;
-        mat_especular[1] = 1.0;
-        mat_especular[2] = 1.0;
-        mat_especular[3] = 1.0;
-      //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-     //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
-        shininess = 0.4 * 128.0;
-        break;
+        case 0: mat_ambient[0] = 0.24725;
+            mat_ambient[1] = 0.1995;
+            mat_ambient[2] = 0.0745;
+            mat_ambient[3] = 1.0;
 
-    case 3:mat_ambient[0] = 0.05	;
-        mat_ambient[1] = 0.0;
-        mat_ambient[2] = 0.0;
-        mat_ambient[3] = 1.0;
-        //mat_ambient  (0.24725,0.1995,0.0745,1.0;
-      //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-        mat_diffuse[0] = 0.5;
-        mat_diffuse[1] = 0.4;
-        mat_diffuse[2] = 0.4;
-        mat_diffuse[3] = 1.0;
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-        mat_especular[0] = 0.7;
-        mat_especular[1] = 0.04;
-        mat_especular[2] = 0.04;
-        mat_especular[3] = 1.0;
-      //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-     //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
-        shininess = 0.078125 * 128.0;
+            mat_diffuse[0] = 0.75164;
+            mat_diffuse[1] = 0.60648;
+            mat_diffuse[2] = 0.22648;
+            mat_diffuse[3] = 1.0;
+
+            mat_especular[0] = 0.628281;
+            mat_especular[1] = 0.555802;
+            mat_especular[2] = 0.366065;
+            mat_especular[3] = 1.0;
+
+            shininess = 0.4 * 128.0;
+            break;
+        case 1:
+            mat_ambient[0] = 0.0215;
+            mat_ambient[1] = 0.1745	;
+            mat_ambient[2] = 0.0215;
+            mat_ambient[3] = 1.0;
+
+            mat_diffuse[0] = 0.07568;
+            mat_diffuse[1] = 0.61424;
+            mat_diffuse[2] = 0.07568;
+            mat_diffuse[3] = 1.0;
+
+            mat_especular[0] = 0.633;
+            mat_especular[1] = 0.727811;
+            mat_especular[2] = 0.633;
+            mat_especular[3] = 1.0;
+
+            shininess = 0.9 * 128.0;
+            break;
+        case 2:mat_ambient[0] = 1.0;
+            mat_ambient[1] = 1.0;
+            mat_ambient[2] = 1.0;
+            mat_ambient[3] = 1.0;
+
+            mat_diffuse[0] = 1.0;
+            mat_diffuse[1] = 1.0;
+            mat_diffuse[2] = 1.0;
+            mat_diffuse[3] = 1.0;
+
+            mat_especular[0] = 1.0;
+            mat_especular[1] = 1.0;
+            mat_especular[2] = 1.0;
+            mat_especular[3] = 1.0;
+
+            shininess = 0.4 * 128.0;
+            break;
+
+        case 3:mat_ambient[0] = 0.05;
+            mat_ambient[1] = 0.0;
+            mat_ambient[2] = 0.0;
+            mat_ambient[3] = 1.0;
+
+            mat_diffuse[0] = 0.5;
+            mat_diffuse[1] = 0.4;
+            mat_diffuse[2] = 0.4;
+            mat_diffuse[3] = 1.0;
+
+            mat_especular[0] = 0.7;
+            mat_especular[1] = 0.04;
+            mat_especular[2] = 0.04;
+            mat_especular[3] = 1.0;
+
+            shininess = 0.078125 * 128.0;
+            break;
     }
-  //  vacio = Material()
+
     mater = Material(mat_ambient,mat_diffuse,mat_especular,shininess);
 
-
-  /*  if(fill_flat_ilu == false){
-        //cout << "entra";
-        glDisable(GL_LIGHTING);
-        glDisable(GL_LIGHT0);
-    }
-*/
+    // Secciones y angulo de objetos de revolución
     int secciones = interfaz->getSecciones();
     int angulo = interfaz->getAngulo();
 
-    string urlPlyWatt = interfaz->getUrlPly();//"/home/ancaor/IG/PLY/modelos_ply/beethoven.ply";
+    // Path de ply
+    string urlPlyWatt = interfaz->getUrlPly();
 
     if(urlPlyWatt != url_ply_watt_anterior)
         figura_anterior=0;
     url_ply_watt_anterior = urlPlyWatt;
 
-    string urlPly = interfaz->getUrlPly_2();//"/home/ancaor/IG/PLY/modelos_ply/beethoven.ply";
+    string urlPly = interfaz->getUrlPly_2();
 
     if(urlPly != url_ply_anterior)
         figura_anterior=0;
     url_ply_anterior = urlPly;
-  //  cout << figura;
+
+
     if((figura != figura_anterior)|| (figura!=9 && figura !=55 ))
     switch(figura)
     {
@@ -535,14 +479,13 @@ void _gl_widget::updateInterfaz()
     case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;break;
     case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true;textura=false; planeta_tierra=false;break;
     case 10: if(cargar_textura){marcoTextura = marco(divisiones,ancho_marco,alto_marco);marcoTextura.cargarImagen(path_textura);}textura=true;planeta_tierra=false;break;
-    case 11: if(cargar_tierra){tierra = EsferaTexturizada(secciones,360,1.0);tierra_cargada=true;tierra.cargarImagen(path_tierra);}/*if(pintar_tierra)*/planeta_tierra=true;/*else planeta_tierra=false;*/break;
+    case 11: if(cargar_tierra){tierra = EsferaTexturizada(secciones,360,1.0);tierra_cargada=true;tierra.cargarImagen(path_tierra);}planeta_tierra=true;break;
     case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;textura=false;planeta_tierra=false;break;
     }
 
     figura_anterior=figura;
 
     velocidad=interfaz->getVelocidad();
-
 
     if(interfaz->Animacion()){
          angle+=velocidad/10;
