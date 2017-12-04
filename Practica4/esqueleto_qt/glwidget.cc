@@ -39,8 +39,33 @@ _gl_widget::_gl_widget(_window *Window1, Interfaz *interfaz):Window(Window1)
  // this->interfaz->
 
 
-  for(float a : porcion_textura)
-      cout << a;
+
+
+  mat_ambient[0] = 1.0;
+          mat_ambient[1] = 1.0;
+          mat_ambient[2] = 1.0;
+          mat_ambient[3] = 1.0;
+          //mat_ambient  (0.24725,0.1995,0.0745,1.0;
+        //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+          mat_diffuse[0] = 1.0;
+          mat_diffuse[1] = 1.0;
+          mat_diffuse[2] = 1.0;
+          mat_diffuse[3] = 1.0;
+          //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+          mat_especular[0] = 1.0;
+          mat_especular[1] = 1.0;
+          mat_especular[2] = 1.0;
+          mat_especular[3] = 1.0;
+        //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+       //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
+          shininess = 0.6 * 128.0;
+
+          vacio = Material(mat_ambient,mat_diffuse,mat_especular,shininess);
+
+
+
+
+
 
   timer_interfaz->start(0);
 }
@@ -119,7 +144,8 @@ void _gl_widget::change_projection()
   //  Front_plane>0  Back_plane>PlanoDelantero)
   //cout << this->size().width()<<" "<<this->size().height()<<endl;
   //cout << this->parentWidget()->size().width()<<" "<<this->parentWidget()->parentWidget()->parentWidget()->size().height()<<endl;
-  float relacion_aspecto = this->size().width()*1.0/this->size().height();
+  float relacion_aspecto = (this->size().width()*1.0)/(this->size().height()*1.0);
+  //float r = (this->size().height()*(X_MAX-X_MIN)*1.0)/(this->size().width()*1.0);
 
   glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
 }
@@ -169,9 +195,21 @@ void _gl_widget::draw_objects()
 {
      luz_posicional.transformar(angulo_luz_y_posicional,angulo_luz_x_posicional,distancia_luz_posicional);
      luz_infinito.transformar(angulo_luz_y_infinito,angulo_luz_x_infinito,distancia_luz_posicional);
-    const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
-    glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
+  //  const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
+  //  glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
+     //INICIALIZACION DE LUCES
 
+      GLfloat light_ambient[]  = { 0.1f, 0.1f, 0.1f, 1.0f };  // 10%
+      GLfloat light_diffuse[]  = { 0.7f, 0.7f, 0.7f, 1.0f };  // 70%
+      GLfloat light_specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };  // 20%
+
+     glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
+     glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
+     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+
+     glLightfv(GL_LIGHT1, GL_AMBIENT,  light_ambient);
+     glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
+     glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
    // if(interfaz->getLightning())
     //    glEnable(GL_LIGHTING);
 
@@ -183,80 +221,116 @@ void _gl_widget::draw_objects()
         luz_posicional.enable();
     else luz_posicional.disable();
 
-    if(textura){
-        if(vertex)
-            marcoTextura.drawPoints();
-        if(lines)
-            marcoTextura.drawLines();
-        if(fill)
-            marcoTextura.drawFill();
-        if(chest)
-            marcoTextura.drawAjedrez();
-        if(fill_flat_ilu)
-            marcoTextura.drawFillIluminado(porcion_textura,porcion_marco,mater,interfaz->getLightning());
-        if(fill_smooth_ilu)
-            marcoTextura.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
-        if(!textura_con_iluminacion)
-            marcoTextura.drawTextura(porcion_textura,porcion_marco);   // nunca se activa   revisar variables
-    }
+    if(planeta_tierra){
+        if(tierra_cargada){
+            if(vertex){
+                tierra.drawPoints();
+                //estrellas.drawPoints();
+            }
+            if(lines){
+                //estrellas.drawLines();
+                tierra.drawLines();
+            }
+            if(fill){
+                //estrellas.drawFill();
+                tierra.drawFill();
+            }
+            if(chest){
+                //estrellas.drawAjedrez();
+                tierra.drawAjedrez();
+            }
 
+            if(fill_flat_ilu)
+                tierra.drawFillIluminado(path_tierra,cargar_tierra,vacio,interfaz->getLightning());
+            if(fill_smooth_ilu)
+                tierra.drawFillIluminadoSuave(path_tierra,cargar_tierra,vacio,interfaz->getLightning());
+               // tierra.drawNormalesCaras();
+                // if(fill_smooth_ilu)
+             //   tierra.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+            if(!textura_con_iluminacion){
+
+               // glMatrixMode(GL_MODELVIEW);
+                tierra.drawTextura(path_tierra,cargar_tierra);
+            }
+        }
+
+    }
     else{
-        if(objeto_complejo){
+        if(textura){
             if(vertex)
-                watt_regulator.draw(0,angle,velocidad);
+                marcoTextura.drawPoints();
             if(lines)
-               watt_regulator.draw(1,angle,velocidad);
+                marcoTextura.drawLines();
             if(fill)
-                watt_regulator.draw(2,angle,velocidad);
+                marcoTextura.drawFill();
             if(chest)
-                watt_regulator.draw(3,angle,velocidad);
+                marcoTextura.drawAjedrez();
+            if(fill_flat_ilu)
+                marcoTextura.drawFillIluminado(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+            if(fill_smooth_ilu)
+                marcoTextura.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+            if(!textura_con_iluminacion)
+                marcoTextura.drawTextura(porcion_textura,porcion_marco);   // nunca se activa   revisar variables
         }
 
         else{
-
-            if(!revolucion){
+            if(objeto_complejo){
                 if(vertex)
-                    object.drawPoints();
+                    watt_regulator.draw(0,angle,velocidad);
                 if(lines)
-                    object.drawLines();
+                   watt_regulator.draw(1,angle,velocidad);
                 if(fill)
-                    object.drawFill();
+                    watt_regulator.draw(2,angle,velocidad);
                 if(chest)
-                    object.drawAjedrez();
-                if(fill_flat_ilu)
-                    object.drawFillIluminado(mater,interfaz->getLightning());
-                if(fill_smooth_ilu)
-                    object.drawFillIluminadoSuave(mater,interfaz->getLightning());//mat_ambient,mat_diffuse,mat_especular,shininess);
-                
+                    watt_regulator.draw(3,angle,velocidad);
             }
-            else {
-                if(ply_bool){
+
+            else{
+
+                if(!revolucion){
                     if(vertex)
-                        ply.drawPoints();
+                        object.drawPoints();
                     if(lines)
-                        ply.drawLines();
+                        object.drawLines();
                     if(fill)
-                        ply.drawFill();
+                        object.drawFill();
                     if(chest)
-                        ply.drawAjedrez();
-                    if(fill_smooth_ilu)
-                        ply.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);
+                        object.drawAjedrez();
                     if(fill_flat_ilu)
-                        ply.drawFillIluminado(mater,interfaz->getLightning());
+                        object.drawFillIluminado(mater,interfaz->getLightning());
+                    if(fill_smooth_ilu)
+                        object.drawFillIluminadoSuave(mater,interfaz->getLightning());//mat_ambient,mat_diffuse,mat_especular,shininess);
+
                 }
-                else{
-                    if(vertex)
-                        object_revolucion.drawPoints();
-                    if(lines)
-                        object_revolucion.drawLines();
-                    if(fill)
-                        object_revolucion.drawFill();
-                    if(chest)
-                        object_revolucion.drawAjedrez();
-                    if(fill_flat_ilu)
-                        object_revolucion.drawFillIluminado(mater,interfaz->getLightning());
-                    if(fill_smooth_ilu)
-                        object_revolucion.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                else {
+                    if(ply_bool){
+                        if(vertex)
+                            ply.drawPoints();
+                        if(lines)
+                            ply.drawLines();
+                        if(fill)
+                            ply.drawFill();
+                        if(chest)
+                            ply.drawAjedrez();
+                        if(fill_smooth_ilu)
+                            ply.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);
+                        if(fill_flat_ilu)
+                            ply.drawFillIluminado(mater,interfaz->getLightning());
+                    }
+                    else{
+                        if(vertex)
+                            object_revolucion.drawPoints();
+                        if(lines)
+                            object_revolucion.drawLines();
+                        if(fill)
+                            object_revolucion.drawFill();
+                        if(chest)
+                            object_revolucion.drawAjedrez();
+                        if(fill_flat_ilu)
+                            object_revolucion.drawFillIluminado(mater,interfaz->getLightning());
+                        if(fill_smooth_ilu)
+                            object_revolucion.drawFillIluminadoSuave(mater,interfaz->getLightning());//,luz_infinito,luz_posicional);//mat_ambient,mat_diffuse,mat_especular,shininess);
+                    }
                 }
             }
         }
@@ -311,6 +385,13 @@ void _gl_widget::updateInterfaz()
     //luz_posicional = Luz(interfaz->getLuz(),interfaz->getEstadoLuzPosicional());
    // luz_posicional.transformar(angulo_luz,angulo_luz_x,distancia_luz);
 
+    cargar_estrellas = interfaz->getCargarEstrellas();
+
+    path_tierra = interfaz->getPathTierra();
+    path_estrellas = interfaz->getPathEstrellas();
+
+    cargar_tierra = interfaz->getCargarTierra();
+    pintar_tierra = interfaz->getPintarTierra();
 
     divisiones=interfaz->getDivisiones();
     porcion_textura = interfaz->getPuntosTextura();
@@ -321,6 +402,10 @@ void _gl_widget::updateInterfaz()
     ancho_marco = interfaz->getAnchoMarco();
     alto_marco = interfaz->getAltoMarco();
 
+    path_textura = interfaz->getPathTextura();
+
+    cargar_textura = interfaz->getCargarTextura();
+    cout << cargar_textura << endl;
   //  cout << divisiones<< endl;
 
     //if(lighting)
@@ -370,7 +455,7 @@ void _gl_widget::updateInterfaz()
         mat_especular[2] = 0.633;
         mat_especular[3] = 1.0;
         //glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-        shininess = 0.6 * 128.0;
+        shininess = 0.9 * 128.0;
         // glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6 * 128.0);
         break;
     case 2:mat_ambient[0] = 1.0;
@@ -392,8 +477,27 @@ void _gl_widget::updateInterfaz()
      //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
         shininess = 0.4 * 128.0;
         break;
-    }
 
+    case 3:mat_ambient[0] = 0.05	;
+        mat_ambient[1] = 0.0;
+        mat_ambient[2] = 0.0;
+        mat_ambient[3] = 1.0;
+        //mat_ambient  (0.24725,0.1995,0.0745,1.0;
+      //  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+        mat_diffuse[0] = 0.5;
+        mat_diffuse[1] = 0.4;
+        mat_diffuse[2] = 0.4;
+        mat_diffuse[3] = 1.0;
+        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+        mat_especular[0] = 0.7;
+        mat_especular[1] = 0.04;
+        mat_especular[2] = 0.04;
+        mat_especular[3] = 1.0;
+      //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+     //  glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.4 * 128.0);
+        shininess = 0.078125 * 128.0;
+    }
+  //  vacio = Material()
     mater = Material(mat_ambient,mat_diffuse,mat_especular,shininess);
 
 
@@ -418,20 +522,21 @@ void _gl_widget::updateInterfaz()
         figura_anterior=0;
     url_ply_anterior = urlPly;
   //  cout << figura;
-    if((figura != figura_anterior)|| (figura!=9 && figura !=55))
+    if((figura != figura_anterior)|| (figura!=9 && figura !=55 ))
     switch(figura)
     {
-    case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;break;
-    case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;break;
-    case 3: object_revolucion = Esfera(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; break;
-    case 4: object_revolucion = Cilindro(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; break;
-    case 5: object_revolucion = Tubo(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; break;
-    case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
-    case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
-    case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;break;
-    case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true;textura=false; break;
-    case 10: marcoTextura = marco(divisiones,ancho_marco,alto_marco);marcoTextura.cargarImagen("imagen.png");textura=true;break;
-    case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;textura=false;break;
+    case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false;break;
+    case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false;break;
+    case 3: object_revolucion = Esfera(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; planeta_tierra=false;break;
+    case 4: object_revolucion = Cilindro(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false; break;
+    case 5: object_revolucion = Tubo(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false; break;
+    case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;break;
+    case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;break;
+    case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;break;
+    case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true;textura=false; planeta_tierra=false;break;
+    case 10: if(cargar_textura){marcoTextura = marco(divisiones,ancho_marco,alto_marco);marcoTextura.cargarImagen(path_textura);}textura=true;planeta_tierra=false;break;
+    case 11: if(cargar_tierra){tierra = EsferaTexturizada(secciones,360,1.0);tierra_cargada=true;tierra.cargarImagen(path_tierra);}/*if(pintar_tierra)*/planeta_tierra=true;/*else planeta_tierra=false;*/break;
+    case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;textura=false;planeta_tierra=false;break;
     }
 
     figura_anterior=figura;

@@ -11,11 +11,9 @@ private:
     bool tapa_inferior;
     _vertex3f posicion_tapa_superior;
     _vertex3f posicion_tapa_inferior;
-    int PUNTOS_PERFIL;             // Almacena el numero de puntos que tiene el perfil, sin contar las tapas.
-
 
 public:
-
+    int PUNTOS_PERFIL;             // Almacena el numero de puntos que tiene el perfil, sin contar las tapas.
     int SECCIONES;      // Numero de secciones en las que se divide el objeto de revolucion, a más secciones mas puntos tiene el objeto.
     O3DR();
     void setPuntosPerfil(int size);

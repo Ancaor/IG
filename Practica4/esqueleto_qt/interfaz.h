@@ -54,6 +54,17 @@ public:
     float getAnchoMarco();
     float getAltoMarco();
 
+    std::string getPathTextura();
+
+    bool getCargarTextura();
+
+    std::string getPathTierra();
+    std::string getPathEstrellas();
+
+    bool getCargarTierra();
+    bool getCargarEstrellas();
+
+    bool getPintarTierra();
 
 private slots:
     void on_tabWidget_tabBarClicked(int index);
@@ -166,6 +177,24 @@ private slots:
 
     void on_doubleSpinBox_7_valueChanged(double arg1);
 
+    void on_pushButton_4_clicked();
+
+    void on_lineEdit_3_textChanged(const QString &arg1);
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_lineEdit_4_textChanged(const QString &arg1);
+
+    void on_lineEdit_5_textChanged(const QString &arg1);
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_9_clicked();
+
 public slots:
     void raise_dialog();
 
@@ -212,7 +241,7 @@ private:
     std::string urlPly_2;
 
 
-    int marco = 10;
+    int obj_textura = 10;
     int divisiones=1;
 
     bool textura_con_iluminacion=0;
@@ -222,6 +251,21 @@ private:
 
     float ancho_marco = 1.0;
     float alto_marco = 1.0;
+
+    std::string path_textura;
+
+    bool cargar_textura=true;
+
+    bool cargar_tierra=true;
+
+    std::string path_tierra;
+    std::string path_estrellas;
+
+    int tierra = -11;
+
+    bool pintar_tierra=0;
+
+    bool  cargar_estrellas=false;
 
     /*
      *

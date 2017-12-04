@@ -82,6 +82,7 @@ public:
     QRadioButton *radioButton_10;
     QRadioButton *radioButton_11;
     QRadioButton *radioButton_12;
+    QRadioButton *radioButton_13;
     QGroupBox *groupBox_9;
     QCheckBox *checkBox_8;
     QGroupBox *groupBox_7;
@@ -112,23 +113,17 @@ public:
     QCheckBox *checkBox_6;
     QCheckBox *checkBox_7;
     QWidget *tab_6;
-    QRadioButton *radioButton_14;
-    QSpinBox *spinBox_2;
-    QLabel *label_17;
-    QGroupBox *groupBox_12;
-    QCheckBox *checkBox_9;
-    QCheckBox *checkBox_10;
     QGroupBox *groupBox_13;
     QCheckBox *checkBox_11;
     QGroupBox *groupBox_14;
-    QWidget *widget;
+    QWidget *layoutWidget6;
     QHBoxLayout *horizontalLayout_16;
     QLabel *label_22;
     QDoubleSpinBox *doubleSpinBox;
     QLabel *label_23;
     QDoubleSpinBox *doubleSpinBox_7;
     QGroupBox *groupBox_15;
-    QWidget *widget1;
+    QWidget *layoutWidget7;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_13;
     QLabel *label_11;
@@ -142,7 +137,9 @@ public:
     QDoubleSpinBox *doubleSpinBox_4;
     QGroupBox *groupBox_16;
     QLabel *label_9;
-    QWidget *widget2;
+    QSpinBox *spinBox_2;
+    QLabel *label_17;
+    QWidget *layoutWidget8;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_14;
     QLabel *label_19;
@@ -154,8 +151,21 @@ public:
     QSpinBox *spinBox_5;
     QLabel *label_18;
     QSpinBox *spinBox_3;
+    QGroupBox *groupBox_12;
+    QRadioButton *radioButton_14;
+    QLineEdit *lineEdit_3;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
+    QWidget *tab_7;
+    QGroupBox *groupBox_17;
+    QCheckBox *checkBox_9;
+    QGroupBox *groupBox_18;
+    QLabel *label_24;
+    QLineEdit *lineEdit_4;
+    QPushButton *pushButton_6;
+    QPushButton *pushButton_7;
     QGroupBox *groupBox;
-    QWidget *layoutWidget6;
+    QWidget *layoutWidget9;
     QHBoxLayout *horizontalLayout_2;
     QCheckBox *checkBox;
     QCheckBox *checkBox_2;
@@ -166,10 +176,10 @@ public:
     {
         if (Interfaz->objectName().isEmpty())
             Interfaz->setObjectName(QStringLiteral("Interfaz"));
-        Interfaz->resize(513, 650);
+        Interfaz->resize(572, 650);
         tabWidget = new QTabWidget(Interfaz);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(11, 11, 491, 531));
+        tabWidget->setGeometry(QRect(11, 11, 531, 531));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         groupBox_2 = new QGroupBox(tab);
@@ -197,10 +207,10 @@ public:
         tab_2->setObjectName(QStringLiteral("tab_2"));
         groupBox_3 = new QGroupBox(tab_2);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(10, 10, 371, 121));
+        groupBox_3->setGeometry(QRect(10, 10, 481, 121));
         layoutWidget1 = new QWidget(groupBox_3);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(20, 30, 222, 76));
+        layoutWidget1->setGeometry(QRect(150, 30, 222, 76));
         horizontalLayout = new QHBoxLayout(layoutWidget1);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -247,10 +257,10 @@ public:
 
         groupBox_4 = new QGroupBox(tab_2);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
-        groupBox_4->setGeometry(QRect(10, 150, 371, 91));
+        groupBox_4->setGeometry(QRect(10, 150, 481, 91));
         horizontalSlider = new QSlider(groupBox_4);
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setGeometry(QRect(20, 40, 161, 31));
+        horizontalSlider->setGeometry(QRect(20, 40, 211, 31));
         horizontalSlider->setMaximum(360);
         horizontalSlider->setValue(360);
         horizontalSlider->setOrientation(Qt::Horizontal);
@@ -259,7 +269,7 @@ public:
         label_2->setGeometry(QRect(30, 30, 141, 16));
         layoutWidget2 = new QWidget(groupBox_4);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(230, 40, 128, 25));
+        layoutWidget2->setGeometry(QRect(310, 40, 128, 25));
         horizontalLayout_4 = new QHBoxLayout(layoutWidget2);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -280,13 +290,13 @@ public:
         tab_3->setObjectName(QStringLiteral("tab_3"));
         pushButton = new QPushButton(tab_3);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(120, 20, 131, 61));
+        pushButton->setGeometry(QRect(210, 30, 131, 61));
         lineEdit_2 = new QLineEdit(tab_3);
         lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(30, 130, 251, 22));
+        lineEdit_2->setGeometry(QRect(30, 130, 351, 22));
         pushButton_3 = new QPushButton(tab_3);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(300, 130, 80, 22));
+        pushButton_3->setGeometry(QRect(410, 130, 80, 22));
         label_5 = new QLabel(tab_3);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(30, 110, 81, 16));
@@ -295,7 +305,7 @@ public:
         tab_4->setObjectName(QStringLiteral("tab_4"));
         groupBox_5 = new QGroupBox(tab_4);
         groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
-        groupBox_5->setGeometry(QRect(10, 10, 371, 121));
+        groupBox_5->setGeometry(QRect(10, 10, 481, 121));
         radioButton_9 = new QRadioButton(groupBox_5);
         radioButton_9->setObjectName(QStringLiteral("radioButton_9"));
         radioButton_9->setGeometry(QRect(120, 30, 111, 20));
@@ -311,7 +321,7 @@ public:
         label_6->setGeometry(QRect(30, 60, 81, 16));
         groupBox_6 = new QGroupBox(tab_4);
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
-        groupBox_6->setGeometry(QRect(10, 150, 371, 91));
+        groupBox_6->setGeometry(QRect(10, 150, 481, 91));
         horizontalSlider_2 = new QSlider(groupBox_6);
         horizontalSlider_2->setObjectName(QStringLiteral("horizontalSlider_2"));
         horizontalSlider_2->setGeometry(QRect(210, 30, 160, 16));
@@ -336,32 +346,35 @@ public:
         tab_5->setObjectName(QStringLiteral("tab_5"));
         groupBox_8 = new QGroupBox(tab_5);
         groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
-        groupBox_8->setGeometry(QRect(30, 170, 421, 71));
+        groupBox_8->setGeometry(QRect(30, 170, 461, 71));
         radioButton_10 = new QRadioButton(groupBox_8);
         radioButton_10->setObjectName(QStringLiteral("radioButton_10"));
-        radioButton_10->setGeometry(QRect(40, 30, 100, 20));
+        radioButton_10->setGeometry(QRect(20, 30, 51, 20));
         radioButton_10->setChecked(true);
         radioButton_11 = new QRadioButton(groupBox_8);
         radioButton_11->setObjectName(QStringLiteral("radioButton_11"));
-        radioButton_11->setGeometry(QRect(140, 30, 100, 20));
+        radioButton_11->setGeometry(QRect(90, 30, 91, 20));
         radioButton_12 = new QRadioButton(groupBox_8);
         radioButton_12->setObjectName(QStringLiteral("radioButton_12"));
-        radioButton_12->setGeometry(QRect(270, 30, 100, 20));
+        radioButton_12->setGeometry(QRect(320, 30, 100, 20));
+        radioButton_13 = new QRadioButton(groupBox_8);
+        radioButton_13->setObjectName(QStringLiteral("radioButton_13"));
+        radioButton_13->setGeometry(QRect(200, 30, 100, 20));
         groupBox_9 = new QGroupBox(tab_5);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
-        groupBox_9->setGeometry(QRect(30, 10, 421, 61));
+        groupBox_9->setGeometry(QRect(30, 10, 461, 61));
         checkBox_8 = new QCheckBox(groupBox_9);
         checkBox_8->setObjectName(QStringLiteral("checkBox_8"));
         checkBox_8->setGeometry(QRect(130, 30, 171, 20));
         groupBox_7 = new QGroupBox(tab_5);
         groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
-        groupBox_7->setGeometry(QRect(30, 260, 421, 111));
+        groupBox_7->setGeometry(QRect(30, 260, 461, 111));
         checkBox_12 = new QCheckBox(groupBox_7);
         checkBox_12->setObjectName(QStringLiteral("checkBox_12"));
-        checkBox_12->setGeometry(QRect(20, 30, 100, 20));
+        checkBox_12->setGeometry(QRect(10, 20, 100, 20));
         layoutWidget3 = new QWidget(groupBox_7);
         layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(100, 70, 203, 25));
+        layoutWidget3->setGeometry(QRect(150, 70, 203, 25));
         horizontalLayout_10 = new QHBoxLayout(layoutWidget3);
         horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
         horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
@@ -379,7 +392,7 @@ public:
 
         layoutWidget4 = new QWidget(groupBox_7);
         layoutWidget4->setObjectName(QStringLiteral("layoutWidget4"));
-        layoutWidget4->setGeometry(QRect(20, 50, 364, 19));
+        layoutWidget4->setGeometry(QRect(60, 50, 364, 19));
         horizontalLayout_11 = new QHBoxLayout(layoutWidget4);
         horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
         horizontalLayout_11->setContentsMargins(0, 0, 0, 0);
@@ -424,13 +437,13 @@ public:
         checkBox_12->raise();
         groupBox_10 = new QGroupBox(tab_5);
         groupBox_10->setObjectName(QStringLiteral("groupBox_10"));
-        groupBox_10->setGeometry(QRect(30, 380, 421, 81));
+        groupBox_10->setGeometry(QRect(30, 380, 461, 81));
         checkBox_13 = new QCheckBox(groupBox_10);
         checkBox_13->setObjectName(QStringLiteral("checkBox_13"));
-        checkBox_13->setGeometry(QRect(10, 30, 121, 20));
+        checkBox_13->setGeometry(QRect(10, 20, 121, 20));
         layoutWidget5 = new QWidget(groupBox_10);
         layoutWidget5->setObjectName(QStringLiteral("layoutWidget5"));
-        layoutWidget5->setGeometry(QRect(10, 50, 364, 19));
+        layoutWidget5->setGeometry(QRect(50, 50, 364, 19));
         horizontalLayout_5 = new QHBoxLayout(layoutWidget5);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -472,7 +485,7 @@ public:
 
         groupBox_11 = new QGroupBox(tab_5);
         groupBox_11->setObjectName(QStringLiteral("groupBox_11"));
-        groupBox_11->setGeometry(QRect(30, 80, 421, 80));
+        groupBox_11->setGeometry(QRect(30, 80, 461, 80));
         checkBox_6 = new QCheckBox(groupBox_11);
         checkBox_6->setObjectName(QStringLiteral("checkBox_6"));
         checkBox_6->setGeometry(QRect(80, 30, 61, 20));
@@ -482,61 +495,39 @@ public:
         tabWidget->addTab(tab_5, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QStringLiteral("tab_6"));
-        radioButton_14 = new QRadioButton(tab_6);
-        radioButton_14->setObjectName(QStringLiteral("radioButton_14"));
-        radioButton_14->setGeometry(QRect(70, 30, 100, 20));
-        radioButton_14->setChecked(true);
-        spinBox_2 = new QSpinBox(tab_6);
-        spinBox_2->setObjectName(QStringLiteral("spinBox_2"));
-        spinBox_2->setGeometry(QRect(380, 30, 47, 23));
-        spinBox_2->setMinimum(1);
-        spinBox_2->setMaximum(100);
-        spinBox_2->setValue(1);
-        label_17 = new QLabel(tab_6);
-        label_17->setObjectName(QStringLiteral("label_17"));
-        label_17->setGeometry(QRect(240, 30, 131, 20));
-        groupBox_12 = new QGroupBox(tab_6);
-        groupBox_12->setObjectName(QStringLiteral("groupBox_12"));
-        groupBox_12->setGeometry(QRect(40, 440, 421, 41));
-        checkBox_9 = new QCheckBox(groupBox_12);
-        checkBox_9->setObjectName(QStringLiteral("checkBox_9"));
-        checkBox_9->setGeometry(QRect(80, 20, 61, 20));
-        checkBox_10 = new QCheckBox(groupBox_12);
-        checkBox_10->setObjectName(QStringLiteral("checkBox_10"));
-        checkBox_10->setGeometry(QRect(250, 20, 81, 20));
         groupBox_13 = new QGroupBox(tab_6);
         groupBox_13->setObjectName(QStringLiteral("groupBox_13"));
-        groupBox_13->setGeometry(QRect(40, 390, 421, 41));
+        groupBox_13->setGeometry(QRect(30, 430, 461, 61));
         checkBox_11 = new QCheckBox(groupBox_13);
         checkBox_11->setObjectName(QStringLiteral("checkBox_11"));
-        checkBox_11->setGeometry(QRect(160, 20, 85, 20));
+        checkBox_11->setGeometry(QRect(190, 30, 85, 20));
         groupBox_14 = new QGroupBox(tab_6);
         groupBox_14->setObjectName(QStringLiteral("groupBox_14"));
-        groupBox_14->setGeometry(QRect(30, 60, 431, 71));
-        widget = new QWidget(groupBox_14);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(100, 30, 222, 25));
-        horizontalLayout_16 = new QHBoxLayout(widget);
+        groupBox_14->setGeometry(QRect(30, 110, 461, 71));
+        layoutWidget6 = new QWidget(groupBox_14);
+        layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
+        layoutWidget6->setGeometry(QRect(120, 30, 291, 25));
+        horizontalLayout_16 = new QHBoxLayout(layoutWidget6);
         horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
         horizontalLayout_16->setContentsMargins(0, 0, 0, 0);
-        label_22 = new QLabel(widget);
+        label_22 = new QLabel(layoutWidget6);
         label_22->setObjectName(QStringLiteral("label_22"));
 
         horizontalLayout_16->addWidget(label_22);
 
-        doubleSpinBox = new QDoubleSpinBox(widget);
+        doubleSpinBox = new QDoubleSpinBox(layoutWidget6);
         doubleSpinBox->setObjectName(QStringLiteral("doubleSpinBox"));
         doubleSpinBox->setSingleStep(0.1);
         doubleSpinBox->setValue(1);
 
         horizontalLayout_16->addWidget(doubleSpinBox);
 
-        label_23 = new QLabel(widget);
+        label_23 = new QLabel(layoutWidget6);
         label_23->setObjectName(QStringLiteral("label_23"));
 
         horizontalLayout_16->addWidget(label_23);
 
-        doubleSpinBox_7 = new QDoubleSpinBox(widget);
+        doubleSpinBox_7 = new QDoubleSpinBox(layoutWidget6);
         doubleSpinBox_7->setObjectName(QStringLiteral("doubleSpinBox_7"));
         doubleSpinBox_7->setMinimum(1);
         doubleSpinBox_7->setSingleStep(0.1);
@@ -546,33 +537,33 @@ public:
 
         groupBox_15 = new QGroupBox(tab_6);
         groupBox_15->setObjectName(QStringLiteral("groupBox_15"));
-        groupBox_15->setGeometry(QRect(30, 140, 431, 101));
-        widget1 = new QWidget(groupBox_15);
-        widget1->setObjectName(QStringLiteral("widget1"));
-        widget1->setGeometry(QRect(90, 30, 237, 58));
-        verticalLayout_3 = new QVBoxLayout(widget1);
+        groupBox_15->setGeometry(QRect(30, 190, 461, 101));
+        layoutWidget7 = new QWidget(groupBox_15);
+        layoutWidget7->setObjectName(QStringLiteral("layoutWidget7"));
+        layoutWidget7->setGeometry(QRect(110, 30, 237, 58));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget7);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
-        label_11 = new QLabel(widget1);
+        label_11 = new QLabel(layoutWidget7);
         label_11->setObjectName(QStringLiteral("label_11"));
 
         horizontalLayout_13->addWidget(label_11);
 
-        doubleSpinBox_3 = new QDoubleSpinBox(widget1);
+        doubleSpinBox_3 = new QDoubleSpinBox(layoutWidget7);
         doubleSpinBox_3->setObjectName(QStringLiteral("doubleSpinBox_3"));
         doubleSpinBox_3->setMaximum(1);
         doubleSpinBox_3->setSingleStep(0.05);
 
         horizontalLayout_13->addWidget(doubleSpinBox_3);
 
-        label_13 = new QLabel(widget1);
+        label_13 = new QLabel(layoutWidget7);
         label_13->setObjectName(QStringLiteral("label_13"));
 
         horizontalLayout_13->addWidget(label_13);
 
-        doubleSpinBox_5 = new QDoubleSpinBox(widget1);
+        doubleSpinBox_5 = new QDoubleSpinBox(layoutWidget7);
         doubleSpinBox_5->setObjectName(QStringLiteral("doubleSpinBox_5"));
         doubleSpinBox_5->setMaximum(1);
         doubleSpinBox_5->setSingleStep(0.05);
@@ -584,24 +575,24 @@ public:
 
         horizontalLayout_12 = new QHBoxLayout();
         horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
-        label_10 = new QLabel(widget1);
+        label_10 = new QLabel(layoutWidget7);
         label_10->setObjectName(QStringLiteral("label_10"));
 
         horizontalLayout_12->addWidget(label_10);
 
-        doubleSpinBox_2 = new QDoubleSpinBox(widget1);
+        doubleSpinBox_2 = new QDoubleSpinBox(layoutWidget7);
         doubleSpinBox_2->setObjectName(QStringLiteral("doubleSpinBox_2"));
         doubleSpinBox_2->setMaximum(1);
         doubleSpinBox_2->setSingleStep(0.05);
 
         horizontalLayout_12->addWidget(doubleSpinBox_2);
 
-        label_12 = new QLabel(widget1);
+        label_12 = new QLabel(layoutWidget7);
         label_12->setObjectName(QStringLiteral("label_12"));
 
         horizontalLayout_12->addWidget(label_12);
 
-        doubleSpinBox_4 = new QDoubleSpinBox(widget1);
+        doubleSpinBox_4 = new QDoubleSpinBox(layoutWidget7);
         doubleSpinBox_4->setObjectName(QStringLiteral("doubleSpinBox_4"));
         doubleSpinBox_4->setMaximum(1);
         doubleSpinBox_4->setSingleStep(0.05);
@@ -611,53 +602,48 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_12);
 
-        doubleSpinBox_5->raise();
-        label_11->raise();
-        doubleSpinBox_3->raise();
-        doubleSpinBox_4->raise();
-        label_12->raise();
-        label_10->raise();
-        label_13->raise();
-        doubleSpinBox_2->raise();
-        label_10->raise();
-        label_11->raise();
-        doubleSpinBox_3->raise();
-        doubleSpinBox_2->raise();
-        label_12->raise();
-        doubleSpinBox_5->raise();
-        doubleSpinBox_4->raise();
-        label_13->raise();
         groupBox_16 = new QGroupBox(tab_6);
         groupBox_16->setObjectName(QStringLiteral("groupBox_16"));
-        groupBox_16->setGeometry(QRect(30, 260, 431, 121));
+        groupBox_16->setGeometry(QRect(30, 300, 461, 121));
         label_9 = new QLabel(groupBox_16);
         label_9->setObjectName(QStringLiteral("label_9"));
         label_9->setGeometry(QRect(50, 20, 341, 16));
-        widget2 = new QWidget(groupBox_16);
-        widget2->setObjectName(QStringLiteral("widget2"));
-        widget2->setGeometry(QRect(80, 50, 252, 58));
-        verticalLayout_4 = new QVBoxLayout(widget2);
+        spinBox_2 = new QSpinBox(groupBox_16);
+        spinBox_2->setObjectName(QStringLiteral("spinBox_2"));
+        spinBox_2->setGeometry(QRect(330, 70, 47, 23));
+        spinBox_2->setMinimum(1);
+        spinBox_2->setMaximum(100);
+        spinBox_2->setValue(1);
+        label_17 = new QLabel(groupBox_16);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setGeometry(QRect(290, 50, 131, 20));
+        layoutWidget8 = new QWidget(groupBox_16);
+        layoutWidget8->setObjectName(QStringLiteral("layoutWidget8"));
+        layoutWidget8->setGeometry(QRect(20, 50, 252, 58));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget8);
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_14 = new QHBoxLayout();
         horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
-        label_19 = new QLabel(widget2);
+        label_19 = new QLabel(layoutWidget8);
         label_19->setObjectName(QStringLiteral("label_19"));
 
         horizontalLayout_14->addWidget(label_19);
 
-        spinBox_4 = new QSpinBox(widget2);
+        spinBox_4 = new QSpinBox(layoutWidget8);
         spinBox_4->setObjectName(QStringLiteral("spinBox_4"));
+        spinBox_4->setMaximum(1);
 
         horizontalLayout_14->addWidget(spinBox_4);
 
-        label_21 = new QLabel(widget2);
+        label_21 = new QLabel(layoutWidget8);
         label_21->setObjectName(QStringLiteral("label_21"));
 
         horizontalLayout_14->addWidget(label_21);
 
-        spinBox_6 = new QSpinBox(widget2);
+        spinBox_6 = new QSpinBox(layoutWidget8);
         spinBox_6->setObjectName(QStringLiteral("spinBox_6"));
+        spinBox_6->setMaximum(1);
 
         horizontalLayout_14->addWidget(spinBox_6);
 
@@ -666,56 +652,98 @@ public:
 
         horizontalLayout_15 = new QHBoxLayout();
         horizontalLayout_15->setObjectName(QStringLiteral("horizontalLayout_15"));
-        label_20 = new QLabel(widget2);
+        label_20 = new QLabel(layoutWidget8);
         label_20->setObjectName(QStringLiteral("label_20"));
 
         horizontalLayout_15->addWidget(label_20);
 
-        spinBox_5 = new QSpinBox(widget2);
+        spinBox_5 = new QSpinBox(layoutWidget8);
         spinBox_5->setObjectName(QStringLiteral("spinBox_5"));
+        spinBox_5->setMaximum(1);
 
         horizontalLayout_15->addWidget(spinBox_5);
 
-        label_18 = new QLabel(widget2);
+        label_18 = new QLabel(layoutWidget8);
         label_18->setObjectName(QStringLiteral("label_18"));
 
         horizontalLayout_15->addWidget(label_18);
 
-        spinBox_3 = new QSpinBox(widget2);
+        spinBox_3 = new QSpinBox(layoutWidget8);
         spinBox_3->setObjectName(QStringLiteral("spinBox_3"));
+        spinBox_3->setMaximum(1);
 
         horizontalLayout_15->addWidget(spinBox_3);
 
 
         verticalLayout_4->addLayout(horizontalLayout_15);
 
+        groupBox_12 = new QGroupBox(tab_6);
+        groupBox_12->setObjectName(QStringLiteral("groupBox_12"));
+        groupBox_12->setGeometry(QRect(30, 50, 461, 51));
+        radioButton_14 = new QRadioButton(groupBox_12);
+        radioButton_14->setObjectName(QStringLiteral("radioButton_14"));
+        radioButton_14->setGeometry(QRect(190, 20, 100, 31));
+        radioButton_14->setChecked(true);
+        lineEdit_3 = new QLineEdit(tab_6);
+        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
+        lineEdit_3->setGeometry(QRect(30, 20, 231, 22));
+        pushButton_4 = new QPushButton(tab_6);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(270, 20, 111, 21));
+        pushButton_5 = new QPushButton(tab_6);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setGeometry(QRect(390, 20, 101, 22));
         tabWidget->addTab(tab_6, QString());
+        tab_7 = new QWidget();
+        tab_7->setObjectName(QStringLiteral("tab_7"));
+        groupBox_17 = new QGroupBox(tab_7);
+        groupBox_17->setObjectName(QStringLiteral("groupBox_17"));
+        groupBox_17->setGeometry(QRect(10, 110, 501, 80));
+        checkBox_9 = new QCheckBox(groupBox_17);
+        checkBox_9->setObjectName(QStringLiteral("checkBox_9"));
+        checkBox_9->setGeometry(QRect(180, 40, 85, 20));
+        groupBox_18 = new QGroupBox(tab_7);
+        groupBox_18->setObjectName(QStringLiteral("groupBox_18"));
+        groupBox_18->setGeometry(QRect(10, 10, 501, 91));
+        label_24 = new QLabel(groupBox_18);
+        label_24->setObjectName(QStringLiteral("label_24"));
+        label_24->setGeometry(QRect(40, 30, 101, 16));
+        lineEdit_4 = new QLineEdit(groupBox_18);
+        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
+        lineEdit_4->setGeometry(QRect(10, 50, 261, 22));
+        pushButton_6 = new QPushButton(groupBox_18);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+        pushButton_6->setGeometry(QRect(380, 50, 111, 21));
+        pushButton_7 = new QPushButton(groupBox_18);
+        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
+        pushButton_7->setGeometry(QRect(290, 50, 80, 22));
+        tabWidget->addTab(tab_7, QString());
         groupBox = new QGroupBox(Interfaz);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(11, 550, 491, 71));
-        layoutWidget6 = new QWidget(groupBox);
-        layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
-        layoutWidget6->setGeometry(QRect(40, 30, 291, 31));
-        horizontalLayout_2 = new QHBoxLayout(layoutWidget6);
+        groupBox->setGeometry(QRect(11, 550, 531, 71));
+        layoutWidget9 = new QWidget(groupBox);
+        layoutWidget9->setObjectName(QStringLiteral("layoutWidget9"));
+        layoutWidget9->setGeometry(QRect(110, 30, 291, 31));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget9);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        checkBox = new QCheckBox(layoutWidget6);
+        checkBox = new QCheckBox(layoutWidget9);
         checkBox->setObjectName(QStringLiteral("checkBox"));
         checkBox->setChecked(true);
 
         horizontalLayout_2->addWidget(checkBox);
 
-        checkBox_2 = new QCheckBox(layoutWidget6);
+        checkBox_2 = new QCheckBox(layoutWidget9);
         checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
 
         horizontalLayout_2->addWidget(checkBox_2);
 
-        checkBox_3 = new QCheckBox(layoutWidget6);
+        checkBox_3 = new QCheckBox(layoutWidget9);
         checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
 
         horizontalLayout_2->addWidget(checkBox_3);
 
-        checkBox_4 = new QCheckBox(layoutWidget6);
+        checkBox_4 = new QCheckBox(layoutWidget9);
         checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
 
         horizontalLayout_2->addWidget(checkBox_4);
@@ -725,7 +753,7 @@ public:
 
         retranslateUi(Interfaz);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Interfaz);
@@ -766,6 +794,7 @@ public:
         radioButton_10->setText(QApplication::translate("Interfaz", "Oro", 0));
         radioButton_11->setText(QApplication::translate("Interfaz", "Esmeralda", 0));
         radioButton_12->setText(QApplication::translate("Interfaz", "Sin material", 0));
+        radioButton_13->setText(QApplication::translate("Interfaz", "Goma Roja", 0));
         groupBox_9->setTitle(QApplication::translate("Interfaz", "Luz", 0));
         checkBox_8->setText(QApplication::translate("Interfaz", "Habilitar iluminacion", 0));
         groupBox_7->setTitle(QApplication::translate("Interfaz", "Posicion Luz Posicional", 0));
@@ -781,11 +810,6 @@ public:
         checkBox_6->setText(QApplication::translate("Interfaz", "Flat", 0));
         checkBox_7->setText(QApplication::translate("Interfaz", "Smooth", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("Interfaz", "Iluminacion", 0));
-        radioButton_14->setText(QApplication::translate("Interfaz", "Marco", 0));
-        label_17->setText(QApplication::translate("Interfaz", "Numero de divisiones", 0));
-        groupBox_12->setTitle(QApplication::translate("Interfaz", "Modo de Sombreado", 0));
-        checkBox_9->setText(QApplication::translate("Interfaz", "Flat", 0));
-        checkBox_10->setText(QApplication::translate("Interfaz", "Smooth", 0));
         groupBox_13->setTitle(QApplication::translate("Interfaz", "Iluminaci\303\263n", 0));
         checkBox_11->setText(QApplication::translate("Interfaz", "Activada", 0));
         groupBox_14->setTitle(QApplication::translate("Interfaz", "Tama\303\261o de Marco", 0));
@@ -799,11 +823,23 @@ public:
         label_12->setText(QApplication::translate("Interfaz", "Y_min :", 0));
         groupBox_16->setTitle(QApplication::translate("Interfaz", "Porci\303\263n de Marco", 0));
         label_9->setText(QApplication::translate("Interfaz", "Las coordenadas deben estar en el rango (0,0) (N,N)", 0));
+        label_17->setText(QApplication::translate("Interfaz", "Numero de divisiones", 0));
         label_19->setText(QApplication::translate("Interfaz", "Fila_max", 0));
         label_21->setText(QApplication::translate("Interfaz", "Columna_min", 0));
         label_20->setText(QApplication::translate("Interfaz", "Fila_min", 0));
         label_18->setText(QApplication::translate("Interfaz", "Columna_min", 0));
+        groupBox_12->setTitle(QApplication::translate("Interfaz", "Objeto", 0));
+        radioButton_14->setText(QApplication::translate("Interfaz", "Marco", 0));
+        pushButton_4->setText(QApplication::translate("Interfaz", "Buscar Textura", 0));
+        pushButton_5->setText(QApplication::translate("Interfaz", "Cargar Textura", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("Interfaz", "Texturas", 0));
+        groupBox_17->setTitle(QApplication::translate("Interfaz", "Iluminacion", 0));
+        checkBox_9->setText(QApplication::translate("Interfaz", "Activar", 0));
+        groupBox_18->setTitle(QApplication::translate("Interfaz", "Carga de Textura", 0));
+        label_24->setText(QApplication::translate("Interfaz", "Path de tierra", 0));
+        pushButton_6->setText(QApplication::translate("Interfaz", "Cargar Tierra", 0));
+        pushButton_7->setText(QApplication::translate("Interfaz", "Buscar", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("Interfaz", "Tierra", 0));
         groupBox->setTitle(QApplication::translate("Interfaz", "Modo de Dibujo:", 0));
         checkBox->setText(QApplication::translate("Interfaz", "Puntos", 0));
         checkBox_2->setText(QApplication::translate("Interfaz", "Lineas", 0));

@@ -64,10 +64,10 @@ void O3D::calcularNormalesCaras()
         _vertex3f a = vertices[triangles[i]._0];
         _vertex3f b = vertices[triangles[i]._1];
         _vertex3f c = vertices[triangles[i]._2];
-      //  cout << a.x << ", " << a.y << ", " << a.z << endl;
-      //   cout << b.x << ", " << b.y << ", " << b.z << endl;
-      //    cout << c.x << ", " << c.y << ", " << c.z << endl;
-      //    cout << endl;
+        //cout << a.x << ", " << a.y << ", " << a.z << endl;
+        // cout << b.x << ", " << b.y << ", " << b.z << endl;
+        //  cout << c.x << ", " << c.y << ", " << c.z << endl;
+        //  cout << endl;
         _vertex3f r1 = c-b;
         _vertex3f r2 = a-b;
      //   cout << r1.x << ", " << r1.y << ", " << r1.z << endl;
