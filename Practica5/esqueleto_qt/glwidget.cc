@@ -83,8 +83,55 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       case Qt::Key_PageUp:Observer_distance*=1.2;break;
       case Qt::Key_PageDown:Observer_distance/=1.2;break;
       case Qt::Key_0: interfaz->raise();break;
+      case Qt::Key_7 : camara1.zoom_orto = camara1.zoom_orto-0.5;break;
+      case Qt::Key_8 : camara1.zoom_orto = camara1.zoom_orto+0.5;break;
     }
+    camara1.setObserver_angle_x(Observer_angle_x);
+    camara1.setObserver_angle_y(Observer_angle_y);
+    camara1.setObserver_distance(Observer_distance);
     update();
+}
+
+void _gl_widget::mouseMoveEvent(QMouseEvent *Mouseevent)
+{
+    if(Mouseevent->buttons() == Qt::LeftButton){
+        //cout << Mouseevent->localPos().x() << " " << Mouseevent->localPos().y() << endl;
+       // if(Mouseevent->localPos().x() > origen_raton_x){
+        //    cout << "positivo";
+       // Observer_angle_y+=ANGLE_STEP;
+       // }
+       // else Observer_angle_y-=ANGLE_STEP;
+
+        /*
+        if(Mouseevent->localPos().y()>origen_raton_y)
+            Observer_angle_x+=ANGLE_STEP;
+        else Observer_angle_x-=ANGLE_STEP;
+        */
+
+        Observer_angle_y += (Mouseevent->localPos().x()-x_ant);
+        Observer_angle_x += (Mouseevent->localPos().y()-y_ant);
+        x_ant=Mouseevent->localPos().x();
+        y_ant=Mouseevent->localPos().y();
+
+    }
+    camara1.setObserver_angle_x(Observer_angle_x);
+    camara1.setObserver_angle_y(Observer_angle_y);
+    camara1.setObserver_distance(Observer_distance);
+    Mouseevent->accept();
+    update();
+}
+
+void _gl_widget::mousePressEvent(QMouseEvent *Mouseevent)
+{
+    x_ant = Mouseevent->localPos().x();
+     y_ant = Mouseevent->localPos().y();
+
+   /* if(Mouseevent->buttons() == Qt::LeftButton){
+        origen_raton_x = Mouseevent->pos().x();
+        origen_raton_y = Mouseevent->pos().y();
+    }
+            */
+    Mouseevent->accept();
 }
 
 //**************************************************************************
@@ -103,12 +150,14 @@ void _gl_widget::clear_window()
 
 void _gl_widget::change_projection()
 {
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
+  //glMatrixMode(GL_PROJECTION);
+  //glLoadIdentity();
 
   float relacion_aspecto = (this->size().width()*1.0)/(this->size().height()*1.0);
+  camara1.setRelacion_de_aspecto(relacion_aspecto);
+  camara1.change_projection();
 
-  glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+  //glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
 }
 
 //**************************************************************************
@@ -118,11 +167,14 @@ void _gl_widget::change_projection()
 void _gl_widget::change_observer()
 {
   // posicion del observador
-  glMatrixMode(GL_MODELVIEW);
+  camara1.change_observer();
+    /*
+    glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glTranslatef(0,0,-Observer_distance);
   glRotatef(Observer_angle_x,1,0,0);
   glRotatef(Observer_angle_y,0,1,0);
+*/
 }
 
 //**************************************************************************
@@ -325,6 +377,18 @@ void _gl_widget::animar()
 
 void _gl_widget::updateInterfaz()
 {
+
+    // PRACTICA 5
+    //modo_proyeccion = interfaz->getModoProyeccion();
+    //camara_seleccionada = interfaz->getCamaraSeleccionada();
+
+
+
+    //
+
+
+
+
 
     // Figura que va a pintarse
     int figura = interfaz->getFigura();
@@ -574,5 +638,8 @@ void _gl_widget::initializeGL()
   Observer_angle_x=0;
   Observer_angle_y=0;
   Observer_distance=DEFAULT_DISTANCE;
+
+  x_ant = this->width()/2;
+  y_ant = this->height()/2;
 }
 

@@ -25,7 +25,8 @@ HEADERS += \
     material.h \
     luz.h \
     marco.h \
-    esferatexturizada.h
+    esferatexturizada.h \
+    camara.h
 
 SOURCES += \
   main.cc \
@@ -55,7 +56,8 @@ SOURCES += \
     material.cpp \
     luz.cpp \
     marco.cpp \
-    esferatexturizada.cpp
+    esferatexturizada.cpp \
+    camara.cpp
 
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 

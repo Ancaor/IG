@@ -36,6 +36,7 @@
 #include "luz.h"
 #include "marco.h"
 #include "esferatexturizada.h"
+#include "camara.h"
 
 namespace _gl_widget_ne {
 
@@ -142,6 +143,16 @@ public:
   bool modotextura=false;
 
 
+  //PRACTICA 5
+
+  bool modo_proyeccion=1;
+  int camara_seleccionada = 1;
+
+  int x_ant;
+  int y_ant;
+
+
+
   _gl_widget(_window *Window1,Interfaz *interfaz);
 
   void clear_window();
@@ -166,11 +177,15 @@ protected:
   void paintGL() Q_DECL_OVERRIDE;
   void initializeGL() Q_DECL_OVERRIDE;
   void keyPressEvent(QKeyEvent *Keyevent) Q_DECL_OVERRIDE;
+  void mouseMoveEvent(QMouseEvent *Mouseevent) Q_DECL_OVERRIDE;
+  void mousePressEvent(QMouseEvent *Mouseevent) Q_DECL_OVERRIDE;
 
 
 private:
   _window *Window;
   Interfaz *interfaz;
+
+  Camara camara1 = Camara(_gl_widget_ne::X_MIN,_gl_widget_ne::X_MAX,_gl_widget_ne::Y_MIN,_gl_widget_ne::Y_MAX,_gl_widget_ne::BACK_PLANE_PERSPECTIVE,_gl_widget_ne::DEFAULT_DISTANCE,_gl_widget_ne::ANGLE_STEP,0);
 
   QTimer *timer;
   QTimer *timer_interfaz;

@@ -68,6 +68,11 @@ public:
 
     bool getModoText();
 
+    //Practica 5
+
+    int getCamaraSeleccionada();
+    bool getModoProyeccion();
+
 private slots:
     void on_tabWidget_tabBarClicked(int index);
 
@@ -197,6 +202,16 @@ private slots:
 
     void on_checkBox_10_clicked(bool checked);
 
+    void on_radioButton_15_clicked();
+
+    void on_radioButton_16_clicked();
+
+    void on_radioButton_17_clicked();
+
+    void on_radioButton_18_clicked();
+
+    void on_radioButton_19_clicked();
+
 public slots:
     void raise_dialog();
 
@@ -273,14 +288,11 @@ private:
 
 
 
-    /*
-     *
+    // PRACTICA 5
 
-    float x_min_text = 0.0;
-    float y_min_text = 0.0;
-    float x_max_text = 0.0;
-    float x_max_text = 0.0;
-    */
+    int camara_selec = 1;   // 1 / 2 / 3
+    bool modo_proyeccion = 1;  // 1: perspectiva , 0: ortogonal
+
 };
 
 #endif // INTERFAZ_H

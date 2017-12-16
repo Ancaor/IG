@@ -222,6 +222,11 @@ bool Interfaz::getModoText()
     return modotext;
 }
 
+int Interfaz::getCamaraSeleccionada()
+{
+    return camara_selec;
+}
+
 int Interfaz::getAnguloLuzInfinito()
 {
     return angulo_luz_infinito;
@@ -719,4 +724,29 @@ void Interfaz::on_pushButton_9_clicked()
 void Interfaz::on_checkBox_10_clicked(bool checked)
 {
     modotext = checked;
+}
+
+void Interfaz::on_radioButton_15_clicked()
+{
+    camara_selec = 1;
+}
+
+void Interfaz::on_radioButton_16_clicked()
+{
+    camara_selec = 2;
+}
+
+void Interfaz::on_radioButton_17_clicked()
+{
+    camara_selec = 3;
+}
+
+void Interfaz::on_radioButton_18_clicked()
+{
+    modo_proyeccion = 0;
+}
+
+void Interfaz::on_radioButton_19_clicked()
+{
+    modo_proyeccion = 1;
 }

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
+    <width>640</width>
     <height>650</height>
    </rect>
   </property>
@@ -18,12 +18,12 @@
     <rect>
      <x>11</x>
      <y>11</y>
-     <width>531</width>
+     <width>611</width>
      <height>531</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>7</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -1277,6 +1277,102 @@
       </property>
       <property name="text">
        <string>Buscar</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_8">
+    <attribute name="title">
+     <string>Camaras</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_19">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>551</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Selección de Camara</string>
+     </property>
+     <widget class="QRadioButton" name="radioButton_15">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>40</y>
+        <width>100</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Camara 1</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_16">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>40</y>
+        <width>100</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Camara 2</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_17">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>40</y>
+        <width>100</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Camara 3</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_20">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>110</y>
+       <width>551</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Tipo de Proyección</string>
+     </property>
+     <widget class="QRadioButton" name="radioButton_18">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>40</y>
+        <width>100</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ortogonal</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_19">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>40</y>
+        <width>100</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Perspectiva</string>
       </property>
      </widget>
     </widget>
