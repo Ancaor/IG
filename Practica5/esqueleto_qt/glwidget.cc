@@ -14,6 +14,7 @@
 #include <QOpenGLTexture>
 #include <QCoreApplication>
 #include <math.h>
+#include "GL/glu.h"
 
 
 #include "window.h"
@@ -116,7 +117,7 @@ void _gl_widget::mouseMoveEvent(QMouseEvent *Mouseevent)
     }
     camara1.setObserver_angle_x(Observer_angle_x);
     camara1.setObserver_angle_y(Observer_angle_y);
-    camara1.setObserver_distance(Observer_distance);
+
     Mouseevent->accept();
     update();
 }
@@ -124,15 +125,82 @@ void _gl_widget::mouseMoveEvent(QMouseEvent *Mouseevent)
 void _gl_widget::mousePressEvent(QMouseEvent *Mouseevent)
 {
     x_ant = Mouseevent->localPos().x();
-     y_ant = Mouseevent->localPos().y();
+    y_ant = Mouseevent->localPos().y();
 
-   /* if(Mouseevent->buttons() == Qt::LeftButton){
-        origen_raton_x = Mouseevent->pos().x();
-        origen_raton_y = Mouseevent->pos().y();
+    if(Mouseevent->buttons() == Qt::RightButton){
+        pick(x_ant,y_ant,3,3);
     }
-            */
-    Mouseevent->accept();
+
+
+     Mouseevent->accept();
 }
+
+void _gl_widget::wheelEvent(QWheelEvent *event)
+{
+    if(event->delta()>0)
+    Observer_distance += 1;
+    else Observer_distance -= 1;
+
+
+    camara1.setObserver_distance(Observer_distance);
+    update();
+}
+
+
+void _gl_widget::pick(unsigned int x, unsigned int y, unsigned int Width, unsigned int Height)
+{
+  GLuint Selection_buffer[100];
+  GLint Hits, Viewport[4];
+
+  glGetIntegerv (GL_VIEWPORT, Viewport);
+  glSelectBuffer (100, Selection_buffer);
+  glRenderMode (GL_SELECT);
+  glInitNames();
+glPushName(0);
+  glMatrixMode (GL_PROJECTION);
+  glLoadIdentity ();
+ // gluPickMatrix(x, Viewport[3] - y, Width, Height, Viewport);
+    gluPickMatrix(x,Viewport[3]-y,Width,Height,Viewport);
+//glFrustum(Min_x,Max_y,Min_y,Max_y,Front_plane,Back_plane);
+cout << "pickeando" ;
+    clear_window();
+    change_projection();
+    change_observer();
+   // glPushName(1);
+    draw_objects();
+
+  /*
+  Draw(){
+    Limpiar_ventana();
+    Cambiar_proyeccion(); // PROJECTION
+    Cambiar_observador(); // MODELVIEW
+    Dibujar_escena();
+  }
+  */
+  Hits = glRenderMode (GL_RENDER);
+if (Hits>0){
+  // Obtener información de la selección y marcar el objeto seleccionado
+    cout << Selection_buffer[0]<<endl;
+    cout << Selection_buffer[1]<<endl;
+    cout << Selection_buffer[2]<<endl;
+    cout << Selection_buffer[3]<<endl;
+    cout << Selection_buffer[4]<<endl;
+    cout << Selection_buffer[5]<<endl;
+    cout << Selection_buffer[6]<<endl;
+    cout << Selection_buffer[7]<<endl;
+    cout << Selection_buffer[8]<<endl;
+    cout << endl;
+  }
+  // volver a dibujar la escena pero teniendo en cuenta si hay algún objeto seleccionado
+clear_window();
+change_projection();
+change_observer();
+draw_objects();
+
+update();
+}
+
+
 
 //**************************************************************************
 //

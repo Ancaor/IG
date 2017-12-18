@@ -62,7 +62,7 @@ SOURCES += \
 INCLUDEPATH += /casa/dmartin/codigo/funciontecas/glew/include
 
 LIBS += -L/usr/X11R6/lib64 -lGL \
-        -L/casa/dmartin/codigo/funciontecas/glew/lib -lGLEW
+        -L/casa/dmartin/codigo/funciontecas/glew/lib -lGLEW -lGLU
 
 CONFIG += c++11
 QT += widgets

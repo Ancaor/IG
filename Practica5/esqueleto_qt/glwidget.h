@@ -166,6 +166,7 @@ public:
   QString getPathPLYs(string archivo);
   void timers();
 
+  void pick(unsigned int x, unsigned int y, unsigned int Width, unsigned int Height);
 public slots:
   void animar();
 
@@ -179,6 +180,7 @@ protected:
   void keyPressEvent(QKeyEvent *Keyevent) Q_DECL_OVERRIDE;
   void mouseMoveEvent(QMouseEvent *Mouseevent) Q_DECL_OVERRIDE;
   void mousePressEvent(QMouseEvent *Mouseevent) Q_DECL_OVERRIDE;
+  void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
 
 
 private:
