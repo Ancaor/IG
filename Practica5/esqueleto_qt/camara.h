@@ -18,6 +18,9 @@ private:
      float DEFAULT_DISTANCE=10;
      float ANGLE_STEP=1.5;
      float relacion_de_aspecto;
+     float VPN[3] = {0,0,0};
+
+
 
 
      bool tipo =0;  // 0 == Perspectiva , 1 == Ortogonal
@@ -36,7 +39,11 @@ public:
     void setObserver_distance(float d);
     void change_projection();
     void change_observer();
+    void setModoProyeccion(bool modo);
+    void changeVPN(float vpn1, float vpn2, float vpn3);
+    void changeLookAt();
     float zoom_orto=0;
+    float* getVPN();
 };
 
 #endif // CAMARA_H

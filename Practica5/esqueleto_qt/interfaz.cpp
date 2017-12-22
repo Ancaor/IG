@@ -30,6 +30,7 @@ int Interfaz::getFigura()
     case 4: return obj_textura; break;
     case 10: aux = cargar_ply; cargar_ply=0;return aux;break;
     case 11 : return tierra; break;
+    case 80 : return escena; break;
     }
     return 0;
 }
@@ -227,6 +228,11 @@ int Interfaz::getCamaraSeleccionada()
     return camara_selec;
 }
 
+bool Interfaz::getModoProyeccion()
+{
+    return modo_proyeccion;
+}
+
 int Interfaz::getAnguloLuzInfinito()
 {
     return angulo_luz_infinito;
@@ -242,6 +248,7 @@ void Interfaz::on_tabWidget_tabBarClicked(int index)
     case 3: practica=3; break;
     case 5: practica=4; break;
     case 6: practica=11; break;
+    case 8: practica =80; break;
     }
 }
 
@@ -749,4 +756,9 @@ void Interfaz::on_radioButton_18_clicked()
 void Interfaz::on_radioButton_19_clicked()
 {
     modo_proyeccion = 1;
+}
+
+void Interfaz::on_radioButton_20_clicked()
+{
+
 }

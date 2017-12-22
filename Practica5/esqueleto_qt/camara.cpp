@@ -75,17 +75,39 @@ void Camara::change_projection()
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    if(tipo==0)
+    if(tipo==1)
         glFrustum(X_MIN*relacion_de_aspecto,X_MAX*relacion_de_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
     else
-        glOrtho((X_MIN-(zoom_orto/2))*relacion_de_aspecto,(X_MAX+(zoom_orto/2))*relacion_de_aspecto,Y_MIN-(zoom_orto/2),Y_MAX+(zoom_orto/2),FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+        glOrtho((X_MIN-(observer_distance/2))*relacion_de_aspecto,(X_MAX+(observer_distance/2))*relacion_de_aspecto,Y_MIN-(observer_distance/2),Y_MAX+(observer_distance/2),FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
 }
 
 void Camara::change_observer()
 {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef(0,0,-observer_distance);
-    glRotatef(observer_angle_x,1,0,0);
-    glRotatef(observer_angle_y,0,1,0);
+    glTranslatef(0,0,-observer_distance); //
+    glRotatef(observer_angle_x,1,0,0);    //
+    glRotatef(observer_angle_y,0,1,0);    //
+}
+
+void Camara::setModoProyeccion(bool modo)
+{
+    tipo = modo;
+}
+
+void Camara::changeVPN(float vpn1, float vpn2, float vpn3)
+{
+    VPN[0] = vpn1;
+    VPN[1] = vpn2;
+    VPN[2] = vpn3;
+}
+
+float *Camara::getVPN(){
+    return VPN;
+}
+
+
+void Camara::changeLookAt()
+{
+    gluLookAt(VPN[0],VPN[1],VPN[2],VPN[0],VPN[1],VPN[2]-1,0,1,0);
 }

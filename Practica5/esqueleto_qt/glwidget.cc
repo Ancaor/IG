@@ -16,15 +16,18 @@
 #include <math.h>
 #include "GL/glu.h"
 
+//#include"GL/glu_mangle.h"
+
 
 #include "window.h"
 
+
+float aux= 0;
 
 // COMPONENTES DE LUCES BLANCAS
 GLfloat light_ambient[]  = { 0.1f, 0.1f, 0.1f, 1.0f };  // 10%
 GLfloat light_diffuse[]  = { 0.7f, 0.7f, 0.7f, 1.0f };  // 70%
 GLfloat light_specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };  // 20%
-
 
 using namespace std;
 using namespace _gl_widget_ne;
@@ -77,10 +80,10 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 {
 
     switch(Keyevent->key()){
-      case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
-      case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
-      case Qt::Key_Up:Observer_angle_x-=ANGLE_STEP;break;
-      case Qt::Key_Down:Observer_angle_x+=ANGLE_STEP;break;
+      case Qt::Key_Left:coordx-=0.5;break;
+      case Qt::Key_Right:coordx+=0.5;break;
+      case Qt::Key_Up:coordz-=0.5;break;
+      case Qt::Key_Down:coordz+=0.5;break;
       case Qt::Key_PageUp:Observer_distance*=1.2;break;
       case Qt::Key_PageDown:Observer_distance/=1.2;break;
       case Qt::Key_0: interfaz->raise();break;
@@ -114,18 +117,22 @@ void _gl_widget::mouseMoveEvent(QMouseEvent *Mouseevent)
         x_ant=Mouseevent->localPos().x();
         y_ant=Mouseevent->localPos().y();
 
+        camara1.setObserver_angle_x(Observer_angle_x);
+        camara1.setObserver_angle_y(Observer_angle_y);
     }
     camara1.setObserver_angle_x(Observer_angle_x);
     camara1.setObserver_angle_y(Observer_angle_y);
-
+//cout << x_ant << " , " << y_ant << endl;
     Mouseevent->accept();
     update();
 }
 
 void _gl_widget::mousePressEvent(QMouseEvent *Mouseevent)
 {
+
     x_ant = Mouseevent->localPos().x();
     y_ant = Mouseevent->localPos().y();
+
 
     if(Mouseevent->buttons() == Qt::RightButton){
         pick(x_ant,y_ant,3,3);
@@ -149,25 +156,43 @@ void _gl_widget::wheelEvent(QWheelEvent *event)
 
 void _gl_widget::pick(unsigned int x, unsigned int y, unsigned int Width, unsigned int Height)
 {
-  GLuint Selection_buffer[100];
+  GLuint Selection_buffer[100] = {0};
   GLint Hits, Viewport[4];
 
+  glViewport(0,0,this->width(),this->height());
   glGetIntegerv (GL_VIEWPORT, Viewport);
+
   glSelectBuffer (100, Selection_buffer);
   glRenderMode (GL_SELECT);
   glInitNames();
-glPushName(0);
+  glPushName(0);
+
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity ();
- // gluPickMatrix(x, Viewport[3] - y, Width, Height, Viewport);
-    gluPickMatrix(x,Viewport[3]-y,Width,Height,Viewport);
-//glFrustum(Min_x,Max_y,Min_y,Max_y,Front_plane,Back_plane);
-cout << "pickeando" ;
-    clear_window();
-    change_projection();
-    change_observer();
+  gluPickMatrix(x,Viewport[3]-y,Width,Height,Viewport);
+  cout << "pickeando" <<endl;
+
+    float relacion_aspecto = (this->size().width()*1.0)/(this->size().height()*1.0);
+    glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+
+    float* a = camara1.getVPN();
+    camara1.change_observer();
+    gluLookAt(a[0],a[1],a[2],a[0],a[1],a[2]-1,0,1,0);
+   // camara1.change_projection();
+//    change_projection();
+    //glMatrixMode(GL_MODELVIEW);
+  //glLoadIdentity();
+  //glTranslatef(0,0,-Observer_distance);
+  //cout << Observer_angle_x;
+  //cout << Observer_angle_y;
+
+  //  clear_window();
+   // change_projection();
+   // change_observer();
    // glPushName(1);
+    draw_axis();
     draw_objects();
+
 
   /*
   Draw(){
@@ -178,26 +203,75 @@ cout << "pickeando" ;
   }
   */
   Hits = glRenderMode (GL_RENDER);
+  cout << "Hits: " << Hits << endl;
 if (Hits>0){
   // Obtener información de la selección y marcar el objeto seleccionado
-    cout << Selection_buffer[0]<<endl;
-    cout << Selection_buffer[1]<<endl;
-    cout << Selection_buffer[2]<<endl;
-    cout << Selection_buffer[3]<<endl;
-    cout << Selection_buffer[4]<<endl;
-    cout << Selection_buffer[5]<<endl;
-    cout << Selection_buffer[6]<<endl;
-    cout << Selection_buffer[7]<<endl;
-    cout << Selection_buffer[8]<<endl;
+    for(int i=0; i < Hits; i++){
+
+    cout << "Numero en pila: " << Selection_buffer[(i*4)+0] <<endl;
+    cout << "Minima z: " << Selection_buffer[(i*4)+1] <<endl;
+    cout << "Maxima z: " << Selection_buffer[(i*4)+2] <<endl;
+    cout << "Nombre: "<< Selection_buffer[(i*4)+3] <<endl;
+
+    }
     cout << endl;
+
+    float z_min = INFINITY;
+    int seleccionado=0;
+    float z_actual=z_min;
+
+    for(int i=0; i < Hits ; i++){
+        z_actual = Selection_buffer[i*4 +1];
+        if(z_actual < z_min){
+            z_min=z_actual;
+            seleccionado = Selection_buffer[i*4 +3];
+        }
+    }
+
+    cout << "Seleccionado: " << seleccionado << endl;
+    //float vpn[3] = {0,0,0};
+    if(seleccionado == 1){
+        if(!cubo_seleccionado){
+        camara1.changeVPN(2,0,0);
+        cubo_seleccionado=true;
+        aux = -2;
+        esfera_seleccionado=false;
+        }
+      //  else{
+     //   camara1.changeVPN(0,0,0);
+     //   cubo_seleccionado=false;
+     //   aux = 0;
+
+
+    }else if(seleccionado == 2){
+        if(!esfera_seleccionado){
+        camara1.changeVPN(0,0,0);
+        cubo_seleccionado=false;
+        esfera_seleccionado=true;
+        aux = -2;
+        }
+        else{
+        camara1.changeVPN(0,0,0);
+        cubo_seleccionado=false;
+        aux = 0;
+        }
+
+    }
+
+
   }
+else {
+    cout << "No choca" << endl
+          ;
+}
   // volver a dibujar la escena pero teniendo en cuenta si hay algún objeto seleccionado
 clear_window();
-change_projection();
-change_observer();
+ change_projection();
+//change_observer();
+// glPushName(1);
+draw_axis();
 draw_objects();
-
-update();
+//update();
 }
 
 
@@ -220,6 +294,7 @@ void _gl_widget::change_projection()
 {
   //glMatrixMode(GL_PROJECTION);
   //glLoadIdentity();
+
 
   float relacion_aspecto = (this->size().width()*1.0)/(this->size().height()*1.0);
   camara1.setRelacion_de_aspecto(relacion_aspecto);
@@ -274,145 +349,210 @@ void _gl_widget::draw_axis()
 
 void _gl_widget::draw_objects()
 {
-     luz_posicional.transformar(angulo_luz_y_posicional,angulo_luz_x_posicional,distancia_luz_posicional);
-     luz_infinito.transformar(angulo_luz_y_infinito,angulo_luz_x_infinito,distancia_luz_posicional);
 
-     //INICIALIZACION DE LUCES
+    if(escena){
+        object = Cubo();
+        glLoadName(1);
+        glPushMatrix();
+        glTranslatef(2,0,0);
+        if(vertex)
+            object.drawPoints();
+        if(lines)
+            object.drawLines();
+        if(fill)
+            object.drawFill();
+        if(chest)
+            object.drawAjedrez();
+        glPopMatrix();
 
-     glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
-     glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
-     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+        object_revolucion = Esfera(40,360);
+        glLoadName(2);
+        if(vertex)
+            object_revolucion.drawPoints();
+        if(lines)
+            object_revolucion.drawLines();
+        if(fill)
+            object_revolucion.drawFill();
+        if(chest)
+            object_revolucion.drawAjedrez();
 
-     glLightfv(GL_LIGHT1, GL_AMBIENT,  light_ambient);
-     glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
-     glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+        //ply_escena = PLY_Object(urlPly);
+        glLoadName(3);
+        glPushMatrix();
+        glTranslatef(-2,0,0);
+        glScalef(0.2,0.2,0.2);
+        if(vertex)
+            ply_escena.drawPoints();
+        if(lines)
+            ply_escena.drawLines();
+        if(fill)
+            ply_escena.drawFill();
+        if(chest)
+            ply_escena.drawAjedrez();
+        glPopMatrix();
 
-    // Activador de luz en infinito
-
-    if(interfaz->getEstadoLuzInfinito())
-        luz_infinito.enable();
-    else luz_infinito.disable();
-
-    // Activador de luz en punto
-
-    if(interfaz->getEstadoLuzPosicional())
-        luz_posicional.enable();
-    else luz_posicional.disable();
 
 
-    if(planeta_tierra){
+    }else{
 
-        if(tierra_cargada){
-            if(vertex){
-                tierra.drawPoints();
-            }
-            if(lines){
-                tierra.drawLines();
-            }
-            if(fill){
-                tierra.drawFill();
-            }
-            if(chest){
-                tierra.drawAjedrez();
-            }
 
-            if(fill_flat_ilu)
-                tierra.drawFillIluminado(vacio,interfaz->getLightning());
-            if(fill_smooth_ilu)
-                tierra.drawFillIluminadoSuave(vacio,interfaz->getLightning());
-            if(!textura_con_iluminacion){
-                tierra.drawTextura();
-            }
-        }
-    }
-    else{
-        if(textura){
-            if(vertex)
-                marcoTextura.drawPoints();
-            if(lines)
-                marcoTextura.drawNormalesCaras();
-            if(fill)
-                marcoTextura.drawFill();
-            if(chest)
-                marcoTextura.drawAjedrez();
-            if(modotextura){
-                if(fill_flat_ilu)
-                    marcoTextura.drawFillIluminado(porcion_textura,porcion_marco,mater,interfaz->getLightning());
-                if(fill_smooth_ilu)
-                    marcoTextura.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
-                if(!textura_con_iluminacion)
-                    marcoTextura.drawTextura(porcion_textura,porcion_marco);
-            }
-            else{
-                if(fill_flat_ilu)
-                    marcoTextura.drawFillIluminado(mater,interfaz->getLightning());
-                if(fill_smooth_ilu)
-                    marcoTextura.drawFillIluminadoSuave(mater,interfaz->getLightning());
-                //if(!textura_con_iluminacion)
-                //    marcoTextura.drawTextura(porcion_textura,porcion_marco);
-            }
-        }
+             luz_posicional.transformar(angulo_luz_y_posicional,angulo_luz_x_posicional,distancia_luz_posicional);
+             luz_infinito.transformar(angulo_luz_y_infinito,angulo_luz_x_infinito,distancia_luz_posicional);
 
-        else{
-            if(objeto_complejo){
-                if(vertex)
-                    watt_regulator.draw(0,angle,velocidad);
-                if(lines)
-                   watt_regulator.draw(1,angle,velocidad);
-                if(fill)
-                    watt_regulator.draw(2,angle,velocidad);
-                if(chest)
-                    watt_regulator.draw(3,angle,velocidad);
-            }
-            else{
 
-                if(!revolucion){
-                    if(vertex)
-                        object.drawPoints();
-                    if(lines)
-                        object.drawLines();
-                    if(fill)
-                        object.drawFill();
-                    if(chest)
-                        object.drawAjedrez();
+
+             //INICIALIZACION DE LUCES
+
+             glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
+             glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
+             glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+
+             glLightfv(GL_LIGHT1, GL_AMBIENT,  light_ambient);
+             glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_diffuse);
+             glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+
+            // Activador de luz en infinito
+
+            if(interfaz->getEstadoLuzInfinito())
+                luz_infinito.enable();
+            else luz_infinito.disable();
+
+            // Activador de luz en punto
+
+            if(interfaz->getEstadoLuzPosicional())
+                luz_posicional.enable();
+            else luz_posicional.disable();
+
+
+            if(planeta_tierra){
+
+                if(tierra_cargada){
+                    if(vertex){
+                        tierra.drawPoints();
+                    }
+                    if(lines){
+                        tierra.drawLines();
+                    }
+                    if(fill){
+                        tierra.drawFill();
+                    }
+                    if(chest){
+                        tierra.drawAjedrez();
+                    }
+
                     if(fill_flat_ilu)
-                        object.drawFillIluminado(mater,interfaz->getLightning());
+                        tierra.drawFillIluminado(vacio,interfaz->getLightning());
                     if(fill_smooth_ilu)
-                        object.drawFillIluminadoSuave(mater,interfaz->getLightning());
-
+                        tierra.drawFillIluminadoSuave(vacio,interfaz->getLightning());
+                    if(!textura_con_iluminacion){
+                        tierra.drawTextura();
+                    }
                 }
-                else {
-                    if(ply_bool){
-                        if(vertex)
-                            ply.drawPoints();
-                        if(lines)
-                            ply.drawLines();
-                        if(fill)
-                            ply.drawFill();
-                        if(chest)
-                            ply.drawAjedrez();
-                        if(fill_smooth_ilu)
-                            ply.drawFillIluminadoSuave(mater,interfaz->getLightning());
+            }
+            else{
+                if(textura){
+                    if(vertex)
+                        marcoTextura.drawPoints();
+                    if(lines)
+                        marcoTextura.drawNormalesCaras();
+                    if(fill)
+                        marcoTextura.drawFill();
+                    if(chest)
+                        marcoTextura.drawAjedrez();
+                    if(modotextura){
                         if(fill_flat_ilu)
-                            ply.drawFillIluminado(mater,interfaz->getLightning());
+                            marcoTextura.drawFillIluminado(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+                        if(fill_smooth_ilu)
+                            marcoTextura.drawFillIluminadoSuave(porcion_textura,porcion_marco,mater,interfaz->getLightning());
+                        if(!textura_con_iluminacion)
+                            marcoTextura.drawTextura(porcion_textura,porcion_marco);
                     }
                     else{
-                        if(vertex)
-                            object_revolucion.drawPoints();
-                        if(lines)
-                            object_revolucion.drawLines();
-                        if(fill)
-                            object_revolucion.drawFill();
-                        if(chest)
-                            object_revolucion.drawAjedrez();
                         if(fill_flat_ilu)
-                            object_revolucion.drawFillIluminado(mater,interfaz->getLightning());
+                            marcoTextura.drawFillIluminado(mater,interfaz->getLightning());
                         if(fill_smooth_ilu)
-                            object_revolucion.drawFillIluminadoSuave(mater,interfaz->getLightning());
+                            marcoTextura.drawFillIluminadoSuave(mater,interfaz->getLightning());
+                        //if(!textura_con_iluminacion)
+                        //    marcoTextura.drawTextura(porcion_textura,porcion_marco);
+                    }
+                }
+
+                else{
+                    if(objeto_complejo){
+                        if(vertex)
+                            watt_regulator.draw(0,angle,velocidad);
+                        if(lines)
+                           watt_regulator.draw(1,angle,velocidad);
+                        if(fill)
+                            watt_regulator.draw(2,angle,velocidad);
+                        if(chest)
+                            watt_regulator.draw(3,angle,velocidad);
+                    }
+                    else{
+
+                        if(!revolucion){
+                            //glLoadName(1);
+                            if(vertex)
+                                object.drawPoints();
+                            if(lines)
+                                object.drawLines();
+                            if(fill)
+                                object.drawFill();
+                            if(chest)
+                                object.drawAjedrez();
+                            if(fill_flat_ilu)
+                                object.drawFillIluminado(mater,interfaz->getLightning());
+                            if(fill_smooth_ilu)
+                                object.drawFillIluminadoSuave(mater,interfaz->getLightning());
+                        }
+                        else {
+                            if(ply_bool){
+                                if(vertex)
+                                    ply.drawPoints();
+                                if(lines)
+                                    ply.drawLines();
+                                if(fill)
+                                    ply.drawFill();
+                                if(chest)
+                                    ply.drawAjedrez();
+                                if(fill_smooth_ilu)
+                                    ply.drawFillIluminadoSuave(mater,interfaz->getLightning());
+                                if(fill_flat_ilu)
+                                    ply.drawFillIluminado(mater,interfaz->getLightning());
+                            }
+                            else{
+                                if(vertex)
+                                    object_revolucion.drawPoints();
+                                if(lines)
+                                    object_revolucion.drawLines();
+                                if(fill)
+                                    object_revolucion.drawFill();
+                                if(chest)
+                                    object_revolucion.drawAjedrez();
+                                if(fill_flat_ilu)
+                                    object_revolucion.drawFillIluminado(mater,interfaz->getLightning());
+                                if(fill_smooth_ilu)
+                                    object_revolucion.drawFillIluminadoSuave(mater,interfaz->getLightning());
+                            }
+                        }
                     }
                 }
             }
-        }
+          /*  glPointSize(6);
+
+            glBegin(GL_LINES);
+            glColor3f(1,0,0);
+
+                glVertex3f(coordx-0.15,0,coordz);
+                glVertex3f(coordx+0.15,0,coordz);
+
+                glVertex3f(coordx,0,coordz-0.15);
+                glVertex3f(coordx,0,coordz+0.15);
+
+                glVertex3f(coordx,-0.15,coordz);
+                glVertex3f(coordx,+0.15,coordz);
+            glEnd();
+        */
     }
 }
 
@@ -447,15 +587,12 @@ void _gl_widget::updateInterfaz()
 {
 
     // PRACTICA 5
-    //modo_proyeccion = interfaz->getModoProyeccion();
+    modo_proyeccion = interfaz->getModoProyeccion();
     //camara_seleccionada = interfaz->getCamaraSeleccionada();
 
-
+    camara1.setModoProyeccion(modo_proyeccion);
 
     //
-
-
-
 
 
     // Figura que va a pintarse
@@ -604,28 +741,29 @@ void _gl_widget::updateInterfaz()
         figura_anterior=0;
     url_ply_watt_anterior = urlPlyWatt;
 
-    string urlPly = interfaz->getUrlPly_2();
+    urlPly = interfaz->getUrlPly_2();
 
     if(urlPly != url_ply_anterior)
         figura_anterior=0;
     url_ply_anterior = urlPly;
 
 
-    if((figura != figura_anterior)|| (figura!=9 && figura !=55 ))
+    if((figura != figura_anterior)|| (figura!=9 && figura !=55 && figura !=81 ))
     switch(figura)
     {
-    case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false;break;
-    case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false;break;
-    case 3: object_revolucion = Esfera(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; planeta_tierra=false;break;
-    case 4: object_revolucion = Cilindro(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false; break;
-    case 5: object_revolucion = Tubo(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false; break;
-    case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;break;
-    case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;break;
-    case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;break;
-    case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true;textura=false; planeta_tierra=false;break;
-    case 10: if(cargar_textura){marcoTextura = marco(divisiones,ancho_marco,alto_marco);marcoTextura.cargarImagen(path_textura);}textura=true;planeta_tierra=false;break;
-    case 11: if(cargar_tierra){tierra = EsferaTexturizada(secciones,360,1.0);tierra_cargada=true;tierra.cargarImagen(path_tierra);}planeta_tierra=true;break;
-    case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;textura=false;planeta_tierra=false;break;
+    case 1: object = Cubo();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false;escena = false;break;
+    case 2: object = Tetraedro();revolucion=false;ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false;escena = false;break;
+    case 3: object_revolucion = Esfera(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false; planeta_tierra=false;escena = false;break;
+    case 4: object_revolucion = Cilindro(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false;escena = false; break;
+    case 5: object_revolucion = Tubo(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false;textura=false;planeta_tierra=false; escena = false;break;
+    case 6: object_revolucion = Vaso(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;escena = false;break;
+    case 7: object_revolucion = Vaso_Invertido(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;escena = false;break;
+    case 8: object_revolucion = Cono(secciones,angulo); revolucion=true; ply_bool=false;objeto_complejo= false; textura=false;planeta_tierra=false;escena = false;break;
+    case 9: watt_regulator= WattRegulator(urlPlyWatt); revolucion=false; ply_bool=false;objeto_complejo=true;textura=false; planeta_tierra=false;escena = false;break;
+    case 10: if(cargar_textura){marcoTextura = marco(divisiones,ancho_marco,alto_marco);marcoTextura.cargarImagen(path_textura);}textura=true;planeta_tierra=false;escena = false;break;
+    case 11: if(cargar_tierra){tierra = EsferaTexturizada(secciones,360,1.0);tierra_cargada=true;tierra.cargarImagen(path_tierra);}planeta_tierra=true;escena = false;break;
+    case 55:ply.read_ply(urlPly); revolucion=true; ply_bool=true;objeto_complejo= false;textura=false;planeta_tierra=false;escena = false;break;
+    case 81: if(ply_escena.vertices.size() == 0)ply_escena = PLY_Object(urlPly);  escena = true; break;
     }
 
     figura_anterior=figura;
@@ -652,6 +790,19 @@ void _gl_widget::paintGL()
   clear_window();
   change_projection();
   change_observer();
+ // float a[3] = {2,0,0};
+ // camara1.changeVPN(a);
+  camara1.changeLookAt();
+  // lookat
+  //cout << coordx << " " << coordz << " " << vpn_x << " " << vpn_y << endl;
+
+
+  //gluLookAt(coordx,0,coordz,coordx + vpn_x,vpn_y,coordz-1,0,1,0);
+
+
+  // gluLookAt(coordx + vpn_x,vpn_y,coordz-1,coordx,0,coordz,0,1,0);
+ //cout << coordx << " " << coordz << endl;
+ // resizeGL(this->width(),this->height());
   draw_axis();
   draw_objects();
 }
@@ -707,7 +858,5 @@ void _gl_widget::initializeGL()
   Observer_angle_y=0;
   Observer_distance=DEFAULT_DISTANCE;
 
-  x_ant = this->width()/2;
-  y_ant = this->height()/2;
 }
 

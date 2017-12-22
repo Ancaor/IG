@@ -5,6 +5,11 @@ PLY_Object::PLY_Object()
     pathname_ply = "/home";
 }
 
+PLY_Object::PLY_Object(string url)
+{
+    read_ply(url);
+}
+
 
 //*************************************************************************
 // Abre el selector de archvivos  y una vez seleccionado un PLY lo carga.

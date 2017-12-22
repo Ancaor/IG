@@ -212,6 +212,8 @@ private slots:
 
     void on_radioButton_19_clicked();
 
+    void on_radioButton_20_clicked();
+
 public slots:
     void raise_dialog();
 
@@ -285,6 +287,8 @@ private:
     bool  cargar_estrellas=false;
 
     bool modotext = false;
+
+    int escena = 81;
 
 
 

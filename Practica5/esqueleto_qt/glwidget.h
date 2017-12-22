@@ -10,6 +10,8 @@
 //**************************************************************************
 
 #include <GL/glew.h>
+#include <GL/gl.h>
+#include "GL/glu.h"
 #include <QOpenGLWidget>
 #include <QKeyEvent>
 #include <iostream>
@@ -132,6 +134,8 @@ public:
      bool cargar_tierra=0;
      bool cargar_estrellas=0;
 
+     string urlPly = "";
+
     Material mater ;
 
     bool cargar_textura=true;
@@ -151,7 +155,20 @@ public:
   int x_ant;
   int y_ant;
 
+  float coordx=0;
+  float coordy=0;
+  float coordz=5;
 
+  float vpn_x=0;
+  float vpn_y=0;
+
+  bool escena=0;
+
+  bool cubo_seleccionado=false;
+  bool esfera_seleccionado=true;
+
+
+  PLY_Object ply_escena= PLY_Object();
 
   _gl_widget(_window *Window1,Interfaz *interfaz);
 

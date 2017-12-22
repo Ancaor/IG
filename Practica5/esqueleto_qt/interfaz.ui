@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
+    <width>723</width>
     <height>650</height>
    </rect>
   </property>
@@ -18,12 +18,12 @@
     <rect>
      <x>11</x>
      <y>11</y>
-     <width>611</width>
+     <width>701</width>
      <height>531</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>7</number>
+    <number>8</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -1374,14 +1374,38 @@
       <property name="text">
        <string>Perspectiva</string>
       </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
      </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_9">
+    <attribute name="title">
+     <string>Practica 5</string>
+    </attribute>
+    <widget class="QRadioButton" name="radioButton_20">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>30</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Dibujar Escena</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>11</x>
+     <x>70</x>
      <y>550</y>
      <width>531</width>
      <height>71</height>
@@ -1393,7 +1417,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>130</x>
       <y>30</y>
       <width>291</width>
       <height>31</height>

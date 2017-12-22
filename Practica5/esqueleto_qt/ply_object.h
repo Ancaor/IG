@@ -12,6 +12,7 @@ private:
     QString pathname_ply; //Path de los PLY (por defecto /home)
 public:
     PLY_Object();
+    PLY_Object(string url);
     void read_ply(string path);
     string buscarPLY();
     QString getPathPLYs(string archivo);
