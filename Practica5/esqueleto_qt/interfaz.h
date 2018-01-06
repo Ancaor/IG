@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QFileDialog>
 #include <iostream>
+#include <vector>
 
 namespace Ui {
 class Interfaz;
@@ -214,6 +215,12 @@ private slots:
 
     void on_radioButton_20_clicked();
 
+    void on_tipoCamara1_currentIndexChanged(int index);
+
+    void on_tipoCamara2_currentIndexChanged(int index);
+
+    void on_tipoCamara3_currentIndexChanged(int index);
+
 public slots:
     void raise_dialog();
 
@@ -294,8 +301,15 @@ private:
 
     // PRACTICA 5
 
-    int camara_selec = 1;   // 1 / 2 / 3
+    int camara_selec = 0;   // 0 / 1 / 2
     bool modo_proyeccion = 1;  // 1: perspectiva , 0: ortogonal
+    bool modo_proyeccion_c1 = 1;
+    bool modo_proyeccion_c2 = 1;
+    bool modo_proyeccion_c3 = 1;
+
+    std::vector<bool> modoProyeccion;
+
+   // modoProyeccion.resize(3);
 
 };
 

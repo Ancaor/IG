@@ -106,6 +106,11 @@ float *Camara::getVPN(){
     return VPN;
 }
 
+bool Camara::getTipo()
+{
+    return tipo;
+}
+
 
 void Camara::changeLookAt()
 {

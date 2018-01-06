@@ -1,12 +1,15 @@
 #include "interfaz.h"
 #include "ui_interfaz.h"
 #include <string>
+#include <iostream>
 
 Interfaz::Interfaz(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Interfaz)
 {
     ui->setupUi(this);
+    modoProyeccion.resize(3);
+    modoProyeccion[0]=1;
 }
 
 Interfaz::~Interfaz()
@@ -230,7 +233,7 @@ int Interfaz::getCamaraSeleccionada()
 
 bool Interfaz::getModoProyeccion()
 {
-    return modo_proyeccion;
+    return modoProyeccion[camara_selec];
 }
 
 int Interfaz::getAnguloLuzInfinito()
@@ -248,7 +251,7 @@ void Interfaz::on_tabWidget_tabBarClicked(int index)
     case 3: practica=3; break;
     case 5: practica=4; break;
     case 6: practica=11; break;
-    case 8: practica =80; break;
+    case 7: practica =80; break;
     }
 }
 
@@ -735,17 +738,17 @@ void Interfaz::on_checkBox_10_clicked(bool checked)
 
 void Interfaz::on_radioButton_15_clicked()
 {
-    camara_selec = 1;
+    camara_selec = 0;
 }
 
 void Interfaz::on_radioButton_16_clicked()
 {
-    camara_selec = 2;
+    camara_selec = 1;
 }
 
 void Interfaz::on_radioButton_17_clicked()
 {
-    camara_selec = 3;
+    camara_selec = 2;
 }
 
 void Interfaz::on_radioButton_18_clicked()
@@ -762,3 +765,17 @@ void Interfaz::on_radioButton_20_clicked()
 {
 
 }
+
+void Interfaz::on_tipoCamara1_currentIndexChanged(int index)
+{
+    modoProyeccion[0] = index;
+}
+
+void Interfaz::on_tipoCamara2_currentIndexChanged(int index)
+{
+    modoProyeccion[1] = index;
+}
+
+void Interfaz::on_tipoCamara3_currentIndexChanged(int index)
+{
+    modoProyeccion[2] = index;}

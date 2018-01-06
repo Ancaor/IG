@@ -87,12 +87,12 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
       case Qt::Key_PageUp:Observer_distance*=1.2;break;
       case Qt::Key_PageDown:Observer_distance/=1.2;break;
       case Qt::Key_0: interfaz->raise();break;
-      case Qt::Key_7 : camara1.zoom_orto = camara1.zoom_orto-0.5;break;
-      case Qt::Key_8 : camara1.zoom_orto = camara1.zoom_orto+0.5;break;
+      case Qt::Key_7 : camaras[camara_seleccionada].zoom_orto = camaras[camara_seleccionada].zoom_orto-0.5;break;
+      case Qt::Key_8 : camaras[camara_seleccionada].zoom_orto = camaras[camara_seleccionada].zoom_orto+0.5;break;
     }
-    camara1.setObserver_angle_x(Observer_angle_x);
-    camara1.setObserver_angle_y(Observer_angle_y);
-    camara1.setObserver_distance(Observer_distance);
+    camaras[camara_seleccionada].setObserver_angle_x(Observer_angle_x);
+    camaras[camara_seleccionada].setObserver_angle_y(Observer_angle_y);
+    camaras[camara_seleccionada].setObserver_distance(Observer_distance);
     update();
 }
 
@@ -117,11 +117,11 @@ void _gl_widget::mouseMoveEvent(QMouseEvent *Mouseevent)
         x_ant=Mouseevent->localPos().x();
         y_ant=Mouseevent->localPos().y();
 
-        camara1.setObserver_angle_x(Observer_angle_x);
-        camara1.setObserver_angle_y(Observer_angle_y);
+        camaras[camara_seleccionada].setObserver_angle_x(Observer_angle_x);
+        camaras[camara_seleccionada].setObserver_angle_y(Observer_angle_y);
     }
-    camara1.setObserver_angle_x(Observer_angle_x);
-    camara1.setObserver_angle_y(Observer_angle_y);
+    camaras[camara_seleccionada].setObserver_angle_x(Observer_angle_x);
+    camaras[camara_seleccionada].setObserver_angle_y(Observer_angle_y);
 //cout << x_ant << " , " << y_ant << endl;
     Mouseevent->accept();
     update();
@@ -149,7 +149,7 @@ void _gl_widget::wheelEvent(QWheelEvent *event)
     else Observer_distance -= 1;
 
 
-    camara1.setObserver_distance(Observer_distance);
+    camaras[camara_seleccionada].setObserver_distance(Observer_distance);
     update();
 }
 
@@ -173,12 +173,18 @@ void _gl_widget::pick(unsigned int x, unsigned int y, unsigned int Width, unsign
   cout << "pickeando" <<endl;
 
     float relacion_aspecto = (this->size().width()*1.0)/(this->size().height()*1.0);
-    glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
 
-    float* a = camara1.getVPN();
-    camara1.change_observer();
+    if(camaras[camara_seleccionada].getTipo() == 1)
+        glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+    else
+        glOrtho((X_MIN-(Observer_distance/2))*relacion_aspecto,(X_MAX+(Observer_distance/2))*relacion_aspecto,(Y_MIN-(Observer_distance/2)),(Y_MAX+(Observer_distance/2)),FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+
+    float* a = camaras[camara_seleccionada].getVPN();
+    camaras[camara_seleccionada].change_observer();
+
+
     gluLookAt(a[0],a[1],a[2],a[0],a[1],a[2]-1,0,1,0);
-   // camara1.change_projection();
+   // camaras[camara_seleccionada].change_projection();
 //    change_projection();
     //glMatrixMode(GL_MODELVIEW);
   //glLoadIdentity();
@@ -229,33 +235,43 @@ if (Hits>0){
     }
 
     cout << "Seleccionado: " << seleccionado << endl;
+    /*
     //float vpn[3] = {0,0,0};
     if(seleccionado == 1){
         if(!cubo_seleccionado){
-        camara1.changeVPN(2,0,0);
+        camaras[camara_seleccionada].changeVPN(2,0,0);
         cubo_seleccionado=true;
         aux = -2;
         esfera_seleccionado=false;
         }
       //  else{
-     //   camara1.changeVPN(0,0,0);
+     //   camaras[camara_seleccionada].changeVPN(0,0,0);
      //   cubo_seleccionado=false;
      //   aux = 0;
 
 
     }else if(seleccionado == 2){
         if(!esfera_seleccionado){
-        camara1.changeVPN(0,0,0);
+        camaras[camara_seleccionada].changeVPN(0,0,0);
         cubo_seleccionado=false;
         esfera_seleccionado=true;
         aux = -2;
         }
         else{
-        camara1.changeVPN(0,0,0);
+        camaras[camara_seleccionada].changeVPN(0,0,0);
         cubo_seleccionado=false;
         aux = 0;
         }
 
+    }else if(seleccionado == 4){
+
+    }
+    */
+    switch(seleccionado){
+    case 1:camaras[camara_seleccionada].changeVPN(2,0,0); break;
+    case 2:camaras[camara_seleccionada].changeVPN(0,0,0); break;
+    case 3: camaras[camara_seleccionada].changeVPN(-2,0,0); break;
+    case 4 : camaras[camara_seleccionada].changeVPN(0,2,0);break;
     }
 
 
@@ -297,8 +313,8 @@ void _gl_widget::change_projection()
 
 
   float relacion_aspecto = (this->size().width()*1.0)/(this->size().height()*1.0);
-  camara1.setRelacion_de_aspecto(relacion_aspecto);
-  camara1.change_projection();
+  camaras[camara_seleccionada].setRelacion_de_aspecto(relacion_aspecto);
+  camaras[camara_seleccionada].change_projection();
 
   //glFrustum(X_MIN*relacion_aspecto,X_MAX*relacion_aspecto,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
 }
@@ -310,7 +326,7 @@ void _gl_widget::change_projection()
 void _gl_widget::change_observer()
 {
   // posicion del observador
-  camara1.change_observer();
+  camaras[camara_seleccionada].change_observer();
     /*
     glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -390,6 +406,23 @@ void _gl_widget::draw_objects()
         if(chest)
             ply_escena.drawAjedrez();
         glPopMatrix();
+
+
+        object_revolucion = Peon(40,360);
+        glLoadName(4);
+        glPushMatrix();
+        glTranslatef(0,2,0);
+        glScalef(0.5,0.5,0.5);
+        if(vertex)
+            object_revolucion.drawPoints();
+        if(lines)
+            object_revolucion.drawLines();
+        if(fill)
+            object_revolucion.drawFill();
+        if(chest)
+            object_revolucion.drawAjedrez();
+        glPopMatrix();
+
 
 
 
@@ -588,9 +621,11 @@ void _gl_widget::updateInterfaz()
 
     // PRACTICA 5
     modo_proyeccion = interfaz->getModoProyeccion();
-    //camara_seleccionada = interfaz->getCamaraSeleccionada();
+    camara_seleccionada = interfaz->getCamaraSeleccionada();
 
-    camara1.setModoProyeccion(modo_proyeccion);
+    camaras[camara_seleccionada].setModoProyeccion(modo_proyeccion);
+
+    //camaras[camara_seleccionada].setModoProyeccion(modo_proyeccion);
 
     //
 
@@ -791,8 +826,8 @@ void _gl_widget::paintGL()
   change_projection();
   change_observer();
  // float a[3] = {2,0,0};
- // camara1.changeVPN(a);
-  camara1.changeLookAt();
+ // camaras[camara_seleccionada].changeVPN(a);
+  camaras[camara_seleccionada].changeLookAt();
   // lookat
   //cout << coordx << " " << coordz << " " << vpn_x << " " << vpn_y << endl;
 
@@ -853,6 +888,12 @@ void _gl_widget::initializeGL()
 
   glClearColor(1.0,1.0,1.0,1.0);
   glEnable(GL_DEPTH_TEST);;
+
+  camaras.push_back(Camara(_gl_widget_ne::X_MIN,_gl_widget_ne::X_MAX,_gl_widget_ne::Y_MIN,_gl_widget_ne::Y_MAX,_gl_widget_ne::BACK_PLANE_PERSPECTIVE,_gl_widget_ne::DEFAULT_DISTANCE,_gl_widget_ne::ANGLE_STEP,0) );
+  camaras.push_back(Camara(_gl_widget_ne::X_MIN,_gl_widget_ne::X_MAX,_gl_widget_ne::Y_MIN,_gl_widget_ne::Y_MAX,_gl_widget_ne::BACK_PLANE_PERSPECTIVE,_gl_widget_ne::DEFAULT_DISTANCE,_gl_widget_ne::ANGLE_STEP,0) );
+  camaras.push_back(Camara(_gl_widget_ne::X_MIN,_gl_widget_ne::X_MAX,_gl_widget_ne::Y_MIN,_gl_widget_ne::Y_MAX,_gl_widget_ne::BACK_PLANE_PERSPECTIVE,_gl_widget_ne::DEFAULT_DISTANCE,_gl_widget_ne::ANGLE_STEP,0) );
+
+
 
   Observer_angle_x=0;
   Observer_angle_y=0;

@@ -44,6 +44,7 @@ public:
     void changeLookAt();
     float zoom_orto=0;
     float* getVPN();
+    bool getTipo();
 };
 
 #endif // CAMARA_H

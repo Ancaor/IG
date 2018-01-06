@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>723</width>
-    <height>650</height>
+    <width>664</width>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,12 +18,12 @@
     <rect>
      <x>11</x>
      <y>11</y>
-     <width>701</width>
+     <width>641</width>
      <height>531</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>8</number>
+    <number>7</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -1281,105 +1281,6 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab_8">
-    <attribute name="title">
-     <string>Camaras</string>
-    </attribute>
-    <widget class="QGroupBox" name="groupBox_19">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>551</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Selección de Camara</string>
-     </property>
-     <widget class="QRadioButton" name="radioButton_15">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>40</y>
-        <width>100</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Camara 1</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButton_16">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>40</y>
-        <width>100</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Camara 2</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButton_17">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>40</y>
-        <width>100</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Camara 3</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_20">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>110</y>
-       <width>551</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Tipo de Proyección</string>
-     </property>
-     <widget class="QRadioButton" name="radioButton_18">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>40</y>
-        <width>100</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ortogonal</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButton_19">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>40</y>
-        <width>100</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Perspectiva</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </widget>
-   </widget>
    <widget class="QWidget" name="tab_9">
     <attribute name="title">
      <string>Practica 5</string>
@@ -1405,7 +1306,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>50</x>
      <y>550</y>
      <width>531</width>
      <height>71</height>
@@ -1458,8 +1359,132 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QGroupBox" name="groupBox_21">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>630</y>
+     <width>531</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Camaras:</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_15">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Camara 1</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_16">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>30</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Camara 2</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_17">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>30</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Camara 3</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="tipoCamara1">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>60</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="currentText">
+     <string>Perspectiva</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Ortogonal</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Perspectiva</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="tipoCamara2">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>60</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Ortogonal</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Perspectiva</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="tipoCamara3">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>60</y>
+      <width>100</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Ortogonal</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Perspectiva</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+   </widget>
+  </widget>
   <zorder>groupBox</zorder>
   <zorder>tabWidget</zorder>
+  <zorder>groupBox_21</zorder>
  </widget>
  <resources/>
  <connections/>

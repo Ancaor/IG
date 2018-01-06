@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGroupBox>
@@ -165,14 +166,6 @@ public:
     QLineEdit *lineEdit_4;
     QPushButton *pushButton_6;
     QPushButton *pushButton_7;
-    QWidget *tab_8;
-    QGroupBox *groupBox_19;
-    QRadioButton *radioButton_15;
-    QRadioButton *radioButton_16;
-    QRadioButton *radioButton_17;
-    QGroupBox *groupBox_20;
-    QRadioButton *radioButton_18;
-    QRadioButton *radioButton_19;
     QWidget *tab_9;
     QRadioButton *radioButton_20;
     QGroupBox *groupBox;
@@ -182,15 +175,22 @@ public:
     QCheckBox *checkBox_2;
     QCheckBox *checkBox_3;
     QCheckBox *checkBox_4;
+    QGroupBox *groupBox_21;
+    QRadioButton *radioButton_15;
+    QRadioButton *radioButton_16;
+    QRadioButton *radioButton_17;
+    QComboBox *tipoCamara1;
+    QComboBox *tipoCamara2;
+    QComboBox *tipoCamara3;
 
     void setupUi(QDialog *Interfaz)
     {
         if (Interfaz->objectName().isEmpty())
             Interfaz->setObjectName(QStringLiteral("Interfaz"));
-        Interfaz->resize(723, 650);
+        Interfaz->resize(664, 733);
         tabWidget = new QTabWidget(Interfaz);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(11, 11, 701, 531));
+        tabWidget->setGeometry(QRect(11, 11, 641, 531));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         groupBox_2 = new QGroupBox(tab);
@@ -732,31 +732,6 @@ public:
         pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
         pushButton_7->setGeometry(QRect(290, 50, 80, 22));
         tabWidget->addTab(tab_7, QString());
-        tab_8 = new QWidget();
-        tab_8->setObjectName(QStringLiteral("tab_8"));
-        groupBox_19 = new QGroupBox(tab_8);
-        groupBox_19->setObjectName(QStringLiteral("groupBox_19"));
-        groupBox_19->setGeometry(QRect(20, 10, 551, 81));
-        radioButton_15 = new QRadioButton(groupBox_19);
-        radioButton_15->setObjectName(QStringLiteral("radioButton_15"));
-        radioButton_15->setGeometry(QRect(40, 40, 100, 20));
-        radioButton_16 = new QRadioButton(groupBox_19);
-        radioButton_16->setObjectName(QStringLiteral("radioButton_16"));
-        radioButton_16->setGeometry(QRect(210, 40, 100, 20));
-        radioButton_17 = new QRadioButton(groupBox_19);
-        radioButton_17->setObjectName(QStringLiteral("radioButton_17"));
-        radioButton_17->setGeometry(QRect(390, 40, 100, 20));
-        groupBox_20 = new QGroupBox(tab_8);
-        groupBox_20->setObjectName(QStringLiteral("groupBox_20"));
-        groupBox_20->setGeometry(QRect(20, 110, 551, 81));
-        radioButton_18 = new QRadioButton(groupBox_20);
-        radioButton_18->setObjectName(QStringLiteral("radioButton_18"));
-        radioButton_18->setGeometry(QRect(90, 40, 100, 20));
-        radioButton_19 = new QRadioButton(groupBox_20);
-        radioButton_19->setObjectName(QStringLiteral("radioButton_19"));
-        radioButton_19->setGeometry(QRect(340, 40, 100, 20));
-        radioButton_19->setChecked(true);
-        tabWidget->addTab(tab_8, QString());
         tab_9 = new QWidget();
         tab_9->setObjectName(QStringLiteral("tab_9"));
         radioButton_20 = new QRadioButton(tab_9);
@@ -766,7 +741,7 @@ public:
         tabWidget->addTab(tab_9, QString());
         groupBox = new QGroupBox(Interfaz);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(70, 550, 531, 71));
+        groupBox->setGeometry(QRect(50, 550, 531, 71));
         layoutWidget9 = new QWidget(groupBox);
         layoutWidget9->setObjectName(QStringLiteral("layoutWidget9"));
         layoutWidget9->setGeometry(QRect(130, 30, 291, 31));
@@ -794,12 +769,35 @@ public:
 
         horizontalLayout_2->addWidget(checkBox_4);
 
+        groupBox_21 = new QGroupBox(Interfaz);
+        groupBox_21->setObjectName(QStringLiteral("groupBox_21"));
+        groupBox_21->setGeometry(QRect(50, 630, 531, 91));
+        radioButton_15 = new QRadioButton(groupBox_21);
+        radioButton_15->setObjectName(QStringLiteral("radioButton_15"));
+        radioButton_15->setGeometry(QRect(30, 30, 100, 20));
+        radioButton_15->setChecked(true);
+        radioButton_16 = new QRadioButton(groupBox_21);
+        radioButton_16->setObjectName(QStringLiteral("radioButton_16"));
+        radioButton_16->setGeometry(QRect(220, 30, 100, 20));
+        radioButton_17 = new QRadioButton(groupBox_21);
+        radioButton_17->setObjectName(QStringLiteral("radioButton_17"));
+        radioButton_17->setGeometry(QRect(400, 30, 100, 20));
+        tipoCamara1 = new QComboBox(groupBox_21);
+        tipoCamara1->setObjectName(QStringLiteral("tipoCamara1"));
+        tipoCamara1->setGeometry(QRect(30, 60, 100, 22));
+        tipoCamara2 = new QComboBox(groupBox_21);
+        tipoCamara2->setObjectName(QStringLiteral("tipoCamara2"));
+        tipoCamara2->setGeometry(QRect(220, 60, 100, 22));
+        tipoCamara3 = new QComboBox(groupBox_21);
+        tipoCamara3->setObjectName(QStringLiteral("tipoCamara3"));
+        tipoCamara3->setGeometry(QRect(400, 60, 100, 22));
         groupBox->raise();
         tabWidget->raise();
+        groupBox_21->raise();
 
         retranslateUi(Interfaz);
 
-        tabWidget->setCurrentIndex(8);
+        tabWidget->setCurrentIndex(7);
 
 
         QMetaObject::connectSlotsByName(Interfaz);
@@ -887,14 +885,6 @@ public:
         pushButton_6->setText(QApplication::translate("Interfaz", "Cargar Tierra", 0));
         pushButton_7->setText(QApplication::translate("Interfaz", "Buscar", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("Interfaz", "Tierra", 0));
-        groupBox_19->setTitle(QApplication::translate("Interfaz", "Selecci\303\263n de Camara", 0));
-        radioButton_15->setText(QApplication::translate("Interfaz", "Camara 1", 0));
-        radioButton_16->setText(QApplication::translate("Interfaz", "Camara 2", 0));
-        radioButton_17->setText(QApplication::translate("Interfaz", "Camara 3", 0));
-        groupBox_20->setTitle(QApplication::translate("Interfaz", "Tipo de Proyecci\303\263n", 0));
-        radioButton_18->setText(QApplication::translate("Interfaz", "Ortogonal", 0));
-        radioButton_19->setText(QApplication::translate("Interfaz", "Perspectiva", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("Interfaz", "Camaras", 0));
         radioButton_20->setText(QApplication::translate("Interfaz", "Dibujar Escena", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QApplication::translate("Interfaz", "Practica 5", 0));
         groupBox->setTitle(QApplication::translate("Interfaz", "Modo de Dibujo:", 0));
@@ -902,6 +892,27 @@ public:
         checkBox_2->setText(QApplication::translate("Interfaz", "Lineas", 0));
         checkBox_3->setText(QApplication::translate("Interfaz", "Relleno", 0));
         checkBox_4->setText(QApplication::translate("Interfaz", "Ajedrez", 0));
+        groupBox_21->setTitle(QApplication::translate("Interfaz", "Camaras:", 0));
+        radioButton_15->setText(QApplication::translate("Interfaz", "Camara 1", 0));
+        radioButton_16->setText(QApplication::translate("Interfaz", "Camara 2", 0));
+        radioButton_17->setText(QApplication::translate("Interfaz", "Camara 3", 0));
+        tipoCamara1->clear();
+        tipoCamara1->insertItems(0, QStringList()
+         << QApplication::translate("Interfaz", "Ortogonal", 0)
+         << QApplication::translate("Interfaz", "Perspectiva", 0)
+        );
+        tipoCamara1->setCurrentText(QApplication::translate("Interfaz", "Perspectiva", 0));
+        tipoCamara2->clear();
+        tipoCamara2->insertItems(0, QStringList()
+         << QApplication::translate("Interfaz", "Ortogonal", 0)
+         << QApplication::translate("Interfaz", "Perspectiva", 0)
+        );
+        tipoCamara3->clear();
+        tipoCamara3->insertItems(0, QStringList()
+         << QApplication::translate("Interfaz", "Ortogonal", 0)
+         << QApplication::translate("Interfaz", "Perspectiva", 0)
+         << QString()
+        );
     } // retranslateUi
 
 };

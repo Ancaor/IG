@@ -26,6 +26,7 @@
 #include "vaso_invertido.h"
 #include "cono.h"
 #include "esfera.h"
+#include "peon.h"
 
 #include "watt_regulator.h"
 #include "brazo.h"
@@ -204,6 +205,7 @@ private:
   _window *Window;
   Interfaz *interfaz;
 
+  vector<Camara> camaras;
   Camara camara1 = Camara(_gl_widget_ne::X_MIN,_gl_widget_ne::X_MAX,_gl_widget_ne::Y_MIN,_gl_widget_ne::Y_MAX,_gl_widget_ne::BACK_PLANE_PERSPECTIVE,_gl_widget_ne::DEFAULT_DISTANCE,_gl_widget_ne::ANGLE_STEP,0);
 
   QTimer *timer;

@@ -76,7 +76,8 @@ SOURCES       = ../esqueleto_qt/main.cc \
 		../esqueleto_qt/luz.cpp \
 		../esqueleto_qt/marco.cpp \
 		../esqueleto_qt/esferatexturizada.cpp \
-		../esqueleto_qt/camara.cpp moc_glwidget.cpp \
+		../esqueleto_qt/camara.cpp \
+		../esqueleto_qt/peon.cpp moc_glwidget.cpp \
 		moc_window.cpp \
 		moc_interfaz.cpp
 OBJECTS       = main.o \
@@ -108,6 +109,7 @@ OBJECTS       = main.o \
 		marco.o \
 		esferatexturizada.o \
 		camara.o \
+		peon.o \
 		moc_glwidget.o \
 		moc_window.o \
 		moc_interfaz.o
@@ -287,7 +289,8 @@ DIST          = ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../esqueleto_qt/luz.h \
 		../esqueleto_qt/marco.h \
 		../esqueleto_qt/esferatexturizada.h \
-		../esqueleto_qt/camara.h ../esqueleto_qt/main.cc \
+		../esqueleto_qt/camara.h \
+		../esqueleto_qt/peon.h ../esqueleto_qt/main.cc \
 		../esqueleto_qt/glwidget.cc \
 		../esqueleto_qt/window.cc \
 		../esqueleto_qt/cubo.cpp \
@@ -315,7 +318,8 @@ DIST          = ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		../esqueleto_qt/luz.cpp \
 		../esqueleto_qt/marco.cpp \
 		../esqueleto_qt/esferatexturizada.cpp \
-		../esqueleto_qt/camara.cpp
+		../esqueleto_qt/camara.cpp \
+		../esqueleto_qt/peon.cpp
 QMAKE_TARGET  = esqueleto_qt
 DESTDIR       = 
 TARGET        = esqueleto_qt
@@ -648,8 +652,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../esqueleto_qt/glwidget.h ../esqueleto_qt/window.h ../esqueleto_qt/cubo.h ../esqueleto_qt/tetraedro.h ../esqueleto_qt/o3ds.h ../esqueleto_qt/o3d.h ../esqueleto_qt/o3dr.h ../esqueleto_qt/file_ply_stl.h ../esqueleto_qt/ply_object.h ../esqueleto_qt/cilindro.h ../esqueleto_qt/vaso.h ../esqueleto_qt/vaso_invertido.h ../esqueleto_qt/cono.h ../esqueleto_qt/tubo.h ../esqueleto_qt/esfera.h ../esqueleto_qt/brazo.h ../esqueleto_qt/partesuperior.h ../esqueleto_qt/cubowatt.h ../esqueleto_qt/brazopequenio.h ../esqueleto_qt/brazogrande.h ../esqueleto_qt/watt_regulator.h ../esqueleto_qt/esfera_beethoven.h ../esqueleto_qt/interfaz.h ../esqueleto_qt/material.h ../esqueleto_qt/luz.h ../esqueleto_qt/marco.h ../esqueleto_qt/esferatexturizada.h ../esqueleto_qt/camara.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../esqueleto_qt/main.cc ../esqueleto_qt/glwidget.cc ../esqueleto_qt/window.cc ../esqueleto_qt/cubo.cpp ../esqueleto_qt/tetraedro.cpp ../esqueleto_qt/o3ds.cpp ../esqueleto_qt/o3d.cpp ../esqueleto_qt/o3dr.cpp ../esqueleto_qt/file_ply_stl.cc ../esqueleto_qt/ply_object.cpp ../esqueleto_qt/cilindro.cpp ../esqueleto_qt/vaso.cpp ../esqueleto_qt/vaso_invertido.cpp ../esqueleto_qt/cono.cpp ../esqueleto_qt/tubo.cpp ../esqueleto_qt/esfera.cpp ../esqueleto_qt/brazo.cpp ../esqueleto_qt/partesuperior.cpp ../esqueleto_qt/cubowatt.cpp ../esqueleto_qt/brazopequenio.cpp ../esqueleto_qt/brazogrande.cpp ../esqueleto_qt/watt_regulator.cpp ../esqueleto_qt/esfera_beethoven.cpp ../esqueleto_qt/interfaz.cpp ../esqueleto_qt/material.cpp ../esqueleto_qt/luz.cpp ../esqueleto_qt/marco.cpp ../esqueleto_qt/esferatexturizada.cpp ../esqueleto_qt/camara.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../esqueleto_qt/glwidget.h ../esqueleto_qt/window.h ../esqueleto_qt/cubo.h ../esqueleto_qt/tetraedro.h ../esqueleto_qt/o3ds.h ../esqueleto_qt/o3d.h ../esqueleto_qt/o3dr.h ../esqueleto_qt/file_ply_stl.h ../esqueleto_qt/ply_object.h ../esqueleto_qt/cilindro.h ../esqueleto_qt/vaso.h ../esqueleto_qt/vaso_invertido.h ../esqueleto_qt/cono.h ../esqueleto_qt/tubo.h ../esqueleto_qt/esfera.h ../esqueleto_qt/brazo.h ../esqueleto_qt/partesuperior.h ../esqueleto_qt/cubowatt.h ../esqueleto_qt/brazopequenio.h ../esqueleto_qt/brazogrande.h ../esqueleto_qt/watt_regulator.h ../esqueleto_qt/esfera_beethoven.h ../esqueleto_qt/interfaz.h ../esqueleto_qt/material.h ../esqueleto_qt/luz.h ../esqueleto_qt/marco.h ../esqueleto_qt/esferatexturizada.h ../esqueleto_qt/camara.h ../esqueleto_qt/peon.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../esqueleto_qt/main.cc ../esqueleto_qt/glwidget.cc ../esqueleto_qt/window.cc ../esqueleto_qt/cubo.cpp ../esqueleto_qt/tetraedro.cpp ../esqueleto_qt/o3ds.cpp ../esqueleto_qt/o3d.cpp ../esqueleto_qt/o3dr.cpp ../esqueleto_qt/file_ply_stl.cc ../esqueleto_qt/ply_object.cpp ../esqueleto_qt/cilindro.cpp ../esqueleto_qt/vaso.cpp ../esqueleto_qt/vaso_invertido.cpp ../esqueleto_qt/cono.cpp ../esqueleto_qt/tubo.cpp ../esqueleto_qt/esfera.cpp ../esqueleto_qt/brazo.cpp ../esqueleto_qt/partesuperior.cpp ../esqueleto_qt/cubowatt.cpp ../esqueleto_qt/brazopequenio.cpp ../esqueleto_qt/brazogrande.cpp ../esqueleto_qt/watt_regulator.cpp ../esqueleto_qt/esfera_beethoven.cpp ../esqueleto_qt/interfaz.cpp ../esqueleto_qt/material.cpp ../esqueleto_qt/luz.cpp ../esqueleto_qt/marco.cpp ../esqueleto_qt/esferatexturizada.cpp ../esqueleto_qt/camara.cpp ../esqueleto_qt/peon.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../esqueleto_qt/interfaz.ui $(DISTDIR)/
 
 
@@ -4370,6 +4374,123 @@ esferatexturizada.o: ../esqueleto_qt/esferatexturizada.cpp ../esqueleto_qt/esfer
 
 camara.o: ../esqueleto_qt/camara.cpp ../esqueleto_qt/camara.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camara.o ../esqueleto_qt/camara.cpp
+
+peon.o: ../esqueleto_qt/peon.cpp ../esqueleto_qt/peon.h \
+		../esqueleto_qt/o3dr.h \
+		../esqueleto_qt/o3d.h \
+		../esqueleto_qt/material.h \
+		../esqueleto_qt/luz.h \
+		../esqueleto_qt/o3ds.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPainter \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpainter.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qfeatures.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qflags.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrect.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsize.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qchar.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qpair.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstring.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qhash.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qimage.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qmatrix.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvector.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qregion.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qline.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpainterpath.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpen.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfontinfo.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfont.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPaintEngine \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qpaintengine.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QOpenGLShaderProgram \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qopenglshaderprogram.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qopengl.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qt_windows.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qopengles2ext.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qopenglext.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector3d.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qvector4d.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qmatrix4x4.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qquaternion.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qgenericmatrix.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmap.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qset.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QOpenGLTexture \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/qopengltexture.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QScopedPointer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QCoreApplication \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qeventloop.h \
+		../esqueleto_qt/vertex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o peon.o ../esqueleto_qt/peon.cpp
 
 moc_glwidget.o: moc_glwidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_glwidget.o moc_glwidget.cpp
